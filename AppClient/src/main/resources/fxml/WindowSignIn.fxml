@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.7"
+            prefHeight="450.0" prefWidth="800.0" style="-fx-background-color: #F4F4F6;"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="by.bsuir.app.controllers.SingInController">
+    <children>
+        <ImageView fitHeight="450.0" fitWidth="420.0" layoutY="-1.0" opacity="0.42" pickOnBounds="true"
+                   preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="380.0"
+                   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../assets/2.jpg"/>
+            </image>
+        </ImageView>
+        <Label layoutX="778.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true">
+            <font>
+                <Font size="26.0"/>
+            </font>
+        </Label>
+        <AnchorPane layoutX="422.0" prefHeight="450.0" prefWidth="380.0" style="-fx-background-color: #000501;"
+                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="420.0"
+                    AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fitHeight="450.0" fitWidth="380.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true"
+                           AnchorPane.topAnchor="1.0">
+                    <image>
+                        <Image url="@../assets/black_background.jpg"/>
+                    </image>
+                </ImageView>
+                <Label layoutX="22.0" layoutY="104.0" text="Добро пожаловать" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold Italic" size="26.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="20.0" layoutY="153.0" prefHeight="35.0" prefWidth="339.0"
+                       text="Для получения доступа Вам необходимо &#10;зарегистрироваться" textFill="WHITE"/>
+                <Button fx:id="singUpButton" layoutX="20.0" layoutY="210.0" mnemonicParsing="false"
+                        style="-fx-background-color: #F77368;" stylesheets="@../animation/first.css" text="Регистрация">
+                    <font>
+                        <Font name="Consolas Italic" size="16.0"/>
+                    </font>
+                </Button>
+                <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="22.0" layoutY="410.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/icons/instagram.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="59.0" layoutY="410.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/icons/twitter.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="26.0" fitWidth="28.0" layoutX="88.0" layoutY="410.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/icons/facebook.png"/>
+                    </image>
+                </ImageView>
+                <Button fx:id="catalog_button" layoutX="20.0" layoutY="252.0" mnemonicParsing="false"
+                        style="-fx-background-color: #F77368;" stylesheets="@../animation/first.css" text="Каталог">
+                    <font>
+                        <Font name="Consolas Italic" size="16.0"/>
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="446.0" layoutY="49.0" prefHeight="360.0" prefWidth="300.0"
+                    style="-fx-background-color: #F43627;">
+            <children>
+                <AnchorPane prefHeight="74.0" prefWidth="300.0" style="-fx-background-color: #000501;">
+                    <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutY="7.0" prefHeight="58.0"
+                               prefWidth="300.0" text="Авторизация" textAlignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold Italic" size="25.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <PasswordField fx:id="password_field" alignment="TOP_CENTER" layoutX="13.0" layoutY="211.0"
+                               prefHeight="35.0" prefWidth="270.0" promptText="password"
+                               style="-fx-background-radius: 30;">
+                    <font>
+                        <Font name="Comic Sans MS" size="17.0"/>
+                    </font>
+                </PasswordField>
+                <TextField fx:id="login_field" alignment="TOP_CENTER" layoutX="14.0" layoutY="158.0" prefHeight="35.0"
+                           prefWidth="270.0" promptText="nickname/email" style="-fx-background-radius: 30;">
+                    <font>
+                        <Font name="Comic Sans MS" size="17.0"/>
+                    </font>
+                </TextField>
+                <Label fx:id="msg_label" alignment="CENTER" layoutX="7.0" layoutY="257.0" prefHeight="17.0"
+                       prefWidth="285.0" text="Неверный логин или пароль. Повторите попытку" visible="false"/>
+                <Hyperlink fx:id="forgotPasswordButton" alignment="TOP_CENTER" layoutX="97.0" layoutY="329.0"
+                           text="Забыли пароль?" underline="true" visited="true">
+                    <font>
+                        <Font size="13.0"/>
+                    </font>
+                </Hyperlink>
+                <ImageView fitHeight="18.0" fitWidth="28.0" layoutX="22.0" layoutY="167.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/icons/multiple-users-silhouette.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fx:id="lock_icon" fitHeight="51.0" fitWidth="63.0" layoutX="123.0" layoutY="89.0"
+                           pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/icons/padlock.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="18.0" fitWidth="28.0" layoutX="22.0" layoutY="217.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/icons/key.png"/>
+                    </image>
+                </ImageView>
+                <Button fx:id="singInButton" layoutX="58.0" layoutY="298.0" mnemonicParsing="false" prefHeight="30.0"
+                        prefWidth="178.0" style="-fx-background-color: #EB6E63;" stylesheets="@../animation/first.css"
+                        text="Войти">
+                    <font>
+                        <Font name="Consolas Italic" size="16.0"/>
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

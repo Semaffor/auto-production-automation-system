@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" opacity="0.7" prefHeight="450.0" prefWidth="830.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.ManagementController">
+   <children>
+      <TabPane layoutX="4.0" layoutY="26.0" prefHeight="424.0" prefWidth="830.0" stylesheets="@../animation/stylesheet.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+        <tabs>
+          <Tab text="Сотрудники">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="815.0">
+                                 <children>
+                                    <TableView fx:id="employee_table" editable="true" fixedCellSize="0.0" prefHeight="361.0" prefWidth="815.0" stylesheets="@../animation/stylesheet.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn fx:id="id_column" prefWidth="40.0" text="ID" />
+                                        <TableColumn fx:id="login_column" onEditCommit="#onEditLogin" prefWidth="85.0" text="Логин" />
+                                          <TableColumn fx:id="mail_column" onEditCommit="#onEditMail" prefWidth="90.0" text="Почта" />
+                                          <TableColumn fx:id="name_column" prefWidth="90.0" text="Имя" />
+                                          <TableColumn fx:id="surname_column" prefWidth="90.0" text="Фамилия" />
+                                          <TableColumn fx:id="thirdName_column" prefWidth="86.39993896484373" text="Отчество" />
+                                          <TableColumn fx:id="age_column" prefWidth="55.0" text="Возраст" />
+                                          <TableColumn fx:id="gender_column" prefWidth="70.0" text="Пол" />
+                                          <TableColumn fx:id="position_column" onEditCommit="#onEditPosition" text="Должность" />
+                                          <TableColumn fx:id="address" prefWidth="100.0" text="Адрес" />
+                                          <TableColumn fx:id="phone" text="Телефон" />
+                                          <TableColumn fx:id="social" prefWidth="100.0" text="Соц.сети" />
+                                          <TableColumn fx:id="start_column" prefWidth="75.0" text="Нанят" />
+                                          <TableColumn fx:id="fire_column" prefWidth="75.0" text="Уволен" />
+                                      </columns>
+                                    </TableView>
+                                    <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" />
+                                    <Button fx:id="delete_employee_button" layoutX="400.0" layoutY="361.0" mnemonicParsing="false" text="Удалить" />
+                                    <Label fx:id="warning" layoutX="477.0" layoutY="364.0" prefHeight="18.0" prefWidth="322.0" text="ntrcn" textFill="#bc3636" visible="false">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Транспорт">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="826.0">
+                     <children>
+                        <ScrollPane layoutX="89.0" layoutY="214.0" prefHeight="359.0" prefWidth="830.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="814.0">
+                                 <children>
+                                    <TableView fx:id="carTable" editable="true" prefHeight="354.0" prefWidth="824.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn fx:id="VIN" prefWidth="126.39999085664749" text="VIN" />
+                                          <TableColumn fx:id="seriesTableCar" prefWidth="55.0" text="Серия" />
+                                          <TableColumn fx:id="modelTableCar" prefWidth="65.0" text="Модель" />
+                                          <TableColumn fx:id="body_typeTableCar" prefWidth="87.20004272460938" text="Тип кузова" />
+                                          <TableColumn fx:id="fuel_typeCarTable" prefWidth="79.20001220703125" text="Тип топлива" />
+                                          <TableColumn fx:id="issuer_date" prefWidth="88.0" text="Выпущена" />
+                                          <TableColumn fx:id="price" prefWidth="89.5999755859375" text="Стоимость" />
+                                          <TableColumn fx:id="responsible" prefWidth="99.20001220703125" text="Ответственный" />
+                                          <TableColumn fx:id="gearbox" prefWidth="56.800048828125" text="Коробка" />
+                                          <TableColumn fx:id="rate" minWidth="44.800048828125" prefWidth="72.7999267578125" text="Рейтинг" />
+                                          <TableColumn fx:id="description" prefWidth="120.0" text="Описание" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                        <Button fx:id="deleteButton" layoutX="685.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Удалить" />
+                        <Label fx:id="war_label" alignment="CENTER_RIGHT" layoutX="251.0" layoutY="368.0" prefHeight="18.0" prefWidth="269.0" text="Label" visible="false" />
+                        <Button fx:id="addButton" layoutX="750.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Добавить" />
+                        <Label fx:id="warningCar" alignment="CENTER_RIGHT" layoutX="162.0" layoutY="370.0" prefHeight="18.0" prefWidth="359.0" text="Label" textAlignment="RIGHT" visible="false" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Модели">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView editable="true" layoutX="8.0" prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="seriesTableModel" prefWidth="80.79998475313187" text="Серия" />
+                            <TableColumn fx:id="modelTableModel" prefWidth="145.60000610351562" text="Модель" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Прочее">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView editable="true" layoutX="100.0" layoutY="29.0" prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="fuel_typeTableOthers" prefWidth="106.39999085664749" text="Тип топлива" />
+                            <TableColumn prefWidth="114.39996337890625" />
+                              <TableColumn fx:id="body_typeTableOthers" minWidth="0.0" prefWidth="93.60005187988281" text="Тип кузова" />
+                              <TableColumn fx:id="seats_numberTableOthers" minWidth="0.0" prefWidth="109.60003662109375" text="Количество мест" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="780.0" layoutY="-3.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="-3.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TextField fx:id="filterField" layoutX="580.0" layoutY="13.0" promptText="Поиск" />
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>

@@ -1,0 +1,5 @@
+.idea
+*/.idea
+documents
+*/target
+*.iml
