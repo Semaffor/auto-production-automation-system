@@ -7,6 +7,8 @@ public enum Commands {
     DELETE_BY_ID,
     AUTHORISATION,
     GET_ALL_USERS,
-    GET_USER,
-    GET_USER_BY_ID;
+    GET_USER_BY_LOGIN,
+    GET_USER_BY_ID,
+    PASSWORD_RECOVERY,
+    REGISTRATION;
 }

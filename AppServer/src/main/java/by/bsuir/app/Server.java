@@ -10,22 +10,23 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static by.bsuir.app.util.Constants.*;
+import static by.bsuir.app.util.Constants.PORT;
+import static by.bsuir.app.util.ConstantsMSG.*;
 
 
 @Log4j2
 public class Server {
 
-
-    private static int PORT = 5556;
     private static final AtomicInteger countOfConnected = new AtomicInteger(0);
     private static volatile boolean isActive = true;
     private static final ThreadGroup threadGroup = new ThreadGroup("mainGroup");
 
     public static void main(String[] args) {
+        int local_port = PORT;
+
         while (isActive) {
 
-            try (ServerSocket ss = new ServerSocket(PORT)) {
+            try (ServerSocket ss = new ServerSocket(local_port)) {
                 log.info(SERVER_STARTED_MSG);
                 log.info(CURRENT_PORT_MSG + PORT);
 
@@ -48,7 +49,7 @@ public class Server {
                 } while (threadGroup.activeCount() > 0);
             } catch (BindException e) {
                 log.error(e.getMessage() + " " + CURRENT_PORT_MSG + PORT);
-                ++PORT;
+                ++local_port;
             } catch (SocketException e) {
                 log.error(e.getMessage());
             } catch (IOException e) {

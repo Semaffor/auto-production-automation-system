@@ -1,6 +1,6 @@
 //package by.bsuir.app.controllers.submenu;
 //
-//import by.bsuir.app.entities.LogH;
+//import by.bsuir.app.services.GeneralFuncWindow;
 //import javafx.fxml.FXML;
 //import javafx.scene.chart.AreaChart;
 //import javafx.scene.chart.CategoryAxis;
@@ -11,7 +11,6 @@
 //import javafx.scene.input.MouseEvent;
 //import javafx.scene.layout.HBox;
 //
-//import java.awt.*;
 //import java.io.File;
 //import java.io.FileWriter;
 //import java.io.IOException;
@@ -55,7 +54,7 @@
 //
 //    @FXML
 //    void handleClose(MouseEvent event) {
-//        by.bsuir.app.controllers.services.GeneralFuncWindow.closeApplication();
+//        GeneralFuncWindow.closeApplication();
 //    }
 //
 //    @FXML

@@ -1,4 +1,4 @@
-package by.bsuir.app.entity;
+package by.bsuir.app.entity.enums;
 
 public enum Role {
     UNDEFINED(0),

@@ -23,9 +23,8 @@ public final class Phone {
     }
 
     public static void send(String str) throws IOException {
-        writer.write(str);
-        writer.newLine();
-        writer.flush();
+        oos.writeUTF(str);
+        oos.flush();
     }
 
     public static void sendObject(Object obj) throws IOException {
@@ -38,7 +37,7 @@ public final class Phone {
     }
 
     public static String read() throws IOException {
-        return reader.readLine();
+        return ois.readUTF();
     }
 
     public static void shutdown() throws IOException {

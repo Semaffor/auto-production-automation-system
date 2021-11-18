@@ -1,13 +1,13 @@
 package by.bsuir.app.controllers;
 
-import by.bsuir.app.Commands;
 import by.bsuir.app.animation.Shake;
 import by.bsuir.app.entity.Account;
-import by.bsuir.app.entity.Role;
-import by.bsuir.app.entity.Status;
+import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.exception.AuthenticationException;
 import by.bsuir.app.exception.RoleRecognitionException;
 import by.bsuir.app.services.GeneralFuncWindow;
+import by.bsuir.app.util.Commands;
+import by.bsuir.app.util.Status;
 import by.bsuir.app.util.connection.Phone;
 import by.bsuir.app.util.constants.Constants;
 import by.bsuir.app.util.constants.WindowsPaths;
@@ -55,9 +55,9 @@ public class SingInController {
             if (!loginText.equals("") && !passText.equals("")) {
                 loginUser(loginText, passText);
             } else {
-                msg_label.setText("Заполните все поля");
+                msg_label.setText(Constants.FILL_FIELDS_MSG);
+                msg_label.setVisible(true);
             }
-            msg_label.setVisible(true);
         });
 
         catalog_button.setOnAction(actionEvent -> {
@@ -79,17 +79,20 @@ public class SingInController {
     private void loginUser(String loginText, String passText) {
 
         try {
+            log.error(Constants.REQUEST_MSG + loginText + " : " + passText);
+
             Phone.send(Commands.AUTHORISATION.toString());
             Phone.sendObject(new Account(loginText, passText));
 
-            log.info(Constants.REQUEST_MSG + loginText + " : " + passText);
-
-            if (!Phone.read().equals(Status.OK.toString()))
+            String response = Phone.read();
+            if (!response.equals(Status.OK.toString()))
                 throw new AuthenticationException();
-            Role accountRole = (Role) Phone.readObject();
-            //LocalStorage.setAccount(accountRole);
-            log.info(Constants.RESPONSE_MSG + accountRole);
 
+            log.error(Constants.RESPONSE_MSG + response + " TRY TO READ ROLE");
+            Role accountRole = (Role) Phone.readObject();
+            log.error(Constants.RESPONSE_MSG + accountRole);
+
+            //TODO УБРАТЬ sout
             switch (accountRole) {
                 case UNDEFINED -> {
                     System.out.println("UNDEFINED");
@@ -101,6 +104,7 @@ public class SingInController {
             }
         } catch (IOException | ClassNotFoundException | AuthenticationException | RoleRecognitionException e) {
             log.error(Constants.AUTH_FAIL + e.getMessage());
+            msg_label.setText(e.getMessage());
             msg_label.setVisible(true);
             Shake loginAnim = new Shake(login_field);
             Shake passwordAnim = new Shake(password_field);

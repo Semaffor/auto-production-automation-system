@@ -5,9 +5,11 @@ module MyApp {
     requires javafx.controls;
     requires org.apache.logging.log4j;
     requires static lombok;
+    requires java.sql;
 
     opens by.bsuir.app.controllers.others to javafx.fxml;
     opens by.bsuir.app.controllers to javafx.fxml;
 
     opens by.bsuir.app;
+    opens by.bsuir.app.util;
 }

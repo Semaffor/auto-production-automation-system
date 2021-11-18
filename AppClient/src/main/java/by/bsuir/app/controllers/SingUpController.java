@@ -1,128 +1,138 @@
-//package by.bsuir.app.controllers;
-//
-//import javafx.fxml.FXML;
-//import javafx.scene.control.*;
-//import javafx.scene.input.MouseEvent;
-//import sample.animation.Shake;
-//import sample.clientConnection.Phone;
-//import sample.constansts.TEmployees;
-//
-//import java.net.URL;
-//import java.util.ResourceBundle;
-//
-//public class SingUpController {
-//
-//    @FXML
-//    private ResourceBundle resources;
-//
-//    @FXML
-//    private URL location;
-//
-//    @FXML
-//    private TextField login_field;
-//
-//    @FXML
-//    private PasswordField password_field;
-//
-//    @FXML
-//    private PasswordField confirm_password_field;
-//
-//    @FXML
-//    private Button registrationButton;
-//
-//    @FXML
-//    private TextField email_field;
-//
-//    @FXML
-//    private Label warning_label;
-//
-//    @FXML
-//    private Button returnButton;
-//
-//    @FXML
-//    void handleClose(MouseEvent event) {
-//        registrationButton.getScene().getWindow().hide();
-//    }
-//
-//    @FXML
-//    private RadioButton boxMale;
-//
-//    @FXML
-//    private RadioButton boxFemale;
-//
-//    @FXML
-//    void initialize() {
-//
-//        registrationButton.setOnAction(actionEvent -> {
-//            singUpNewUser();
-//        });
-//
-//        returnButton.setOnAction(actionEvent -> {
-//            returnButton.getScene().getWindow().hide();
-//        });
-//    }
-//
-//    private void singUpNewUser() {
-//        //while (true) {
-//            String login = login_field.getText();
-//            String password = password_field.getText();
-//            String confirmPassword = confirm_password_field.getText();
-//            String email = email_field.getText();
-//            String gender = "";
-//
-//            if (boxMale.isSelected())
-//                gender = "Мужской";
-//            else if (boxFemale.isSelected())
-//                gender = "Женский";
-//            else
-//                gender = "";
-//
-//            if (login.equals("") || password.equals("") || confirmPassword.equals("") || email.equals("")
-//                    || gender.equals("")) {
-//                warning_label.setText("Заполните все поля");
-//                warning_label.setVisible(true);
-//
-//                Shake loginAnim = new Shake(login_field);
-//                Shake passwordAnim = new Shake(password_field);
-//                Shake confirmPasswordAnim = new Shake(confirm_password_field);
-//                Shake emailAnim = new Shake(email_field);
-//                loginAnim.playAnim();
-//                passwordAnim.playAnim();
-//                confirmPasswordAnim.playAnim();
-//                emailAnim.playAnim();
-//
-//            } else {
-//                if (login.length() < 4)
-//                    warning_label.setText("Логин менее 4 символов");
-//                if (password.length() < 6)
-//                    warning_label.setText("Пароль менее 6 символов");
-//                if (password.equals(confirmPassword)) {
-//                    String request = "INSERT INTO "
-//                            + TEmployees.TABLE_NAME + " ("
-//                            + TEmployees.LOGIN + ", "
-//                            + TEmployees.PASSWORD + ", "
-//                            + TEmployees.EMAIL + ", "
-//                            + TEmployees.GENDER + ", "
-//                            + TEmployees.POSITION + ") "
-//                            + "VALUES ( '"
-//                            + login + "', '"
-//                            + password + "', '"
-//                            + email + "', '"
-//                            + gender + "', 2)";
-//
-//                    Phone.writeLine(request);
-//                    String answer = Phone.readLine();
-//
-//                    if (answer.equals("GOOD")) {
-//                        warning_label.setText("Вы зарегистрировались.");
-//                        registrationButton.getScene().getWindow().hide();
-//                    } else {
-//                        warning_label.setText("Логин занят. Придумайте другой.");
-//                    }
-//                } else {
-//                    warning_label.setText("Пароли не совпадают");
-//                }
-//            }
-//        warning_label.setVisible(true);
-//    }
-//}
+package by.bsuir.app.controllers;
+
+import by.bsuir.app.animation.Shake;
+import by.bsuir.app.entity.Account;
+import by.bsuir.app.entity.enums.Gender;
+import by.bsuir.app.exception.EmptyFields;
+import by.bsuir.app.util.Commands;
+import by.bsuir.app.util.Status;
+import by.bsuir.app.util.connection.Phone;
+import by.bsuir.app.util.constants.Constants;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import lombok.extern.log4j.Log4j2;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static by.bsuir.app.util.constants.Constants.*;
+
+@Log4j2
+public class SingUpController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TextField login_field;
+
+    @FXML
+    private PasswordField password_field;
+
+    @FXML
+    private PasswordField confirm_password_field;
+
+    @FXML
+    private Button registrationButton;
+
+    @FXML
+    private TextField email_field;
+
+    @FXML
+    private Label warning_label;
+
+    @FXML
+    private Button returnButton;
+
+    @FXML
+    void handleClose(MouseEvent event) {
+        registrationButton.getScene().getWindow().hide();
+    }
+
+    @FXML
+    private RadioButton boxMale;
+
+    @FXML
+    private RadioButton boxFemale;
+
+    @FXML
+    void initialize() {
+
+        registrationButton.setOnAction(actionEvent -> {
+            singUpNewUser();
+        });
+
+        returnButton.setOnAction(actionEvent -> {
+            returnButton.getScene().getWindow().hide();
+        });
+    }
+
+    //TODO GENDERHANDLE
+    private void singUpNewUser() {
+        try {
+            String login = login_field.getText();
+            String password = password_field.getText();
+            String confirmPassword = confirm_password_field.getText();
+            String email = email_field.getText();
+            Gender gender;
+
+            if (login.equals("") || password.equals("") || confirmPassword.equals("") || email.equals(""))
+                throw new EmptyFields(Constants.FILL_FIELDS_MSG);
+
+            if (boxMale.isSelected())
+                gender = Gender.MALE;
+            else if (boxFemale.isSelected())
+                gender = Gender.FEMALE;
+            else
+                throw new EmptyFields(Constants.FILL_FIELDS_MSG);
+
+            if (login.length() < MIN_LOGIN_LENGTH)
+                throw new IllegalArgumentException(MIN_LOGIN_LENGTH_MSG);
+            if (password.length() < MIN_PASSWORD_LENGTH)
+                throw new IllegalArgumentException(MIN_PASSWORD_LENGTH_MSG);
+            if (!password.equals(confirmPassword))
+                throw new IllegalArgumentException(PASSWORDS_NOT_MATCH);
+
+            Phone.send(Commands.REGISTRATION.toString());
+            Phone.sendObject(new Account(login, password, email));
+
+            String answer = Phone.read();
+
+            if (answer.equals(Status.DUPLICATE_LOGIN.toString()))
+                throw new IllegalArgumentException(DUPLICATE_LOGIN_MSG);
+
+            Object obj = Phone.readObject();
+
+            warning_label.setText(SUCCESSFUL_REG_MSG);
+            registrationButton.getScene().getWindow().hide();
+
+        } catch (EmptyFields e) {
+            warning_label.setText(e.getMessage());
+            warning_label.setVisible(true);
+            runAnimation();
+        } catch (IllegalArgumentException e) {
+            warning_label.setText(e.getMessage());
+        } catch (IOException | ClassNotFoundException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+        warning_label.setVisible(true);
+
+    }
+
+    private void runAnimation() {
+        Shake loginAnim = new Shake(login_field);
+        Shake passwordAnim = new Shake(password_field);
+        Shake confirmPasswordAnim = new Shake(confirm_password_field);
+        Shake emailAnim = new Shake(email_field);
+        loginAnim.playAnim();
+        passwordAnim.playAnim();
+        confirmPasswordAnim.playAnim();
+        emailAnim.playAnim();
+    }
+}

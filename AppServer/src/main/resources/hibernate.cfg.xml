@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/product_appraiser</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/car-manufacturer</property>
         <property name="connection.username">root</property>
         <property name="connection.password">12345</property>
         <property name="connection.autocommit">true</property>
@@ -16,6 +16,7 @@
         <property name="current_session_context_class">thread</property>
         <property name="format_sql">true</property>
         <mapping class="by.bsuir.app.entity.Account"/>
+        <mapping class="by.bsuir.app.entity.Feedback"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

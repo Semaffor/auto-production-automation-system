@@ -1,8 +1,8 @@
 package by.bsuir.app.util.connection;
 
 import by.bsuir.app.Server;
-import by.bsuir.app.entity.Status;
-import by.bsuir.app.util.Constants;
+import by.bsuir.app.util.ConstantsMSG;
+import by.bsuir.app.util.Status;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
@@ -30,12 +30,13 @@ public class ClientHandler extends Thread {
         Object requestObject = null;
         while (keepRunning) {
             try {
+                requestAction = null;
+                requestObject = null;
 
                 requestAction = phone.read();
                 requestObject = phone.readObject();
-                log.info(Constants.REQUEST_MSG + this.getName() + " - " + requestAction + " - " + requestObject);
+                log.error(ConstantsMSG.REQUEST_MSG + this.getName() + " - " + requestAction + " - " + requestObject);
 
-                //TODO Заменить на COMMAND
                 Object response = null;
                 Status responseStatus = Status.OK;
 
@@ -50,10 +51,11 @@ public class ClientHandler extends Thread {
 
                 phone.send(responseStatus.toString());
 
-                if (responseStatus == Status.OK)
+                if (responseStatus == Status.OK) {
                     phone.sendObject(response);
+                }
 
-                log.info(Constants.RESPONSE_MSG + this.getName() + " - " + response);
+                log.error(ConstantsMSG.RESPONSE_MSG + this.getName() + " - " + responseStatus + " - " + response);
 
             } catch (IOException | ClassNotFoundException e) {
                 log.error(e.getMessage());
@@ -70,4 +72,6 @@ public class ClientHandler extends Thread {
         }
     }
 }
+
+//TODO Заменить на COMMAND
 

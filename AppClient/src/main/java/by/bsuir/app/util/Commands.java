@@ -1,4 +1,4 @@
-package by.bsuir.app;
+package by.bsuir.app.util;
 
 public enum Commands {
     CLOSE_CONNECTION,
@@ -9,5 +9,7 @@ public enum Commands {
     GET_ALL_USERS,
     GET_USER,
     GET_USER_BY_ID,
-    PASSWORD_RECOVERY;
+    GET_EMAIL_BY_LOGIN,
+    PASSWORD_RECOVERY,
+    REGISTRATION;
 }

@@ -1,6 +1,6 @@
 package by.bsuir.app.services;
 
-import by.bsuir.app.Commands;
+import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.connection.Phone;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,25 +14,23 @@ import java.io.IOException;
 @Log4j2
 public class GeneralFuncWindow {
 
-    public static Stage openNewScene(String window) {
+    public static void openNewScene(String window) {
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(GeneralFuncWindow.class.getResource(window));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(GeneralFuncWindow.class.getResource(window));
 
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
 
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(new Scene(root));
-        stage.showAndWait();
-
-        return stage;
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
     }
 
     public static void closeApplication() {
