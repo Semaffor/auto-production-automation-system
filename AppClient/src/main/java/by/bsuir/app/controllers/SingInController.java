@@ -19,6 +19,7 @@ import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 
 import static by.bsuir.app.services.GeneralFuncWindow.openNewScene;
+import static by.bsuir.app.util.constants.Constants.DELIMITER_MSG;
 
 @Log4j2
 public class SingInController {
@@ -79,23 +80,20 @@ public class SingInController {
     private void loginUser(String loginText, String passText) {
 
         try {
-            log.error(Constants.REQUEST_MSG + loginText + " : " + passText);
-
             Phone.send(Commands.AUTHORISATION.toString());
             Phone.sendObject(new Account(loginText, passText));
+            log.info(Constants.REQUEST_MSG + loginText + DELIMITER_MSG + passText);
 
             String response = Phone.read();
             if (!response.equals(Status.OK.toString()))
                 throw new AuthenticationException();
 
-            log.error(Constants.RESPONSE_MSG + response + " TRY TO READ ROLE");
             Role accountRole = (Role) Phone.readObject();
-            log.error(Constants.RESPONSE_MSG + accountRole);
+            log.info(Constants.RESPONSE_MSG + response + DELIMITER_MSG + accountRole);
 
-            //TODO УБРАТЬ sout
             switch (accountRole) {
                 case UNDEFINED -> {
-                    System.out.println("UNDEFINED");
+                    throw new AuthenticationException();
                 }
                 case ADMIN -> openNewScene(WindowsPaths.WindowAdminClient);
                 case USER -> openNewScene(WindowsPaths.WindowAccountantClient);
@@ -104,7 +102,6 @@ public class SingInController {
             }
         } catch (IOException | ClassNotFoundException | AuthenticationException | RoleRecognitionException e) {
             log.error(Constants.AUTH_FAIL + e.getMessage());
-            msg_label.setText(e.getMessage());
             msg_label.setVisible(true);
             Shake loginAnim = new Shake(login_field);
             Shake passwordAnim = new Shake(password_field);

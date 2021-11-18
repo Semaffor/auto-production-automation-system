@@ -9,14 +9,10 @@ import java.net.Socket;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public final class Phone {
     static Socket socket;
-    static BufferedReader reader;
-    static BufferedWriter writer;
     static ObjectInputStream ois;
     static ObjectOutputStream oos;
 
     public Phone(Socket s) throws IOException {
-            writer = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-            reader = new BufferedReader(new InputStreamReader(s.getInputStream()));
             oos = new ObjectOutputStream(s.getOutputStream());
             ois = new ObjectInputStream(s.getInputStream());
             socket = s;
@@ -41,8 +37,6 @@ public final class Phone {
     }
 
     public static void shutdown() throws IOException {
-        reader.close();
-        writer.close();
         ois.close();
         oos.close();
         socket.close();

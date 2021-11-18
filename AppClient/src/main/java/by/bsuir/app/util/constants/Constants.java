@@ -8,9 +8,10 @@ public class Constants {
     public static final int MIN_PASSWORD_LENGTH = 6;
 
     public static final String IP_ADDRESS = "127.0.0.1";
-    public static final String AUTH_FAIL = "Auth has failed.";
+    public static final String AUTH_FAIL = "Auth has failed. - ";
     public static final String REQUEST_MSG = "REQUEST: ";
     public static final String RESPONSE_MSG = "RESPONSE: ";
+    public static final String DELIMITER_MSG = " : ";
     public static final String CHANGE_PASSWORD_ERROR_MSG = "Не удалось сменить пароль. ";
     public static final String ACCOUNT_NOT_FOUND_MSG = "Такой аккаунт не найден.";
     public static final String NEW_PASSWORD_FAIL_MSG = "Не удалось сменить пароль. ";

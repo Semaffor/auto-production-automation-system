@@ -8,15 +8,11 @@ import java.net.Socket;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public final class Phone {
-    BufferedReader reader;
-    BufferedWriter writer;
     ObjectInputStream ois;
     ObjectOutputStream oos;
 
     public Phone(Socket s) {
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-            reader = new BufferedReader(new InputStreamReader(s.getInputStream()));
             oos = new ObjectOutputStream(s.getOutputStream());
             ois = new ObjectInputStream(s.getInputStream());
         } catch (IOException e) {
@@ -43,8 +39,6 @@ public final class Phone {
     }
 
     public void shutdown() throws IOException {
-        reader.close();
-        writer.close();
         ois.close();
         oos.close();
     }
