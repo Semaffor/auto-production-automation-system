@@ -2,6 +2,7 @@ package by.bsuir.app.dao.impl;
 
 import by.bsuir.app.dao.AccountDao;
 import by.bsuir.app.entity.Account;
+import by.bsuir.app.entity.HistoryLog;
 import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.util.Status;
 import by.bsuir.app.service.Services;
@@ -13,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import javax.mail.MessagingException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,7 @@ public class AccountDaoImpl implements AccountDao {
         List<Account> accounts = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
             accounts = session.createQuery("SELECT a FROM Account a", Account.class).getResultList();
             session.close();
         } catch (Throwable e) {
@@ -87,10 +90,13 @@ public class AccountDaoImpl implements AccountDao {
     public Role auth(Account account) {
         Account foundAccount = findByLogin(account.getLogin()).orElse(new Account());
 
+
         if (account.getLogin().equals(foundAccount.getLogin()) && account.getPassword().equals(foundAccount.getPassword()))
             for (Role e : Role.values()) {
-                if (e == foundAccount.getRole())
+                if (e == foundAccount.getRole()) {
+                    addEntranceLog(foundAccount);
                     return e;
+                }
             }
         return Role.UNDEFINED;
     }
@@ -147,5 +153,19 @@ public class AccountDaoImpl implements AccountDao {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void addEntranceLog(Account account) {
+
+        account.getLogs();
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        account.addLog(new HistoryLog(new Timestamp(System.currentTimeMillis())));
+
+        session.update(account);
+        session.getTransaction().commit();
+        session.close();
     }
 }

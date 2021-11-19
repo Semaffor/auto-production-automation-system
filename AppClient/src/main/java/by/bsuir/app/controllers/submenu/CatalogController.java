@@ -1,6 +1,7 @@
 //package by.bsuir.app.controllers.submenu;
 //
-//import com.bsuir.entities.Car;
+//import by.bsuir.app.entity.Car;
+//import by.bsuir.app.util.connection.Phone;
 //import javafx.fxml.FXML;
 //import javafx.fxml.FXMLLoader;
 //import javafx.scene.Node;
@@ -8,10 +9,6 @@
 //import javafx.scene.control.ScrollPane;
 //import javafx.scene.input.MouseEvent;
 //import javafx.scene.layout.VBox;
-//import sample.clientConnection.Phone;
-//import sample.constansts.Data;
-//import sample.constansts.Windows;
-//import sample.entities.CarForTable;
 //
 //import java.io.IOException;
 //import java.net.URL;

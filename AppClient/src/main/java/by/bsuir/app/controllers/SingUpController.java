@@ -3,7 +3,7 @@ package by.bsuir.app.controllers;
 import by.bsuir.app.animation.Shake;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.enums.Gender;
-import by.bsuir.app.exception.EmptyFields;
+import by.bsuir.app.exception.EmptyFieldsException;
 import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.Status;
 import by.bsuir.app.util.connection.Phone;
@@ -82,14 +82,14 @@ public class SingUpController {
             Gender gender;
 
             if (login.equals("") || password.equals("") || confirmPassword.equals("") || email.equals(""))
-                throw new EmptyFields(Constants.FILL_FIELDS_MSG);
+                throw new EmptyFieldsException(Constants.FILL_FIELDS_MSG);
 
             if (boxMale.isSelected())
                 gender = Gender.MALE;
             else if (boxFemale.isSelected())
                 gender = Gender.FEMALE;
             else
-                throw new EmptyFields(Constants.FILL_FIELDS_MSG);
+                throw new EmptyFieldsException(Constants.FILL_FIELDS_MSG);
 
             if (login.length() < MIN_LOGIN_LENGTH)
                 throw new IllegalArgumentException(MIN_LOGIN_LENGTH_MSG);
@@ -111,7 +111,7 @@ public class SingUpController {
             warning_label.setText(SUCCESSFUL_REG_MSG);
             registrationButton.getScene().getWindow().hide();
 
-        } catch (EmptyFields e) {
+        } catch (EmptyFieldsException e) {
             warning_label.setText(e.getMessage());
             warning_label.setVisible(true);
             runAnimation();

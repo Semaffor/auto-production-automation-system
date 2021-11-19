@@ -1,5 +1,6 @@
 package by.bsuir.app;
 
+import by.bsuir.app.dao.impl.HistoryLogDaoImpl;
 import by.bsuir.app.util.connection.ClientHandler;
 import lombok.extern.log4j.Log4j2;
 

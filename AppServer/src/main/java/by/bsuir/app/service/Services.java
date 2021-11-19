@@ -1,5 +1,7 @@
 package by.bsuir.app.service;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Random;
 
 public class Services {
@@ -19,4 +21,6 @@ public class Services {
         return sb.toString();
 //        return Math.abs(rand.nextInt() * Integer.parseInt(String.valueOf(login.hashCode())));
     }
+
+//    public static Date convertTimestampInDate(Timestamp)
 }

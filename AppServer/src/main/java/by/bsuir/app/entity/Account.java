@@ -1,6 +1,5 @@
 package by.bsuir.app.entity;
 
-import by.bsuir.app.dao.BaseDao;
 import by.bsuir.app.entity.enums.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,6 +7,7 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,8 +34,16 @@ public class Account extends BaseEntity implements Serializable {
     Long personalInfoId;
     Role role;
 
-    @OneToMany
-    @JoinTable(name = "feedback", joinColumns = {@JoinColumn(name="id")},
-            inverseJoinColumns = {@JoinColumn(name="sender_id")} )
-    List<Feedback> feedbacks;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    List<HistoryLog> logs;
+
+    //List<Feedback> feedbacks;
+
+    public void addLog(HistoryLog log) {
+        if (logs == null)
+            logs = new ArrayList<>();
+
+        logs.add(log);
+    }
 }

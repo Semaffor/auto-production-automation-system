@@ -1,6 +1,7 @@
 package by.bsuir.app.util.connection;
 
 import by.bsuir.app.dao.impl.AccountDaoImpl;
+import by.bsuir.app.dao.impl.HistoryLogDaoImpl;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.util.Status;
 import lombok.extern.log4j.Log4j2;
@@ -10,6 +11,7 @@ import static by.bsuir.app.util.ConstantsMSG.INCORRECT_VALUE_MSG;
 @Log4j2
 public class CommandHandler {
     private static AccountDaoImpl accountDao = new AccountDaoImpl();
+    private static HistoryLogDaoImpl historyLogDao = new HistoryLogDaoImpl();
 
     public static Object execute(Commands command, Object obj) {
         Object response = null;
@@ -26,6 +28,8 @@ public class CommandHandler {
                 case GET_USER_BY_LOGIN -> accountDao.findByLogin((String) obj);
                 case PASSWORD_RECOVERY -> accountDao.resetPassword((Account) obj);
                 case REGISTRATION -> accountDao.registration((Account) obj);
+                case GET_LAUNCHES_COUNT_DATA -> historyLogDao.findAllGropedByDate();
+                case GET_ALL_USER_LAUNCHES -> historyLogDao.findAllUserLaunches();
                 default -> defaultBranch(command);
 
             };

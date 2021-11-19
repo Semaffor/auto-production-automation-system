@@ -3,7 +3,7 @@ package by.bsuir.app.controllers.others;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.connection.Phone;
 import by.bsuir.app.util.constants.Constants;
-import by.bsuir.app.util.constants.WindowsPaths;
+import by.bsuir.app.util.constants.Paths;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -79,7 +79,7 @@ public class LoadingController {
 
             Platform.runLater(() -> {
                 deny_button.getScene().getWindow().hide();
-                GeneralFuncWindow.openNewScene(WindowsPaths.WindowSignIn);
+                GeneralFuncWindow.openNewScene(Paths.WindowSignIn);
             });
         }
     }

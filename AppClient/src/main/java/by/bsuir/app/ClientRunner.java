@@ -1,6 +1,6 @@
 package by.bsuir.app;
 
-import by.bsuir.app.util.constants.WindowsPaths;
+import by.bsuir.app.util.constants.Paths;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +16,7 @@ public class ClientRunner extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(WindowsPaths.WindowLoading)));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(Paths.WindowLoading)));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setResizable(false);
             primaryStage.setScene(new Scene(root));

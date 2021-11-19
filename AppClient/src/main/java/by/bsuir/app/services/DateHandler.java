@@ -2,6 +2,8 @@ package by.bsuir.app.services;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DateHandler {
 
@@ -31,5 +33,13 @@ public class DateHandler {
             throw new DateTimeException("Некорректная дата.");
         }
         return true;
+    }
+
+    public static String getCurrentTimeStampString() {
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+
+        return  formattedDate;
     }
 }

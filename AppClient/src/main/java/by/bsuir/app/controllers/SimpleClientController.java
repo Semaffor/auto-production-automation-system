@@ -1,7 +1,7 @@
 package by.bsuir.app.controllers;
 
 import by.bsuir.app.services.GeneralFuncWindow;
-import by.bsuir.app.util.constants.WindowsPaths;
+import by.bsuir.app.util.constants.Paths;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -62,7 +62,7 @@ public class SimpleClientController {
         profile_button.setOnAction(actionEvent -> {
             try {
                     pane.getChildren().remove(node[0]);
-                    node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowProfile));
+                    node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowProfile));
                     pane.getChildren().add(node[0]);
 
             } catch (IOException e) {
@@ -75,7 +75,7 @@ public class SimpleClientController {
             pane.getChildren().remove(node[0]);
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowHistory));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowHistory));
                 pane.getChildren().add(node[0]);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -83,13 +83,13 @@ public class SimpleClientController {
         });
 
         catalog_button.setOnAction(actionEvent -> {
-            GeneralFuncWindow.openNewScene(WindowsPaths.WindowCatalog);
+            GeneralFuncWindow.openNewScene(Paths.WindowCatalog);
         });
 
         feedback_button.setOnAction(actionEvent -> {
             try {
                     pane.getChildren().remove(node[0]);
-                    node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowFeedback));
+                    node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowFeedback));
                     pane.getChildren().add(node[0]);
 
             } catch (IOException e) {
@@ -100,7 +100,7 @@ public class SimpleClientController {
         statistic_button.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowChart));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowChart));
                 pane.getChildren().add(node[0]);
 
             } catch (IOException e) {

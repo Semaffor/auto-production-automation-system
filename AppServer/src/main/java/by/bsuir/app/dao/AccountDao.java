@@ -2,6 +2,7 @@ package by.bsuir.app.dao;
 
 
 import by.bsuir.app.entity.Account;
+import by.bsuir.app.entity.HistoryLog;
 import by.bsuir.app.entity.enums.Role;
 
 import java.util.List;
@@ -42,4 +43,7 @@ public interface AccountDao extends BaseDao<Long, Account> {
      * @return result of operation
      */
     boolean registration(Account account);
+
+    void addEntranceLog(Account account);
+
 }

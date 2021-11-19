@@ -1,11 +1,20 @@
 package by.bsuir.app.util.connection;
 
+import by.bsuir.app.util.Commands;
+import by.bsuir.app.util.Status;
+import by.bsuir.app.util.constants.Constants;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.log4j.Log4j2;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import static by.bsuir.app.util.constants.Constants.DELIMITER_MSG;
+
+@Log4j2
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public final class Phone {
     static Socket socket;
@@ -44,5 +53,24 @@ public final class Phone {
 
     public static Socket getSocket() {
         return socket;
+    }
+
+    public static Object sendOrGetData(Commands command, Object obj) throws IOException, ClassNotFoundException {
+        String sendCommand = command.toString();
+        Object sendObj = obj;
+
+        Phone.send(sendCommand);
+        Phone.sendObject(sendObj);
+
+        log.info(Constants.REQUEST_MSG + sendCommand + DELIMITER_MSG + sendObj);
+
+        String response = Phone.read();
+        if (!response.equals(Status.OK.toString()))
+            throw new IOException();
+
+        Object responseObj = Phone.readObject();
+        log.info(Constants.RESPONSE_MSG + response + DELIMITER_MSG + responseObj);
+
+        return responseObj;
     }
 }

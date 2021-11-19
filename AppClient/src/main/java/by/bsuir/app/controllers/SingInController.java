@@ -10,7 +10,8 @@ import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.Status;
 import by.bsuir.app.util.connection.Phone;
 import by.bsuir.app.util.constants.Constants;
-import by.bsuir.app.util.constants.WindowsPaths;
+import by.bsuir.app.util.constants.LocalStorage;
+import by.bsuir.app.util.constants.Paths;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -62,13 +63,13 @@ public class SingInController {
         });
 
         catalog_button.setOnAction(actionEvent -> {
-            openNewScene(WindowsPaths.WindowCatalog);
+            openNewScene(Paths.WindowCatalog);
         });
         forgotPasswordButton.setOnAction(actionEvent -> {
-            openNewScene(WindowsPaths.WindowForgotPassword);
+            openNewScene(Paths.WindowForgotPassword);
         });
         singUpButton.setOnAction(actionEvent -> {
-            openNewScene(WindowsPaths.WindowSignUp);
+            openNewScene(Paths.WindowSignUp);
         });
     }
 
@@ -80,8 +81,10 @@ public class SingInController {
     private void loginUser(String loginText, String passText) {
 
         try {
+            Account account = new Account(loginText, passText);
+
             Phone.send(Commands.AUTHORISATION.toString());
-            Phone.sendObject(new Account(loginText, passText));
+            Phone.sendObject(account);
             log.info(Constants.REQUEST_MSG + loginText + DELIMITER_MSG + passText);
 
             String response = Phone.read();
@@ -91,13 +94,13 @@ public class SingInController {
             Role accountRole = (Role) Phone.readObject();
             log.info(Constants.RESPONSE_MSG + response + DELIMITER_MSG + accountRole);
 
+            LocalStorage.setAccount(account);
+
             switch (accountRole) {
-                case UNDEFINED -> {
-                    throw new AuthenticationException();
-                }
-                case ADMIN -> openNewScene(WindowsPaths.WindowAdminClient);
-                case USER -> openNewScene(WindowsPaths.WindowAccountantClient);
-                case GUEST -> openNewScene(WindowsPaths.WindowSimpleClient);
+                case UNDEFINED -> throw new AuthenticationException();
+                case ADMIN -> openNewScene(Paths.WindowAdminClient);
+                case USER -> openNewScene(Paths.WindowAccountantClient);
+                case GUEST -> openNewScene(Paths.WindowSimpleClient);
                 default -> throw new RoleRecognitionException();
             }
         } catch (IOException | ClassNotFoundException | AuthenticationException | RoleRecognitionException e) {

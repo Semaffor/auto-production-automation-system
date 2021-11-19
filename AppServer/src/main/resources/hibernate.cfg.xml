@@ -5,18 +5,20 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/car-manufacturer</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/car-manufacturer?useSSL=false&amp;serverTimezone=UTC</property>
         <property name="connection.username">root</property>
         <property name="connection.password">12345</property>
         <property name="connection.autocommit">true</property>
 
         <property name="show_sql">true</property>
 
+        <property name="connection.pool_size">10</property>
+
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="current_session_context_class">thread</property>
-        <property name="format_sql">true</property>
+<!--        <property name="format_sql">true</property>-->
         <mapping class="by.bsuir.app.entity.Account"/>
-        <mapping class="by.bsuir.app.entity.Feedback"/>
+        <mapping class="by.bsuir.app.entity.HistoryLog"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

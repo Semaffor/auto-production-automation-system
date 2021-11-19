@@ -1,7 +1,7 @@
 package by.bsuir.app.controllers;
 
 import by.bsuir.app.services.GeneralFuncWindow;
-import by.bsuir.app.util.constants.WindowsPaths;
+import by.bsuir.app.util.constants.Paths;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -47,7 +47,7 @@ public class AccountantClientController {
         profile_button.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowProfile));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowProfile));
                 pane.getChildren().add(node[0]);
 
             } catch (IOException e) {
@@ -58,7 +58,7 @@ public class AccountantClientController {
         KondorseButton.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowKondorse));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowKondorse));
                 pane.getChildren().add(node[0]);
 
             } catch (IOException e) {
@@ -67,13 +67,13 @@ public class AccountantClientController {
         });
 
         management_button.setOnAction(actionEvent -> {
-            GeneralFuncWindow.openNewScene(WindowsPaths.WindowManagementAccountant);
+            GeneralFuncWindow.openNewScene(Paths.WindowManagementAccountant);
         });
 
         mail_button.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowMailSender));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowMailSender));
                 pane.getChildren().add(node[0]);
 
             } catch (IOException e) {

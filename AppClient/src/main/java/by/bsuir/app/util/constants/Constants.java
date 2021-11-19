@@ -22,5 +22,8 @@ public class Constants {
     public static final String PASSWORDS_NOT_MATCH = "Пароли не совпадают";
     public static final String MIN_LOGIN_LENGTH_MSG = "Логин менее " + MIN_LOGIN_LENGTH + " символов";
     public static final String MIN_PASSWORD_LENGTH_MSG = "Пароль менее " + MIN_PASSWORD_LENGTH + " символов";
+    public static final String REPORT_CREATE_DATE_MSG = "Дата создания отчета: ";
+    public static final String LAUNCHES_MSG = "Запуски ";
+    public static final String REPORT_PATTERN_HEAD_MSG = "\n\tID   User ID\tTime\n  ";
 
 }

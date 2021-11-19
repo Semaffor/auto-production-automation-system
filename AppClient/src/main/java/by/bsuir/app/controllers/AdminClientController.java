@@ -1,7 +1,7 @@
 package by.bsuir.app.controllers;
 
 import by.bsuir.app.services.GeneralFuncWindow;
-import by.bsuir.app.util.constants.WindowsPaths;
+import by.bsuir.app.util.constants.Paths;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -61,7 +61,7 @@ public class AdminClientController {
         profile_button.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowProfile));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowProfile));
                 pane.getChildren().add(node[0]);
 
             } catch (IOException e) {
@@ -70,13 +70,13 @@ public class AdminClientController {
         });
 
         management_button.setOnAction(actionEvent -> {
-                GeneralFuncWindow.openNewScene(WindowsPaths.WindowManagement);
+                GeneralFuncWindow.openNewScene(Paths.WindowManagement);
         });
 
         catalog_button.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowCatalog));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowCatalog));
                 pane.getChildren().add(node[0]);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -86,7 +86,7 @@ public class AdminClientController {
         statisticButton.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowActivityChart));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowActivityChart));
                 pane.getChildren().add(node[0]);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -98,7 +98,7 @@ public class AdminClientController {
             pane.getChildren().remove(node[0]);
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(WindowsPaths.WindowHistory));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowHistory));
                 pane.getChildren().add(node[0]);
             } catch (IOException e) {
                 e.printStackTrace();
