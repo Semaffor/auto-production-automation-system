@@ -1,5 +1,6 @@
 package by.bsuir.app.util.connection;
 
+import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.Status;
 import by.bsuir.app.util.constants.Constants;
@@ -13,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import static by.bsuir.app.util.constants.Constants.DELIMITER_MSG;
+import static by.bsuir.app.util.constants.Constants.GETTING_DATA_FAILURE;
 
 @Log4j2
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -55,7 +57,8 @@ public final class Phone {
         return socket;
     }
 
-    public static Object sendOrGetData(Commands command, Object obj) throws IOException, ClassNotFoundException {
+    public static Object sendOrGetData(Commands command, Object obj) throws IOException, ClassNotFoundException,
+            GettingDataException {
         String sendCommand = command.toString();
         Object sendObj = obj;
 
@@ -70,6 +73,9 @@ public final class Phone {
 
         Object responseObj = Phone.readObject();
         log.info(Constants.RESPONSE_MSG + response + DELIMITER_MSG + responseObj);
+
+        if (responseObj == null)
+            throw new GettingDataException(GETTING_DATA_FAILURE);
 
         return responseObj;
     }

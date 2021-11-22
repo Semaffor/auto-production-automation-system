@@ -24,26 +24,26 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="815.0">
                                  <children>
-                                    <TableView fx:id="employee_table" editable="true" fixedCellSize="0.0" prefHeight="361.0" prefWidth="815.0" stylesheets="@../animation/stylesheet.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="account_table" editable="true" fixedCellSize="0.0" prefHeight="361.0" prefWidth="830.0" stylesheets="@../animation/stylesheet.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
                                       <columns>
-                                        <TableColumn fx:id="id_column" prefWidth="40.0" text="ID" />
+                                        <TableColumn fx:id="id_column" prefWidth="40.0" text="№" />
                                         <TableColumn fx:id="login_column" onEditCommit="#onEditLogin" prefWidth="85.0" text="Логин" />
-                                          <TableColumn fx:id="mail_column" onEditCommit="#onEditMail" prefWidth="90.0" text="Почта" />
-                                          <TableColumn fx:id="name_column" prefWidth="90.0" text="Имя" />
+                                          <TableColumn fx:id="mail_column" onEditCommit="#onEditMail" prefWidth="113.60003662109375" text="Почта" />
+                                          <TableColumn fx:id="name_column" prefWidth="85.0" text="Имя" />
+                                          <TableColumn fx:id="role_column" prefWidth="72.800048828125" text="Роль" />
                                           <TableColumn fx:id="surname_column" prefWidth="90.0" text="Фамилия" />
                                           <TableColumn fx:id="thirdName_column" prefWidth="86.39993896484373" text="Отчество" />
                                           <TableColumn fx:id="age_column" prefWidth="55.0" text="Возраст" />
                                           <TableColumn fx:id="gender_column" prefWidth="70.0" text="Пол" />
                                           <TableColumn fx:id="position_column" onEditCommit="#onEditPosition" text="Должность" />
-                                          <TableColumn fx:id="address" prefWidth="100.0" text="Адрес" />
                                           <TableColumn fx:id="phone" text="Телефон" />
                                           <TableColumn fx:id="social" prefWidth="100.0" text="Соц.сети" />
                                           <TableColumn fx:id="start_column" prefWidth="75.0" text="Нанят" />
                                           <TableColumn fx:id="fire_column" prefWidth="75.0" text="Уволен" />
                                       </columns>
                                     </TableView>
-                                    <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" />
-                                    <Button fx:id="delete_employee_button" layoutX="400.0" layoutY="361.0" mnemonicParsing="false" text="Удалить" />
+                                    <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" visible="false" />
+                                    <Button fx:id="delete_account_button" layoutX="378.0" layoutY="364.0" mnemonicParsing="false" text="Удалить" />
                                     <Label fx:id="warning" layoutX="477.0" layoutY="364.0" prefHeight="18.0" prefWidth="322.0" text="ntrcn" textFill="#bc3636" visible="false">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
@@ -63,30 +63,28 @@
                      <children>
                         <ScrollPane layoutX="89.0" layoutY="214.0" prefHeight="359.0" prefWidth="830.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="814.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="826.0">
                                  <children>
-                                    <TableView fx:id="carTable" editable="true" prefHeight="354.0" prefWidth="824.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="carTable" editable="true" prefHeight="354.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-16.0" AnchorPane.topAnchor="0.0">
                                       <columns>
-                                        <TableColumn fx:id="VIN" prefWidth="126.39999085664749" text="VIN" />
-                                          <TableColumn fx:id="seriesTableCar" prefWidth="55.0" text="Серия" />
-                                          <TableColumn fx:id="modelTableCar" prefWidth="65.0" text="Модель" />
-                                          <TableColumn fx:id="body_typeTableCar" prefWidth="87.20004272460938" text="Тип кузова" />
-                                          <TableColumn fx:id="fuel_typeCarTable" prefWidth="79.20001220703125" text="Тип топлива" />
-                                          <TableColumn fx:id="issuer_date" prefWidth="88.0" text="Выпущена" />
-                                          <TableColumn fx:id="price" prefWidth="89.5999755859375" text="Стоимость" />
-                                          <TableColumn fx:id="responsible" prefWidth="99.20001220703125" text="Ответственный" />
-                                          <TableColumn fx:id="gearbox" prefWidth="56.800048828125" text="Коробка" />
-                                          <TableColumn fx:id="rate" minWidth="44.800048828125" prefWidth="72.7999267578125" text="Рейтинг" />
-                                          <TableColumn fx:id="description" prefWidth="120.0" text="Описание" />
+                                        <TableColumn fx:id="VIN" prefWidth="127.19997555017471" resizable="false" text="VIN" />
+                                          <TableColumn fx:id="model_table_car_field" prefWidth="80.800048828125" text="Модель" />
+                                          <TableColumn fx:id="body_typeTableCar" prefWidth="100.00003051757812" text="Тип кузова" />
+                                          <TableColumn fx:id="fuel_typeCarTable" prefWidth="103.99993896484375" text="Тип топлива" />
+                                          <TableColumn fx:id="price" prefWidth="79.20001220703125" text="Стоимость" />
+                                          <TableColumn fx:id="gearbox" prefWidth="74.4000244140625" text="Коробка" />
+                                          <TableColumn fx:id="rate" minWidth="12.0" prefWidth="71.99993896484375" text="Рейтинг" />
+                                          <TableColumn fx:id="issuer_date" prefWidth="69.5999755859375" text="Выпущена" />
+                                          <TableColumn fx:id="car_quantity_column" prefWidth="119.199951171875" text="Кол-во" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                           </content>
                         </ScrollPane>
-                        <Button fx:id="deleteButton" layoutX="685.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Удалить" />
+                        <Button fx:id="delete_car_button" layoutX="685.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Удалить" />
                         <Label fx:id="war_label" alignment="CENTER_RIGHT" layoutX="251.0" layoutY="368.0" prefHeight="18.0" prefWidth="269.0" text="Label" visible="false" />
-                        <Button fx:id="addButton" layoutX="750.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Добавить" />
+                        <Button fx:id="add_car_button" layoutX="750.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Добавить" />
                         <Label fx:id="warningCar" alignment="CENTER_RIGHT" layoutX="162.0" layoutY="370.0" prefHeight="18.0" prefWidth="359.0" text="Label" textAlignment="RIGHT" visible="false" />
                      </children></AnchorPane>
             </content>
@@ -97,8 +95,9 @@
                      <children>
                         <TableView editable="true" layoutX="8.0" prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn fx:id="seriesTableModel" prefWidth="80.79998475313187" text="Серия" />
-                            <TableColumn fx:id="modelTableModel" prefWidth="145.60000610351562" text="Модель" />
+                              <TableColumn fx:id="seriesTableModel1" prefWidth="52.79995805025101" text="№" />
+                            <TableColumn fx:id="model_name_field" prefWidth="144.79998397827148" text="Название модели" />
+                            <TableColumn fx:id="description_field" prefWidth="629.6000518798828" text="Описание" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>

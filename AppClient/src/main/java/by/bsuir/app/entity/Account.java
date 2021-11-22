@@ -1,18 +1,14 @@
 package by.bsuir.app.entity;
 
-import by.bsuir.app.entity.enums.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.io.Serializable;
-import java.util.List;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Account extends BaseEntity implements Serializable {
+public class Account extends BaseEntity {
 
     static final long serialVersionUID = 42L;
 
@@ -20,14 +16,14 @@ public class Account extends BaseEntity implements Serializable {
     String login;
     String password;
     String email;
-    Role role;
-    Long personalInfoId;
 
-    List<Feedback> feedbacks;
+    String role;
 
-    public Account(String login) {
-        this.login = login;
-    }
+    PersonalData data;
+
+    //List<HistoryLog> logs;
+
+//    List<Feedback> feedbacks;
 
     public Account(String login, String password, String email) {
         this.login = login;
@@ -39,4 +35,20 @@ public class Account extends BaseEntity implements Serializable {
         this.login = login;
         this.password = password;
     }
+
+    public PersonalData getData() {
+        if (data == null)
+            data = new PersonalData();
+        return data;
+    }
+
+//    public List<Feedback> getFeedbacks() {
+//        if (feedbacks == null)
+//            feedbacks = new ArrayList<>();
+//        return feedbacks;
+//    }
+
 }
+
+
+

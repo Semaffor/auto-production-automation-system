@@ -19,6 +19,11 @@
 <!--        <property name="format_sql">true</property>-->
         <mapping class="by.bsuir.app.entity.Account"/>
         <mapping class="by.bsuir.app.entity.HistoryLog"/>
+        <mapping class="by.bsuir.app.entity.PersonalData"/>
+        <mapping class="by.bsuir.app.entity.Position"/>
+        <mapping class="by.bsuir.app.entity.Model"/>
+        <mapping class="by.bsuir.app.entity.Car"/>
+        <mapping class="by.bsuir.app.entity.Feedback"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

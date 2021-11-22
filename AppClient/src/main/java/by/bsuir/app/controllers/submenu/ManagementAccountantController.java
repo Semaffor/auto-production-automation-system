@@ -1,5 +1,9 @@
 //package by.bsuir.app.controllers.submenu;
 //
+//import by.bsuir.app.entity.PersonalData;
+//import by.bsuir.app.services.GeneralFuncWindow;
+//import by.bsuir.app.util.connection.Phone;
+//import by.bsuir.app.util.constants.Paths;
 //import com.bsuir.entities.Employees;
 //import javafx.beans.value.ObservableValue;
 //import javafx.collections.FXCollections;
@@ -12,11 +16,6 @@
 //import javafx.scene.control.cell.TextFieldTableCell;
 //import javafx.scene.input.MouseEvent;
 //import javafx.util.converter.IntegerStringConverter;
-//import sample.clientConnection.Phone;
-//import sample.constansts.MigrateData;
-//import sample.constansts.Windows;
-//import sample.entities.EmployeesForTable;
-//import sample.services.GeneralFuncWindow;
 //
 //import java.net.URL;
 //import java.text.DateFormat;
@@ -35,49 +34,43 @@
 //    private URL location;
 //
 //    @FXML
-//    private TableView<Employees> employee_table;
+//    private TableView<PersonalData> employee_table;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, Integer> ID;
+//    private TableColumn<PersonalData, String> login_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> login_column;
+//    private TableColumn<PersonalData, String> mail_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> mail_column;
+//    private TableColumn<PersonalData, String> name_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> name_column;
+//    private TableColumn<PersonalData, String> surname_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> surname_column;
+//    private TableColumn<PersonalData, String> thirdName_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> thirdName_column;
+//    private TableColumn<PersonalData, Integer> age_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, Integer> age_column;
+//    private TableColumn<PersonalData, String> gender_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> gender_column;
+//    private TableColumn<PersonalData, Integer> position_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, Integer> position_column;
+//    private TableColumn<PersonalData, Integer> phone;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> address;
+//    private TableColumn<PersonalData, String> social;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, Integer> phone;
+//    private TableColumn<PersonalData, String> start_column;
 //
 //    @FXML
-//    private TableColumn<EmployeesForTable, String> social;
-//
-//    @FXML
-//    private TableColumn<EmployeesForTable, String> start_column;
-//
-//    @FXML
-//    private TableColumn<EmployeesForTable, String> fire_column;
+//    private TableColumn<PersonalData, String> fire_column;
 //
 //    @FXML
 //    private TextField filterField;
@@ -103,7 +96,7 @@
 //        refreshTable();
 //
 //        buttonAdd.setOnAction(actionEvent -> {
-//            GeneralFuncWindow.openNewScene(Windows.WindowAddEmployee);
+//            GeneralFuncWindow.openNewScene(Paths.WindowAddEmployee);
 //            employee_table.getItems().add(MigrateData.empl);
 //            refreshTable();
 //        });

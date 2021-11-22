@@ -12,4 +12,6 @@ public interface CarDao extends BaseDao<Long, Car> {
      * @return list of requests with a necessary field
      */
     List<Car> findAllByField(String field) throws DAOException;
+    List<Object[]>  findAllGroupedByQuantity();
+
 }

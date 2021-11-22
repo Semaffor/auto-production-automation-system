@@ -1,6 +1,9 @@
 package by.bsuir.app;
 
+import by.bsuir.app.dao.AccountDao;
+import by.bsuir.app.dao.impl.AccountDaoImpl;
 import by.bsuir.app.dao.impl.HistoryLogDaoImpl;
+import by.bsuir.app.entity.Account;
 import by.bsuir.app.util.connection.ClientHandler;
 import lombok.extern.log4j.Log4j2;
 
@@ -25,6 +28,8 @@ public class Server {
     public static void main(String[] args) {
         int local_port = PORT;
 
+//        AccountDao accountDao = new AccountDaoImpl();
+//        accountDao.auth()
         while (isActive) {
 
             try (ServerSocket ss = new ServerSocket(local_port)) {

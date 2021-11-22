@@ -15,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Position extends BaseEntity implements Serializable {
+public class Position extends BaseEntity {
 
     static final long serialVersionUID = 42L;
 

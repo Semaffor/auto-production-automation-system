@@ -1,6 +1,7 @@
 package by.bsuir.app.controllers.submenu;
 
 import by.bsuir.app.entity.HistoryLog;
+import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.services.DateHandler;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.Commands;
@@ -103,7 +104,7 @@ public class ActivityChartController {
                 writer.write(String.valueOf(report));
                 openButton.setDisable(false);
                 writer.flush();
-            } catch (IOException | ClassNotFoundException ex) {
+            } catch (IOException | ClassNotFoundException | GettingDataException ex) {
                 log.error(ex.toString() + DELIMITER_MSG + ex.getMessage());
             }
         });
@@ -131,7 +132,7 @@ public class ActivityChartController {
 
             chart.getData().add(seriesActivity);
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | GettingDataException e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }

@@ -21,7 +21,7 @@ public interface AccountDao extends BaseDao<Long, Account> {
      * @param login - parameter by which searching on db
      * @return the user wrappered by Optional
      */
-    Optional<Account> findByLogin(String login);
+    Account findByLogin(String login);
 
     /**
      * Method that use to find all requests on db by special field

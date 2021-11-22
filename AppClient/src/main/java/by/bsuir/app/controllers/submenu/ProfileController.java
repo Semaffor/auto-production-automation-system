@@ -1,6 +1,9 @@
 package by.bsuir.app.controllers.submenu;
 
 import by.bsuir.app.entity.Account;
+import by.bsuir.app.entity.Position;
+import by.bsuir.app.entity.enums.Gender;
+import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.connection.Phone;
@@ -11,12 +14,15 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
+@Log4j2
 public class ProfileController {
 
     @FXML
@@ -75,66 +81,82 @@ public class ProfileController {
 
     @FXML
     void initialize() {
-        setData();
+        updateData();
     }
 
-    void setData() {
+    void updateData() {
         try {
-            LocalStorage.setAccount((Account) Phone.sendOrGetData(Commands.GET_USER_BY_LOGIN, LocalStorage.getAccount()));
+            Account responseAccount = (Account) Phone.sendOrGetData(Commands.GET_USER_BY_LOGIN,
+                    LocalStorage.getAccount().getLogin());
+
+            LocalStorage.setAccount(responseAccount);
 
             Account account = LocalStorage.getAccount();
 
-        if (account.get.equals("Мужской"))
-            image_box.setImage(new Image(new File("src/sample/assets/man-avatar.png").toURI().toString()));
-        else if (gender.equals("Женский"))
-            image_box.setImage(new Image(new File("src/sample/assets/woman-avatar.png").toURI().toString()));
+            login_label.setText(account.getLogin());
+            mail_label.setText(account.getEmail());
 
-        position_label.setText(Data.getPosition().getPositionName());
-        login_label.setText(Data.getEmpl().getLogin());
-        mail_label.setText(Data.getEmpl().getEmail());
-        sex_label.setText(Data.getEmpl().getGender());
+            String sex = account.getData().getGender();
+            if (sex != null && sex.equals(Gender.MALE.toString()))
+                image_box.setImage(new Image(new File(Paths.MAN_AVATAR_PATH).toURI().toString()));
+            else if (sex != null && sex.equals(Gender.FEMALE.toString()))
+                image_box.setImage(new Image(new File(Paths.WOMAN_AVATAR_PATH).toURI().toString()));
+            else
+                image_box.setImage(new Image(new File(Paths.UNDEFINED_AVATAR_PATH).toURI().toString()));
 
-        if (Data.getEmpl().getName() != null) {
-            name_label.setText(Data.getEmpl().getName());
-        }
+            if (sex != null)
+                sex_label.setText(sex);
 
-        if (Data.getEmpl().getSurname() != null) {
-            surname_label.setText(Data.getEmpl().getSurname());
-        }
-        if (Data.getEmpl().getThirdname() != null) {
-            third_name_label.setText(Data.getEmpl().getThirdname());
-        }
+            Position position = account.getData().getPosition();
+            if (position != null && position.getName() != null)
+                position_label.setText(position.getName());
 
-        if (Data.getContacts().getAddress() != null)
-            adress_label.setText(Data.getContacts().getAddress());
+            String name = account.getData().getName();
+            if (name != null) {
+                name_label.setText(name);
+            }
 
-        String phone = "";
-        if (Data.getContacts().getPhone_code() != null)
-            phone += Data.getContacts().getPhone_code() + " - ";
-        if (Data.getContacts().getPhone() != 0)
-            phone += Data.getContacts().getPhone();
-        if (!phone.equals(""))
-            phone_label.setText(phone);
+            String surname = account.getData().getSurname();
+            if (surname != null) {
+                surname_label.setText(surname);
+            }
 
-        if (Data.getContacts().getAddress() != null)
-            social_label.setText(Data.getContacts().getSocial());
+            String thirdName = account.getData().getThirdName();
+            if (thirdName != null) {
+                third_name_label.setText(thirdName);
+            }
 
-        if (Data.getEmpl().getAge() != 0)
-            age_label.setText(String.valueOf(Data.getEmpl().getAge()));
+            String phone = account.getData().getPhone();
+            if (phone != null)
+                phone_label.setText(phone);
 
-        start_date.setText(Data.getEmpl().getStartDate());
+            String social = account.getData().getSocial();
+            if (social != null)
+                social_label.setText(social);
 
-        if (Data.getEmpl().getEndDate() != null)
-            end_date.setText(Data.getEmpl().getEndDate());
+            int age = account.getData().getAge();
+            if (age != 0)
+                age_label.setText(String.valueOf(age));
+
+            Date date = account.getData().getEmplStartDate();
+            if (date != null)
+                start_date.setText(date.toString());
+
+            Date endDate = account.getData().getEmplEndDate();
+            if (endDate != null)
+                end_date.setText(endDate.toString());
+
         } catch (IOException e) {
+            log.error(e.getMessage());
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | GettingDataException e) {
             e.printStackTrace();
         }
     }
 
     public void iconHandler(MouseEvent mouseEvent) {
         GeneralFuncWindow.openNewScene(Paths.WindowEdit);
+        updateData();
     }
 }
 

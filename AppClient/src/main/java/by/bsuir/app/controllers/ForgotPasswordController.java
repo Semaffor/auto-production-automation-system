@@ -1,6 +1,7 @@
 package by.bsuir.app.controllers;
 
 import by.bsuir.app.entity.Account;
+import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.util.Status;
 import by.bsuir.app.util.connection.Phone;
 import javafx.fxml.FXML;
@@ -15,8 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static by.bsuir.app.util.Commands.PASSWORD_RECOVERY;
-import static by.bsuir.app.util.constants.Constants.FILL_FIELDS_MSG;
-import static by.bsuir.app.util.constants.Constants.NEW_PASSWORD_MSG;
+import static by.bsuir.app.util.constants.Constants.*;
 
 @Log4j2
 public class ForgotPasswordController {
@@ -74,19 +74,22 @@ public class ForgotPasswordController {
             warning_label.setVisible(true);
         } else {
             try {
-                Phone.send(PASSWORD_RECOVERY.toString());
-                Phone.sendObject(new Account(login, "", email));
+                String response = (String) Phone.sendOrGetData(PASSWORD_RECOVERY,
+                        new Account(login, "", email));
 
-                String responseStatus = Phone.read();
+                warning_label.setText(NEW_PASSWORD_MSG);
 
-                if (responseStatus.equals(Status.ACCOUNT_NOT_EXISTS.toString()) || responseStatus.equals(
-                        Status.INCORRECT_EMAIL.toString())) {
-                    warning_label.setText(responseStatus);
-                } else {
-                    warning_label.setText(NEW_PASSWORD_MSG + Phone.readObject().toString());
+                if (!response.contains("-")) {
+                    switch (Status.valueOf(response)) {
+                        case ACCOUNT_NOT_EXISTS -> warning_label.setText(ACCOUNT_NOT_FOUND_MSG);
+                        case INCORRECT_EMAIL -> warning_label.setText(INCORRECT_MAIL_MSG);
+                        case MAIL_SENDING_ERROR -> warning_label.setText(MESSAGE_FAIL_MSG);
+                    }
                 }
-            } catch (IOException | ClassNotFoundException e) {
+
+                } catch (IOException | ClassNotFoundException | GettingDataException e) {
                 log.error(e.getMessage());
+                warning_label.setText(MESSAGE_FAIL_MSG);
             }
         }
         warning_label.setVisible(true);

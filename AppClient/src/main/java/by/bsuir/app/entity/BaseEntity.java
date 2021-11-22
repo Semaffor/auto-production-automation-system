@@ -1,4 +1,6 @@
 package by.bsuir.app.entity;
 
-public abstract class BaseEntity {
+import java.io.Serializable;
+
+public abstract class BaseEntity implements Serializable {
 }

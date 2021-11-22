@@ -3,9 +3,10 @@ package by.bsuir.app.entity.enums;
 public enum BodyType {
     SEDAN("Седан"),
     COUPE("Купе"),
-    HATCHBACK("Хетчбек"),
+    HATCHBACK("Хэтчбек"),
     MINIVAN("Минивен"),
-    CONVERTIBLE("Кабриолет");
+    CONVERTIBLE("Кабриолет"),
+    NONE("None");
 
     private final String bodyType;
 

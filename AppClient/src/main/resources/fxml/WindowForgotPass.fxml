@@ -29,7 +29,7 @@
                     </image>
                 </ImageView>
             <Separator layoutX="40.0" layoutY="64.0" prefHeight="10.0" prefWidth="300.0" />
-                <Button fx:id="recoveryButton" layoutX="90.0" layoutY="241.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="193.0" style="-fx-background-color: #EB6E63;" stylesheets="@../animation/first.css" text="Восстановить пароль">
+                <Button fx:id="recoveryButton" layoutX="90.0" layoutY="246.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="193.0" style="-fx-background-color: #EB6E63;" stylesheets="@../animation/first.css" text="Восстановить пароль">
                     <font>
                         <Font name="Consolas Italic" size="16.0" />
                     </font>
@@ -49,17 +49,17 @@
                       <Font size="26.0" />
                   </font>
               </Label>
-            <Button fx:id="returnButton" layoutX="143.0" layoutY="287.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #EB6E63;" stylesheets="@../animation/first.css" text="Назад">
+            <Button fx:id="returnButton" layoutX="143.0" layoutY="292.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #EB6E63;" stylesheets="@../animation/first.css" text="Назад">
                <font>
                   <Font name="Consolas Italic" size="16.0" />
                </font>
             </Button>
-            <Label fx:id="warning_label" alignment="CENTER" layoutX="57.0" layoutY="195.0" prefHeight="20.0" prefWidth="270.0" text="Заполните все поля." textFill="#ffc3c3" visible="false">
+            <Label fx:id="warning_label" alignment="CENTER" layoutX="57.0" layoutY="180.0" prefHeight="45.0" prefWidth="270.0" text="Заполните все поля." textAlignment="CENTER" textFill="#ffc3c3" visible="false" wrapText="true">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Label>
-            <Separator layoutX="42.0" layoutY="215.0" prefHeight="10.0" prefWidth="300.0" />
+            <Separator layoutX="42.0" layoutY="220.0" prefHeight="10.0" prefWidth="300.0" />
             </children>
         </AnchorPane>
     </children>

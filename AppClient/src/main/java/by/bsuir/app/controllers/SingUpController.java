@@ -4,8 +4,8 @@ import by.bsuir.app.animation.Shake;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.enums.Gender;
 import by.bsuir.app.exception.EmptyFieldsException;
+import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.util.Commands;
-import by.bsuir.app.util.Status;
 import by.bsuir.app.util.connection.Phone;
 import by.bsuir.app.util.constants.Constants;
 import javafx.fxml.FXML;
@@ -72,7 +72,7 @@ public class SingUpController {
         });
     }
 
-    //TODO GENDERHANDLE
+    //TODO GENDER HANDLE
     private void singUpNewUser() {
         try {
             String login = login_field.getText();
@@ -98,28 +98,24 @@ public class SingUpController {
             if (!password.equals(confirmPassword))
                 throw new IllegalArgumentException(PASSWORDS_NOT_MATCH);
 
-            Phone.send(Commands.REGISTRATION.toString());
-            Phone.sendObject(new Account(login, password, email));
+            Account account = new Account(login, password, email);
+            account.getData().setGender(gender.getGender());
 
-            String answer = Phone.read();
+            boolean answer = (boolean) Phone.sendOrGetData(Commands.REGISTRATION, account);
 
-            if (answer.equals(Status.DUPLICATE_LOGIN.toString()))
-                throw new IllegalArgumentException(DUPLICATE_LOGIN_MSG);
-
-            Object obj = Phone.readObject();
-
-            warning_label.setText(SUCCESSFUL_REG_MSG);
-            registrationButton.getScene().getWindow().hide();
-
+            if (answer) {
+                warning_label.setText(SUCCESSFUL_REG_MSG);
+                registrationButton.getScene().getWindow().hide();
+            } else throw new GettingDataException();
         } catch (EmptyFieldsException e) {
             warning_label.setText(e.getMessage());
             warning_label.setVisible(true);
             runAnimation();
         } catch (IllegalArgumentException e) {
             warning_label.setText(e.getMessage());
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | GettingDataException e) {
             log.error(e.getMessage());
-            e.printStackTrace();
+            warning_label.setText(LOGIN_IN_USE);
         }
         warning_label.setVisible(true);
 

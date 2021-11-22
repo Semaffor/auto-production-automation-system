@@ -1,61 +1,70 @@
-//package by.bsuir.app.controllers.submenu;
-//
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.Label;
-//import javafx.scene.control.TextArea;
-//import javafx.scene.input.MouseEvent;
-//import sample.clientConnection.Phone;
-//import sample.constansts.Data;
-//import sample.services.GeneralFuncWindow;
-//
-//import java.net.URL;
-//import java.util.ResourceBundle;
-//
-//public class FeedbackController {
-//
-//    @FXML
-//    private ResourceBundle resources;
-//
-//    @FXML
-//    private URL location;
-//
-//    @FXML
-//    private TextArea feedback_area;
-//
-//    @FXML
-//    private Button accept_button;
-//
-//    @FXML
-//    private Label warning_label;
-//
-//    @FXML
-//    void handleClose(MouseEvent event) {
-//        GeneralFuncWindow.closeApplication();
-//    }
-//
-//    @FXML
-//    void initialize() {
-//        accept_button.setOnAction(actionEvent -> {
-//
-//            String feedback = feedback_area.getText();
-//
-//            if (feedback.length() < 20) {
-//                warning_label.setText("Минимальное количество символов - 20. Опишите поподробнее.");
-//            } else {
-//                String request = "INSERT INTO Feedback (sender_id, question) " +
-//                        "VALUES(" + Data.getEmpl().getId() + ", '" + feedback + "' )";
-//
-//                Phone.writeLine(request);
-//                if (Phone.readLine().equals("GOOD")) {
-//                    warning_label.setText("Ваше обращение отправлено.");
-//                    feedback_area.setText("");
-//                }
-//                else
-//                    warning_label.setText("Ошибка отправки сообщения. Повторите попытку позже.");
-//            }
-//            warning_label.setVisible(true);
-//        });
-//
-//    }
-//}
+package by.bsuir.app.controllers.submenu;
+
+import by.bsuir.app.exception.GettingDataException;
+import by.bsuir.app.services.GeneralFuncWindow;
+import by.bsuir.app.util.Commands;
+import by.bsuir.app.util.connection.Phone;
+import by.bsuir.app.util.constants.LocalStorage;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+import lombok.extern.log4j.Log4j2;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static by.bsuir.app.util.constants.Constants.*;
+
+@Log4j2
+public class FeedbackController {
+
+    @FXML
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private TextArea feedback_area;
+
+    @FXML
+    private Button accept_button;
+
+    @FXML
+    private Label warning_label;
+
+    @FXML
+    void handleClose(MouseEvent event) {
+        GeneralFuncWindow.closeApplication();
+    }
+
+    @FXML
+    void initialize() {
+        accept_button.setOnAction(actionEvent -> sendQuestion());
+
+    }
+
+    private void sendQuestion() {
+
+        String feedback = feedback_area.getText();
+
+        if (feedback.length() < MIN_MESSAGE_LENGTH) {
+            warning_label.setText(MIN_MESSAGE_LENGTH_MSG);
+        } else {
+
+            try {
+                Phone.sendOrGetData(Commands.ADD_QUESTION_FROM_USER, LocalStorage.getAccount().getLogin());
+                warning_label.setText(MESSAGE_SUCCESS_MSG);
+                feedback_area.setText("");
+            } catch (IOException | GettingDataException | ClassNotFoundException e) {
+                warning_label.setText(MESSAGE_FAIL_MSG);
+                log.error(e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        warning_label.setVisible(true);
+    }
+}

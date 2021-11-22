@@ -32,10 +32,12 @@ public class JavaMailUtil {
 
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.ssl.trust", MAIL_HOST);
-        props.put("mail.smtp.user", from);
-        props.put("mail.smtp.password", pass);
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.port", MAIL_PORT);
         props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.user", from);
+        props.put("mail.smtp.password", pass);
+
 
 
         Session session = Session.getDefaultInstance(props);

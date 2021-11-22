@@ -3,6 +3,9 @@ package by.bsuir.app.util.constants;
 public class Paths {
 
     public static final String REPORT_PATH = "reportActivityLog.txt";
+    public static final String MAN_AVATAR_PATH = "src/main/resources/assets/man-avatar.png";
+    public static final String WOMAN_AVATAR_PATH = "src/main/resources/assets/woman-avatar.png";
+    public static final String UNDEFINED_AVATAR_PATH = "src/main/resources/assets/undefined-avatar.png";
 
     public static final String WindowSignUp = "/fxml/WindowSignUp.fxml";
     public static final String WindowSimpleClient = "/fxml/WindowSimpleClient.fxml";

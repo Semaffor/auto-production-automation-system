@@ -82,18 +82,18 @@ public class AccountDaoImpl implements AccountDao {
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.saveOrUpdate(account);
+        session.getTransaction().commit();
         session.close();
         return true;
     }
 
     @Override
     public Role auth(Account account) {
-        Account foundAccount = findByLogin(account.getLogin()).orElse(new Account());
-
+        Account foundAccount = Optional.of(findByLogin(account.getLogin())).orElse(new Account());
 
         if (account.getLogin().equals(foundAccount.getLogin()) && account.getPassword().equals(foundAccount.getPassword()))
             for (Role e : Role.values()) {
-                if (e == foundAccount.getRole()) {
+                if (e.toString().equals(foundAccount.getRole())) {
                     addEntranceLog(foundAccount);
                     return e;
                 }
@@ -103,7 +103,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     @SuppressWarnings("depricated")
-    public Optional<Account> findByLogin(String login) {
+    public Account findByLogin(String login) {
         Optional<Account> account = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -112,9 +112,11 @@ public class AccountDaoImpl implements AccountDao {
                     .uniqueResult());
             session.close();
         } catch (Throwable e) {
+            log.error(e.getMessage());
             e.printStackTrace();
+            return new Account();
         }
-        return account;
+        return account.orElse(new Account());
     }
 
     @Override
@@ -124,7 +126,7 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public String resetPassword(Account accountFromUser) {
-        Optional<Account> accountOptional = findByLogin(accountFromUser.getLogin());
+        Optional<Account> accountOptional = Optional.of(findByLogin(accountFromUser.getLogin()));
         if (accountOptional.isEmpty())
             return Status.ACCOUNT_NOT_EXISTS.toString();
 
@@ -139,7 +141,7 @@ public class AccountDaoImpl implements AccountDao {
             account.setPassword(newPass);
             saveOrUpdate(account);
         } catch (MessagingException e) {
-            log.error(e.getMessage());
+            log.error(e);
             return Status.MAIL_SENDING_ERROR.toString();
         }
         return newPass;
@@ -147,8 +149,9 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public boolean registration(Account account) {
-        Optional<Account> a = findByLogin(account.getLogin());
-        if (a.isEmpty()) {
+        Account a = findByLogin(account.getLogin());
+        if (a.getId() == null) {
+            account.setRole(Role.USER.toString());
             saveOrUpdate(account);
             return true;
         }
@@ -158,7 +161,6 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public void addEntranceLog(Account account) {
 
-        account.getLogs();
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
@@ -168,4 +170,5 @@ public class AccountDaoImpl implements AccountDao {
         session.getTransaction().commit();
         session.close();
     }
+
 }

@@ -44,7 +44,6 @@ public class LoadingController {
 
         new SplashScreen().start();
 
-
         deny_button.setOnAction(actionEvent -> {
             System.exit(0);
         });
@@ -63,12 +62,12 @@ public class LoadingController {
                         i = Constants.ATTEMPTS_COUNT;
                         break;
                     } catch (IOException e) {
+                        try {
+                            Thread.sleep(CONNECTION_WAIT_TIME);
+                        } catch (InterruptedException ex) {
+                            ex.printStackTrace();
+                        }
                         log.error(e.getMessage() + " ");
-                        e.printStackTrace();
-                    }
-                    try {
-                        Thread.sleep(CONNECTION_WAIT_TIME);
-                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -79,7 +78,8 @@ public class LoadingController {
 
             Platform.runLater(() -> {
                 deny_button.getScene().getWindow().hide();
-                GeneralFuncWindow.openNewScene(Paths.WindowSignIn);
+//                GeneralFuncWindow.openNewScene(Paths.WindowSignIn);
+                GeneralFuncWindow.openNewScene(Paths.WindowManagement);
             });
         }
     }

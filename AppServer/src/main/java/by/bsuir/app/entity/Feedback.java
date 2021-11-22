@@ -16,7 +16,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 @Proxy(lazy = false)
-public class Feedback extends BaseEntity implements Serializable {
+public class Feedback extends BaseEntity{
 
     static final long serialVersionUID = 42L;
 
@@ -33,4 +33,6 @@ public class Feedback extends BaseEntity implements Serializable {
     @Column(name = "question_date")
     private Date questionDate;
 
+    @Column(name = "answer_date")
+    private Date answerDate;
 }

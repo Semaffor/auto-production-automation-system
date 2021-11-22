@@ -15,7 +15,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Car extends BaseEntity implements Serializable {
+public class Car extends BaseEntity {
 
     static final long serialVersionUID = 42L;
 
@@ -26,10 +26,23 @@ public class Car extends BaseEntity implements Serializable {
     @Column(name = "vin")
     private String VIN;
 
+    @Column(name = "body_type")
     private String bodyType;
+
+    @Column(name = "fuel_type")
     private String fuelType;
     private String gearbox;
     private BigDecimal price;
+
+    @Column(name = "issue_date")
     private Date issueDate;
-    private String description;
+    private BigDecimal rate;
+
+    @Column(name="photo_url")
+    private String photoURL;
+
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "model_id")
+    private Model model;
+
 }

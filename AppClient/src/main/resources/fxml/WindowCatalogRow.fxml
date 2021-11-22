@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="595.0" style="-fx-border-radius: 20;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.CatalogRowController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="577.0" style="-fx-border-radius: 20;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.CatalogRowController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <children>
-      <HBox layoutY="14.0" prefHeight="127.0" prefWidth="545.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutY="14.0" prefHeight="127.0" prefWidth="577.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -33,13 +33,8 @@
                </children>
             </VBox>
             <Separator opacity="0.49" orientation="VERTICAL" prefHeight="110.0" prefWidth="6.0" />
-            <VBox alignment="CENTER_LEFT" prefHeight="126.0" prefWidth="90.0">
+            <VBox prefHeight="126.0" prefWidth="90.0">
                <children>
-                  <Label text="Серия:">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
                   <Label text="Модель:">
                      <font>
                         <Font size="13.0" />
@@ -51,6 +46,11 @@
                      </font>
                   </Label>
                   <Label text="Тип топлива:">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="Количество:">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -69,50 +69,52 @@
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="127.0" prefWidth="134.0">
+            <VBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="112.0">
                <children>
-                  <Label fx:id="series" text="Label">
+                  <Label fx:id="model_label" text="Label">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="model" text="Label">
+                  <Label fx:id="body_type_label" text="Label">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="body_type" text="Label">
+                  <Label fx:id="fuel_type_label" text="Label">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fuel_type" text="Label">
+                  <Label fx:id="quantity_label" text="Label">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="issue_date" text="Label">
+                  <Label fx:id="issue_date_label" text="Label">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="price" text="Label" />
+                  <Label fx:id="price_label" text="Label" />
                </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="127.0" prefWidth="74.0">
+            <VBox prefHeight="127.0" prefWidth="66.0">
                <children>
-                  <Label text="Сиденья:">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
                   <Label text="Коробка:">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label text="Тираж:">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -122,41 +124,43 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label alignment="TOP_LEFT" prefHeight="38.0" prefWidth="62.0" text="Описание:">
+                  <Label alignment="TOP_LEFT" prefHeight="18.0" prefWidth="62.0" text="Описание:">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
                </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="127.0" prefWidth="139.0">
+            <VBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="154.0">
                <children>
-                  <Label fx:id="seats" text="Label">
+                  <Label fx:id="gearbox_label" text="Label">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="gearbox" text="Label">
+                  <Label fx:id="rate_label" text="Label">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="quantity" text="Label" wrapText="true">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="rate" text="Label">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="description" alignment="TOP_CENTER" prefHeight="42.0" prefWidth="118.0" text="Label" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="description_label" alignment="TOP_CENTER" prefHeight="74.0" prefWidth="166.0" text="Label" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
                </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
             </VBox>
          </children>
       </HBox>

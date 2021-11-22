@@ -3,10 +3,12 @@ package by.bsuir.app.entity;
 import by.bsuir.app.entity.enums.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Proxy(lazy = false)
-public class Account extends BaseEntity implements Serializable {
+public class Account extends BaseEntity {
 
     static final long serialVersionUID = 42L;
 
@@ -30,20 +32,34 @@ public class Account extends BaseEntity implements Serializable {
     String password;
     @Column(nullable = false, length = 45)
     String email;
-    @Column(name = "personal_data_id")
-    Long personalInfoId;
-    Role role;
+
+    String role;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "personal_data_id")
+    @NotNull
+    PersonalData data;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     List<HistoryLog> logs;
 
-    //List<Feedback> feedbacks;
+    @OneToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinColumn(name = "sender_id")
+    List<Feedback> feedbacks;
 
     public void addLog(HistoryLog log) {
         if (logs == null)
             logs = new ArrayList<>();
 
         logs.add(log);
+    }
+
+    public void addFeedback(Feedback feedback) {
+        if (feedbacks == null)
+            feedbacks = new ArrayList<>();
+
+        feedbacks.add(feedback);
     }
 }

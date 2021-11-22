@@ -20,7 +20,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @Table(name = "history_log", schema = "car-manufacturer")
-public class HistoryLog extends BaseEntity implements Serializable {
+public class HistoryLog extends BaseEntity {
 
     static final long serialVersionUID = 42L;
 

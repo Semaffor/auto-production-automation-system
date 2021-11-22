@@ -23,7 +23,7 @@ public class HistoryLogDaoImpl implements HistoryLogDao {
 
         try {
             AccountDaoImpl accountDao = new AccountDaoImpl();
-            Optional<Account> account = accountDao.findByLogin(userLogin);
+            Optional<Account> account = Optional.of(accountDao.findByLogin(userLogin));
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();

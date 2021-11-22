@@ -23,5 +23,14 @@ public class Car extends BaseEntity {
     private String gearbox;
     private BigDecimal price;
     private Date issueDate;
-    private String description;
+    private String photoURL;
+    private BigDecimal rate;
+
+    private Model model;
+
+    public Model getModel() {
+        if (model == null)
+            model = new Model();
+        return model;
+    }
 }

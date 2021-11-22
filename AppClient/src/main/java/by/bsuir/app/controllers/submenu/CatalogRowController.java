@@ -1,87 +1,87 @@
-//package by.bsuir.app.controllers.submenu;
-//
-//import java.io.File;
-//import java.net.URL;
-//import java.util.ArrayList;
-//import java.util.ResourceBundle;
-//
-//import com.bsuir.entities.Car_photo;
-//import com.bsuir.jdbc.TableNames;
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Label;
-//import javafx.scene.image.Image;
-//import javafx.scene.image.ImageView;
-//import sample.clientConnection.Phone;
-//import sample.constansts.Data;
-//
-//public class CatalogRowController {
-//
-//    @FXML
-//    private ResourceBundle resources;
-//
-//    @FXML
-//    private URL location;
-//
-//    @FXML
-//    private ImageView imageView;
-//
-//    @FXML
-//    private Label series;
-//
-//    @FXML
-//    private Label model;
-//
-//    @FXML
-//    private Label body_type;
-//
-//    @FXML
-//    private Label fuel_type;
-//
-//    @FXML
-//    private Label issue_date;
-//
-//    @FXML
-//    private Label price;
-//
-//    @FXML
-//    private Label seats;
-//
-//    @FXML
-//    private Label quantity;
-//
-//    @FXML
-//    private Label gearbox;
-//
-//    @FXML
-//    private Label rate;
-//
-//    @FXML
-//    private Label description;
-//
-//    @FXML
-//    void initialize() {
-//        series.setText(Data.getCarList().get(0).getSeries());
-//        model.setText(Data.getCarList().get(0).getModel());
-//        body_type.setText(Data.getCarList().get(0).getBody_type());
-//        fuel_type.setText(Data.getCarList().get(0).getFuel_type());
-//        issue_date.setText(Data.getCarList().get(0).getIssue_date());
-//        price.setText(String.valueOf(Data.getCarList().get(0).getPrice()) + "$");
-//        gearbox.setText(Data.getCarList().get(0).getGearbox());
-//        seats.setText(String.valueOf(Data.getCarList().get(0).getSeats()));
-//        rate.setText(String.valueOf(Data.getCarList().get(0).getRate()));
-//        description.setText(Data.getCarList().get(0).getDescription());
-//        quantity.setText("10000");      //TODO ДОДЕЛАТЬ ПОЛЕ
-//        String photoURL = findPhoto(Data.getCarList().get(0).getVIN());
-//        System.out.println(photoURL);
-//        if (!photoURL.equals(""))
-//            imageView.setImage(new Image(new File(photoURL).toURI().toString()));
-//        Data.getCarList().remove(0);
-//    }
-//
-//    private String findPhoto(String VIN) {
-//        Phone.writeLine("SELECT url FROM " + TableNames.CAR_PHOTO +
-//                " WHERE VIN = '" + VIN + "'");
-//        ArrayList<Car_photo> photos = (ArrayList<Car_photo>) Phone.readObject();
-//        return (!photos.isEmpty()) ? photos.get(0).getUrl() : "";
-//    }
-//}
+package by.bsuir.app.controllers.submenu;
+
+import by.bsuir.app.entity.Car;
+import by.bsuir.app.entity.Model;
+import by.bsuir.app.util.constants.Constants;
+import by.bsuir.app.util.constants.LocalStorage;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import lombok.extern.log4j.Log4j2;
+
+import java.io.File;
+import java.util.List;
+
+@Log4j2
+public class CatalogRowController {
+
+    @FXML
+    private ImageView imageView;
+
+    @FXML
+    private Label model_label;
+
+    @FXML
+    private Label body_type_label;
+
+    @FXML
+    private Label fuel_type_label;
+
+    @FXML
+    private Label issue_date_label;
+
+    @FXML
+    private Label price_label;
+
+    @FXML
+    private Label gearbox_label;
+
+    @FXML
+    private Label rate_label;
+
+    @FXML
+    private Label description_label;
+
+    @FXML
+    private Label quantity_label;
+
+    private int index = 0;
+    private List<Car> cars = null;
+
+    {
+        cars = LocalStorage.getCars();
+    }
+
+    //TODO iterator
+    @FXML
+    void initialize() {
+        initializeRowsWithData();
+    }
+
+    private void initializeRowsWithData() {
+        Car car = cars.get(0);
+        Model model = car.getModel();
+
+        model_label.setText(model.getName());
+        description_label.setText(model.getDescription());
+
+        body_type_label.setText(car.getBodyType());
+        fuel_type_label.setText(car.getFuelType());
+        issue_date_label.setText(car.getIssueDate().toString());
+        price_label.setText(car.getPrice().toString() + Constants.CURRENCY_MSG);
+        gearbox_label.setText(car.getGearbox());
+        rate_label.setText(String.valueOf(car.getRate()));
+        quantity_label.setText(car.getPrice().toString());
+
+        String photoURL = car.getPhotoURL();
+        if (photoURL != null)
+            imageView.setImage(new Image(new File(photoURL).toURI().toString()));
+
+        if (index == cars.size() - 1) {
+            index = 0;
+        } else {
+            index++;
+        }
+    }
+}

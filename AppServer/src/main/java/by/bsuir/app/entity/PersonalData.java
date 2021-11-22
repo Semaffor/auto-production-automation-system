@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -15,7 +16,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Builder
 @Table(name = "personal_data", schema = "car-manufacturer")
-public class PersonalData extends BaseEntity implements Serializable {
+public class PersonalData extends BaseEntity {
 
     static final long serialVersionUID = 42L;
 
@@ -24,14 +25,22 @@ public class PersonalData extends BaseEntity implements Serializable {
     private Long id;
     private String name;
     private String surname;
-
     @Column(name = "thirdname")
     private String thirdName;
+
+    private int age;
     private String gender;
+
     private String phone;
-    private String address;
     private String social;
 
+    @Column(name = "empl_start_date")
     private Date emplStartDate;
+
+    @Column(name = "empl_end_date")
     private Date emplEndDate;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "position_id")
+    Position position;
 }

@@ -11,7 +11,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Feedback extends BaseEntity {
+public class Feedback extends BaseEntity{
 
     static final long serialVersionUID = 42L;
 
@@ -19,6 +19,6 @@ public class Feedback extends BaseEntity {
     private String question;
     private String answer;
     private Date questionDate;
+    private Date answerDate;
 
-    private Account account;
 }

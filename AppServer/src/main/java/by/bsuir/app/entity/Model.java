@@ -5,18 +5,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
 
+@Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Position extends BaseEntity{
+public class Model extends BaseEntity {
 
     static final long serialVersionUID = 42L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name="model_name")
     private String name;
-    private BigDecimal salary;
     private String description;
+    private int quantity;
+
 }

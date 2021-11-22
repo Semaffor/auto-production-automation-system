@@ -11,6 +11,7 @@ module MyApp {
     opens by.bsuir.app.controllers.submenu to javafx.fxml;
     opens by.bsuir.app.controllers.others to javafx.fxml;
     opens by.bsuir.app.controllers to javafx.fxml;
+    opens by.bsuir.app.entity to javafx.base;
 
     opens by.bsuir.app;
     opens by.bsuir.app.util;

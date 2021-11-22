@@ -4,10 +4,10 @@ import by.bsuir.app.animation.Shake;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.exception.AuthenticationException;
+import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.exception.RoleRecognitionException;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.Commands;
-import by.bsuir.app.util.Status;
 import by.bsuir.app.util.connection.Phone;
 import by.bsuir.app.util.constants.Constants;
 import by.bsuir.app.util.constants.LocalStorage;
@@ -20,7 +20,6 @@ import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 
 import static by.bsuir.app.services.GeneralFuncWindow.openNewScene;
-import static by.bsuir.app.util.constants.Constants.DELIMITER_MSG;
 
 @Log4j2
 public class SingInController {
@@ -83,17 +82,8 @@ public class SingInController {
         try {
             Account account = new Account(loginText, passText);
 
-            Phone.send(Commands.AUTHORISATION.toString());
-            Phone.sendObject(account);
-            log.info(Constants.REQUEST_MSG + loginText + DELIMITER_MSG + passText);
-
-            String response = Phone.read();
-            if (!response.equals(Status.OK.toString()))
-                throw new AuthenticationException();
-
-            Role accountRole = (Role) Phone.readObject();
-            log.info(Constants.RESPONSE_MSG + response + DELIMITER_MSG + accountRole);
-
+            Role accountRole = (Role) Phone.sendOrGetData(Commands.AUTHORISATION, account);
+            account.setRole(accountRole.toString());
             LocalStorage.setAccount(account);
 
             switch (accountRole) {
@@ -103,7 +93,8 @@ public class SingInController {
                 case GUEST -> openNewScene(Paths.WindowSimpleClient);
                 default -> throw new RoleRecognitionException();
             }
-        } catch (IOException | ClassNotFoundException | AuthenticationException | RoleRecognitionException e) {
+
+        } catch (IOException | ClassNotFoundException | AuthenticationException | RoleRecognitionException | GettingDataException e) {
             log.error(Constants.AUTH_FAIL + e.getMessage());
             msg_label.setVisible(true);
             Shake loginAnim = new Shake(login_field);
