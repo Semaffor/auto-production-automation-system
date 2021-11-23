@@ -37,4 +37,10 @@ public class PersonalData extends BaseEntity{
             position = new Position();
         return position;
     }
+
+    public int getAge() {
+        if (age == 0)
+            age = 18;
+        return age;
+    }
 }

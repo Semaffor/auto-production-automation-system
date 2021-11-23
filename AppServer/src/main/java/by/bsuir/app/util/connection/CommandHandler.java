@@ -31,8 +31,8 @@ public class CommandHandler {
             response = switch (command) {
                 case USER_ADD_OR_UPDATE -> accountDao.saveOrUpdate((Account) obj);
                 case AUTHORISATION -> accountDao.auth((Account) obj);
-                case DELETE -> accountDao.delete((Account) obj);
-                case DELETE_BY_ID -> accountDao.deleteById((Long) obj);
+                case DELETE_USER -> accountDao.delete((Account) obj);
+                case DELETE_USER_BY_ID -> accountDao.deleteById((Long) obj);
                 case GET_USER_BY_ID -> accountDao.findById((Long) obj);
                 case GET_ALL_USERS -> accountDao.findAll();
                 case GET_USER_BY_LOGIN -> accountDao.findByLogin((String) obj);

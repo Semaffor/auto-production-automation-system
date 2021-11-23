@@ -30,7 +30,8 @@ public class Constants {
     public static final String REPORT_PATTERN_HEAD_MSG = "\n\tID   User ID\tTime\n  ";
     public static final String GETTING_DATA_FAILURE = "Произошла ошибка при получении данных.";
     public static final String EDITING_DATA_FAILURE = "Ошибка. Изменения не применены.";
-    public static final String EDITING_DATA_SUCCESS = "Данные изменены. Обновите страницу.";
+    public static final String EDITING_DATA_SUCCESS = "Данные изменены. ";
+    public static final String EDITING_DATA_SUCCESS_UPDATE = EDITING_DATA_SUCCESS + "Обновите страницу.";
     public static final String INCORRECT_DATA_MSG = "Некорректные данные.";
     public static final String INCORRECT_MAIL_MSG = "Проверьте корректность введенной почты.";
     public static final String ADD_SUCCESS_MSG = "Успешно. Данные добавлены";

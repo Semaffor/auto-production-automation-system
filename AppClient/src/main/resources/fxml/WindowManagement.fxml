@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -9,7 +10,10 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" opacity="0.7" prefHeight="450.0" prefWidth="830.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.ManagementController">
@@ -29,26 +33,77 @@
                                         <TableColumn fx:id="id_column" prefWidth="40.0" text="№" />
                                         <TableColumn fx:id="login_column" onEditCommit="#onEditLogin" prefWidth="85.0" text="Логин" />
                                           <TableColumn fx:id="mail_column" onEditCommit="#onEditMail" prefWidth="113.60003662109375" text="Почта" />
-                                          <TableColumn fx:id="name_column" prefWidth="85.0" text="Имя" />
-                                          <TableColumn fx:id="role_column" prefWidth="72.800048828125" text="Роль" />
-                                          <TableColumn fx:id="surname_column" prefWidth="90.0" text="Фамилия" />
-                                          <TableColumn fx:id="thirdName_column" prefWidth="86.39993896484373" text="Отчество" />
-                                          <TableColumn fx:id="age_column" prefWidth="55.0" text="Возраст" />
-                                          <TableColumn fx:id="gender_column" prefWidth="70.0" text="Пол" />
+                                          <TableColumn fx:id="name_column" onEditCommit="#onEditName" prefWidth="85.0" text="Имя" />
+                                          <TableColumn fx:id="role_column" onEditCommit="#onEditRole" prefWidth="72.800048828125" text="Роль" />
+                                          <TableColumn fx:id="surname_column" onEditCommit="#onEditSurname" prefWidth="90.0" text="Фамилия" />
+                                          <TableColumn fx:id="thirdName_column" onEditCommit="#onEditThirdName" prefWidth="86.39993896484373" text="Отчество" />
+                                          <TableColumn fx:id="age_column" onEditCommit="#onEditAge" prefWidth="55.0" text="Возраст" />
+                                          <TableColumn fx:id="gender_column" onEditCommit="#onEditGender" prefWidth="70.0" text="Пол" />
                                           <TableColumn fx:id="position_column" onEditCommit="#onEditPosition" text="Должность" />
-                                          <TableColumn fx:id="phone" text="Телефон" />
+                                          <TableColumn fx:id="phone" onEditCommit="#onEditPhone" text="Телефон" />
                                           <TableColumn fx:id="social" prefWidth="100.0" text="Соц.сети" />
                                           <TableColumn fx:id="start_column" prefWidth="75.0" text="Нанят" />
                                           <TableColumn fx:id="fire_column" prefWidth="75.0" text="Уволен" />
                                       </columns>
                                     </TableView>
                                     <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" visible="false" />
-                                    <Button fx:id="delete_account_button" layoutX="378.0" layoutY="364.0" mnemonicParsing="false" text="Удалить" />
-                                    <Label fx:id="warning" layoutX="477.0" layoutY="364.0" prefHeight="18.0" prefWidth="322.0" text="ntrcn" textFill="#bc3636" visible="false">
+                                    <Label fx:id="warning_account_label" layoutX="14.0" layoutY="367.0" prefHeight="18.0" prefWidth="322.0" text="Label" textFill="#bc3636" visible="false">
                                        <font>
                                           <Font name="System Bold" size="13.0" />
                                        </font>
                                     </Label>
+                                    <HBox layoutX="647.0" layoutY="363.0" prefHeight="26.0" prefWidth="169.0" spacing="15.0">
+                                       <children>
+                                          <Button fx:id="account_save_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickSave" textAlignment="CENTER">
+                                             <graphic>
+                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickSave" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/diskette.png" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D height="16.0" width="16.0" />
+                                                   </viewport>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickBack" prefHeight="15.0" prefWidth="16.0" textAlignment="CENTER">
+                                             <graphic>
+                                                <ImageView fitHeight="15.0" fitWidth="15.0" onMouseClicked="#onMouseClickBack" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/undo-circular-arrow.png" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D height="16.0" width="16.0" />
+                                                   </viewport>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="delete_account_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickReset" prefHeight="0.0" prefWidth="0.0" textAlignment="CENTER">
+                                             <graphic>
+                                                <ImageView fitHeight="15.0" fitWidth="20.0" onMouseClicked="#onMouseClickReset" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/reload.png" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D height="16.0" width="16.0" />
+                                                   </viewport>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="account_reset_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickDelete" textAlignment="CENTER">
+                                             <graphic>
+                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickDelete" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../assets/bin.png" />
+                                                   </image>
+                                                   <viewport>
+                                                      <Rectangle2D height="16.0" width="16.0" />
+                                                   </viewport>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </AnchorPane>
                           </content>
@@ -85,7 +140,11 @@
                         <Button fx:id="delete_car_button" layoutX="685.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Удалить" />
                         <Label fx:id="war_label" alignment="CENTER_RIGHT" layoutX="251.0" layoutY="368.0" prefHeight="18.0" prefWidth="269.0" text="Label" visible="false" />
                         <Button fx:id="add_car_button" layoutX="750.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Добавить" />
-                        <Label fx:id="warningCar" alignment="CENTER_RIGHT" layoutX="162.0" layoutY="370.0" prefHeight="18.0" prefWidth="359.0" text="Label" textAlignment="RIGHT" visible="false" />
+                        <Label fx:id="car_warning_label" layoutX="487.0" layoutY="374.0" prefHeight="18.0" prefWidth="322.0" text="ntrcn" textFill="#bc3636" visible="false">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -126,6 +185,7 @@
          </font>
       </Label>
       <TextField fx:id="filterField" layoutX="580.0" layoutY="13.0" promptText="Поиск" />
+      <ImageView fitHeight="38.0" fitWidth="78.0" layoutX="456.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
    </children>
    <opaqueInsets>
       <Insets />

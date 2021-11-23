@@ -73,7 +73,7 @@ public class LoadingController {
                 }
                 warning_label2.setVisible(true);
                 deny_button.setVisible(true);
-                CURRENT_PORT++;
+                //CURRENT_PORT++;
             }
 
             Platform.runLater(() -> {

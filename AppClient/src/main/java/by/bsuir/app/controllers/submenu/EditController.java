@@ -117,7 +117,7 @@ public class EditController {
         System.out.println(account);
         Phone.sendOrGetData(Commands.USER_ADD_OR_UPDATE, account);
         System.out.println(account);
-        war_label.setText(EDITING_DATA_SUCCESS);
+        war_label.setText(EDITING_DATA_SUCCESS_UPDATE);
     }
 
     void fillFieldsWithData() {

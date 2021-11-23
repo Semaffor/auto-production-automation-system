@@ -58,6 +58,7 @@ public class AccountDaoImpl implements AccountDao {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(account);
+            session.getTransaction().commit();
             session.close();
         } catch (Throwable e) {
             e.printStackTrace();
@@ -67,10 +68,9 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public boolean deleteById(Long id) {
-        Account account = new Account();
-        account.setId(id);
+        Optional<Account> account = findById(id);
         try {
-            delete(account);
+            account.ifPresent(this::delete);
         } catch (Throwable e) {
             e.printStackTrace();
         }
