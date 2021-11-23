@@ -33,6 +33,9 @@ public class Account extends BaseEntity {
     @Column(nullable = false, length = 45)
     String email;
 
+    @Column(name = "is_blocked")
+    boolean isBlocked;
+
     String role;
 
     @OneToOne(cascade = CascadeType.ALL)

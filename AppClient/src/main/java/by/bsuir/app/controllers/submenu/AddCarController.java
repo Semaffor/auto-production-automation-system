@@ -5,6 +5,7 @@ import by.bsuir.app.entity.Model;
 import by.bsuir.app.entity.enums.BodyType;
 import by.bsuir.app.entity.enums.FuelType;
 import by.bsuir.app.entity.enums.GearBox;
+import by.bsuir.app.exception.EmptyFieldsException;
 import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.connection.Phone;
@@ -16,10 +17,13 @@ import javafx.scene.input.MouseEvent;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
-import static by.bsuir.app.util.constants.Constants.ADD_FAIL_MSG;
-import static by.bsuir.app.util.constants.Constants.ADD_SUCCESS_MSG;
+import static by.bsuir.app.util.constants.Constants.*;
 
 @Log4j2
 public class AddCarController {
@@ -37,16 +41,16 @@ public class AddCarController {
     private DatePicker issue_box_date;
 
     @FXML
-    private ComboBox<String> gear_field;
+    private ComboBox<String> gear_box;
 
     @FXML
-    private ComboBox<String> bodyType_field;
+    private ComboBox<String> bodyType_box;
 
     @FXML
-    private ComboBox<String> fuelType_field;
+    private ComboBox<String> fuelType_box;
 
     @FXML
-    private ComboBox<Integer> rate_field;
+    private ComboBox<Double> rate_field;
 
     @FXML
     private TextField price_field;
@@ -80,32 +84,69 @@ public class AddCarController {
             ObservableList<String> ol_gear = FXCollections.observableArrayList();
             for (GearBox b : GearBox.values())
                 ol_gear.add(b.getRusName());
-            gear_field.setItems(ol_gear);
+            gear_box.setItems(ol_gear);
 
             ObservableList<String> ol_body = FXCollections.observableArrayList();
             for (BodyType b : BodyType.values())
                 ol_body.add(b.getBodyType());
-            bodyType_field.setItems(ol_body);
+            bodyType_box.setItems(ol_body);
 
             ObservableList<String> fuel = FXCollections.observableArrayList();
             for (FuelType f : FuelType.values())
                 fuel.add(f.getRusName());
-            fuelType_field.setItems(fuel);
+            fuelType_box.setItems(fuel);
 
-            ObservableList<Integer> ol_rate = FXCollections.observableArrayList();
-            for (int i = 1; i < 6; i++) {
-                ol_rate.add(i);
+            ObservableList<Double> ol_rate = FXCollections.observableArrayList();
+            for (int i = 1; i <= 5; i++) {
+                ol_rate.add((double) i);
             }
             rate_field.setItems(ol_rate);
-        } catch(IOException | ClassNotFoundException | GettingDataException e){
+        } catch (IOException | ClassNotFoundException | GettingDataException e) {
             log.error(e.getMessage());
             e.printStackTrace();
         }
 
-            addButton.setOnAction(actionEvent -> {
 
-            Car car = new Car();
+        addButton.setOnAction(actionEvent -> {
+
             try {
+                Car car = new Car();
+                String VIN = VIN_field.getText().toUpperCase(Locale.ROOT);
+                String model = model_box.getValue();
+                String bodyType = bodyType_box.getValue();
+                String fuel = fuelType_box.getValue();
+                String gear = gear_box.getValue();
+                if (rate_field.getValue() == null)
+                    throw new EmptyFieldsException(FILL_FIELDS_MSG);
+
+                System.out.println(rate_field.getValue());
+                Double rate =  Double.parseDouble(String.valueOf(rate_field.getValue()).replace(",", "."));
+
+                if (issue_box_date.getValue() == null)
+                    throw new EmptyFieldsException(FILL_FIELDS_MSG);
+
+                LocalDate date = issue_box_date.getValue();
+                if (price_field.getText() == null)
+                    throw new EmptyFieldsException(FILL_FIELDS_MSG);
+
+                String priceString = price_field.getText().replace(",", ".");
+
+                BigDecimal price = BigDecimal.valueOf(Double.parseDouble(priceString));
+                if (VIN.isEmpty() || bodyType.isEmpty() || fuel.isEmpty() || gear.isEmpty())
+                    throw new EmptyFieldsException(FILL_FIELDS_MSG);
+
+//                if (rate <= 0.0 || rate >= 5.0)
+//                    throw new EmptyFieldsException(INCORRECT_RATE_MSG);
+
+                car.setVIN(VIN);
+                car.getModel().setName(model.toString());
+                car.setBodyType(bodyType);
+                car.setFuelType(fuel);
+                car.setGearbox(gear);
+                car.setRate(BigDecimal.valueOf(rate));
+                car.setIssueDate(Date.valueOf(date));
+                car.setPrice(price);
+
                 Phone.sendOrGetData(Commands.ADD_NEW_CAR, car);
                 war_label.setText(ADD_SUCCESS_MSG);
 
@@ -113,8 +154,12 @@ public class AddCarController {
                 log.error(e.getMessage());
                 war_label.setText(ADD_FAIL_MSG);
                 e.printStackTrace();
+            } catch (EmptyFieldsException e) {
+                war_label.setText(e.getMessage());
+            } catch (NumberFormatException e) {
+                war_label.setText(USE_COMA_INSTEADOF_POINT);
             }
-                war_label.setVisible(true);
+            war_label.setVisible(true);
         });
     }
 }

@@ -1,14 +1,15 @@
 package by.bsuir.app.util.connection;
 
-import by.bsuir.app.Server;
-import by.bsuir.app.util.ConstantsMSG;
-import by.bsuir.app.util.Status;
+import by.bsuir.app.util.constants.ConstantsMSG;
+import by.bsuir.app.util.constants.Status;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.net.Socket;
+
+import static by.bsuir.app.ServerRunner.decrementCountOfConnected;
 
 @Log4j2
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -61,7 +62,7 @@ public class ClientHandler extends Thread {
                 log.error(e.getMessage());
                 //e.printStackTrace();
                 keepRunning = false;
-                Server.decrementCountOfConnected();
+                decrementCountOfConnected();
             }
         }
         try {

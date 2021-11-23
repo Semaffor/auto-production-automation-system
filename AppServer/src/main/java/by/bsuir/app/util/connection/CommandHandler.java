@@ -8,12 +8,13 @@ import by.bsuir.app.entity.Feedback;
 import by.bsuir.app.entity.Message;
 import by.bsuir.app.exception.DAOException;
 import by.bsuir.app.service.Services;
-import by.bsuir.app.util.Status;
+import by.bsuir.app.service.snapshot.Manipulator;
+import by.bsuir.app.util.constants.Status;
 import lombok.extern.log4j.Log4j2;
 
 import javax.mail.MessagingException;
 
-import static by.bsuir.app.util.ConstantsMSG.INCORRECT_VALUE_MSG;
+import static by.bsuir.app.util.constants.ConstantsMSG.INCORRECT_VALUE_MSG;
 
 @Log4j2
 public class CommandHandler {
@@ -22,6 +23,8 @@ public class CommandHandler {
     private static final CarDao carDao = new CarDaoImpl();
     private static final ModelDao modelDao = new ModelDaoImpl();
     private static final FeedbackDao feedbackDao = new FeedbackDaoImpl();
+    private static final Manipulator manipulator = new Manipulator();
+
 
     public static Object execute(Commands command, Object obj) {
         Object response = null;
@@ -40,7 +43,7 @@ public class CommandHandler {
                 case REGISTRATION -> accountDao.registration((Account) obj);
                 case GET_LAUNCHES_COUNT_DATA -> historyLogDao.findAllGropedByDate();
                 case GET_ALL_USER_LAUNCHES -> historyLogDao.findAllUserLaunches();
-                case ADD_NEW_CAR -> carDao.saveOrUpdate((Car) obj);
+                case ADD_NEW_CAR, CAR_ADD_OR_UPDATE -> carDao.saveOrUpdate((Car) obj);
                 case GET_ALL_MODELS -> modelDao.findAll();
                 case GET_ALL_CARS -> carDao.findAll();
                 case GET_ALL_FEEDBACKS_BY_USER_LOGIN -> feedbackDao.findAllByUserLogin((String) obj);
@@ -49,6 +52,9 @@ public class CommandHandler {
                 case GET_ALL_USERS_FEEDBACKS -> feedbackDao.findAll();
                 case ADD_ANSWER_ON_QUESTION -> feedbackDao.saveAnswer((Feedback) obj);
                 case GET_ALL_MODELS_GROUPED_BY_QUANTITY -> carDao.findAllGroupedByQuantity();
+                case SAVE_CAR_DATA_LOCAL_STORAGE -> manipulator.saveObjectInMemory(new Car() );
+                case RESTORE_CAR_DATA_LOCAL_STORAGE -> manipulator.getObjectFromMemory(new Car() );
+                case DELETE_CAR_BY_VIN -> carDao.deleteByVIN((String) obj);
                 default -> defaultBranch(command);
 
             };

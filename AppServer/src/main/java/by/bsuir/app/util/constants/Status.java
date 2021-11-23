@@ -1,4 +1,4 @@
-package by.bsuir.app.util;
+package by.bsuir.app.util.constants;
 
 public enum Status {
     OK(200),

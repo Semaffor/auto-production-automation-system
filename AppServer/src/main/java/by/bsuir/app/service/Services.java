@@ -1,11 +1,14 @@
 package by.bsuir.app.service;
 
+import by.bsuir.app.dao.AccountDao;
+import by.bsuir.app.dao.impl.AccountDaoImpl;
 import by.bsuir.app.entity.Message;
 import by.bsuir.app.util.JavaMailUtil;
 
 import javax.mail.MessagingException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class Services {

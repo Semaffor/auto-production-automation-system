@@ -4,14 +4,13 @@ import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.Car;
 import by.bsuir.app.entity.PersonalData;
 import by.bsuir.app.entity.Position;
-import by.bsuir.app.entity.enums.Gender;
-import by.bsuir.app.entity.enums.PositionType;
-import by.bsuir.app.entity.enums.Role;
+import by.bsuir.app.entity.enums.*;
 import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.connection.Phone;
 import by.bsuir.app.util.constants.Paths;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,11 +19,13 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.converter.BigDecimalStringConverter;
+import javafx.util.converter.FormatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import lombok.extern.log4j.Log4j2;
 
@@ -79,10 +80,13 @@ public class ManagementController {
     private TableColumn<Account, String> social;
 
     @FXML
-    private TableColumn<Account, String> start_column;
+    private TableColumn<Account, Date> start_column;
 
     @FXML
-    private TableColumn<Account, String> fire_column;
+    private TableColumn<Account, Date> fire_column;
+
+    @FXML
+    private TableColumn<Account, Boolean> account_ban;
 
     @FXML
     private Button delete_account_button;
@@ -91,7 +95,7 @@ public class ManagementController {
     private Label warning_account_label;
 
     @FXML
-    private TableView<Car> carTable;
+    private TableView<Car> car_table;
 
     @FXML
     private TableColumn<?, String> VIN;
@@ -117,8 +121,7 @@ public class ManagementController {
     @FXML
     private TableColumn<Car, Date> issuer_date;
 
-    @FXML
-    private TableColumn<Car, Integer> car_quantity_column;
+
 
     @FXML
     private Button delete_car_button;
@@ -168,33 +171,11 @@ public class ManagementController {
         bindDataInCarTable();
         fillCarTableWithFilteredData();
 
-        add_car_button.setOnAction(actionEvent -> {
-            GeneralFuncWindow.openNewScene(Paths.WindowAddCar);
-            fillCarTableWithFilteredData();
-        });
-        delete_car_button.setOnAction(actionEvent -> {
-            try {
-
-                Car car = (Car) carTable.getSelectionModel().getSelectedItem();
-                if (car == null) {
-                    car_warning_label.setText(ERROR_SELECT_FIELD_MSG);
-                } else {
-                    Phone.sendOrGetData(Commands.DELETE_CAR_BY_VIN, car);
-                    car_warning_label.setText(DELETE_SUCCESS_MSG);
-                    fillCarTableWithFilteredData();
-                }
-            } catch (IOException | ClassNotFoundException | GettingDataException e) {
-                car_warning_label.setText(DELETE_FAIL_MSG);
-                log.error(e);
-                e.printStackTrace();
-            }
-            car_warning_label.setVisible(true);
-        });
-        delete_account_button.setOnAction(actionEvent -> {
-        });
     }
 
-    private void bindDataInAccountTable() {
+
+
+    void bindDataInAccountTable() {
         id_column.setCellValueFactory(new PropertyValueFactory<>("id"));
         login_column.setCellValueFactory(new PropertyValueFactory<>("login"));
         login_column.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -217,28 +198,68 @@ public class ManagementController {
             }
         });
         age_column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        start_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
-                ObservableValue<String>>() {
+        start_column.setCellFactory(column -> {
+            TableCell<Account, Date> cell = new TableCell<Account, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(format.format(item));
+                    }
+                }
+            };
+
+            return cell;
+        });
+
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+
+        start_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, Date>,
+                ObservableValue<Date>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+            public ObservableValue<Date> call(TableColumn.CellDataFeatures<Account, Date> param) {
                 PersonalData personalData = param.getValue().getData();
                 if (personalData.getEmplStartDate() != null)
-                    return new SimpleObjectProperty<>(personalData.getEmplStartDate().toString());
+                    return new SimpleObjectProperty<>(personalData.getEmplStartDate());
                 else return null;
             }
         });
-        start_column.setCellFactory(TextFieldTableCell.forTableColumn());
-        fire_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
-                ObservableValue<String>>() {
+        start_column.setCellFactory(TextFieldTableCell.forTableColumn(new FormatStringConverter<>(format)));
+
+
+        fire_column.setCellFactory(column -> {
+            TableCell<Account, Date> cell = new TableCell<Account, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(format.format(item));
+                    }
+                }
+            };
+
+            return cell;
+        });
+        fire_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, Date>,
+                ObservableValue<Date>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+            public ObservableValue<Date> call(TableColumn.CellDataFeatures<Account, Date> param) {
                 PersonalData personalData = param.getValue().getData();
                 if (personalData.getEmplEndDate() != null)
-                    return new SimpleObjectProperty<>(personalData.getEmplEndDate().toString());
+                    return new SimpleObjectProperty<>(personalData.getEmplEndDate());
                 else return null;
             }
         });
-        fire_column.setCellFactory(TextFieldTableCell.forTableColumn());
+        fire_column.setCellFactory(TextFieldTableCell.forTableColumn(new FormatStringConverter<>(format)));
+
         position_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
                 ObservableValue<String>>() {
             @Override
@@ -292,6 +313,8 @@ public class ManagementController {
         social.setCellFactory(TextFieldTableCell.forTableColumn());
         role_column.setCellValueFactory(new PropertyValueFactory<>("role"));
         role_column.setCellFactory(TextFieldTableCell.forTableColumn());
+        account_ban.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().isBlocked()));
+        account_ban.setCellFactory(tc -> new CheckBoxTableCell<>());
     }
 
     void bindDataInCarTable() {
@@ -314,7 +337,7 @@ public class ManagementController {
                 @Override
                 protected void updateItem(Date item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (empty) {
+                    if (empty || item == null) {
                         setText(null);
                     } else {
                         setText(format.format(item));
@@ -332,15 +355,15 @@ public class ManagementController {
         gearbox.setCellFactory(TextFieldTableCell.forTableColumn());
         rate.setCellValueFactory(new PropertyValueFactory<>("rate"));
         rate.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
-        car_quantity_column.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        car_quantity_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, Integer>,
-                ObservableValue<Integer>>() {
-            @Override
-            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Car, Integer> param) {
-                return new SimpleObjectProperty<>(param.getValue().getModel().getQuantity());
-            }
-        });
-        car_quantity_column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+//        car_quantity_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, Integer>,
+//                ObservableValue<Integer>>() {
+//            @Override
+//            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Car, Integer> param) {
+//                return new SimpleObjectProperty<>(param.getValue().getModel().getQuantity());
+//            }
+//        });
+//        car_quantity_column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
     void fillAccountTableWithFilteredData() {
@@ -476,13 +499,18 @@ public class ManagementController {
 
             // 4. Bind the SortedList comparator to the TableView comparator.
             // 	  Otherwise, sorting the TableView would have no effect.
-            sortedData.comparatorProperty().bind(carTable.comparatorProperty());
+            sortedData.comparatorProperty().bind(car_table.comparatorProperty());
 
             // 5. Add sorted (and filtered) data to the table.
-            carTable.setItems(sortedData);
+            car_table.setItems(sortedData);
         } catch (IOException | ClassNotFoundException | GettingDataException e) {
             e.printStackTrace();
         }
+    }
+
+    void updateCarTable() {
+        bindDataInCarTable();
+        fillCarTableWithFilteredData();
     }
 
     void updateAccountTable() {
@@ -493,6 +521,7 @@ public class ManagementController {
     boolean sendEditedData(Account account) {
         try {
             Phone.sendOrGetData(Commands.USER_ADD_OR_UPDATE, account);
+            updateAccountTable();
             warning_account_label.setText(EDITING_DATA_SUCCESS);
         } catch (IOException | ClassNotFoundException | GettingDataException e) {
             warning_account_label.setText(EDITING_DATA_FAILURE);
@@ -504,6 +533,20 @@ public class ManagementController {
         return true;
     }
 
+    boolean sendEditedData(Car car) {
+        try {
+            Phone.sendOrGetData(Commands.CAR_ADD_OR_UPDATE, car);
+            updateCarTable();
+            car_warning_label.setText(EDITING_DATA_SUCCESS);
+        } catch (IOException | ClassNotFoundException | GettingDataException e) {
+            car_warning_label.setText(EDITING_DATA_FAILURE);
+            log.error(e);
+            e.printStackTrace();
+            return false;
+        }
+        car_warning_label.setVisible(true);
+        return true;
+    }
     @FXML
     public void onEditPosition(TableColumn.CellEditEvent<Account, String> employeesForTableStringCellEditEvent) {
         Account account = (Account) account_table.getSelectionModel().getSelectedItem();
@@ -530,7 +573,6 @@ public class ManagementController {
         sendEditedData(account);
     }
 
-
     @FXML
     void onEditLogin(TableColumn.CellEditEvent<Account, String> employeesForTableStringCellEditEvent) {
         Account account = (Account) account_table.getSelectionModel().getSelectedItem();
@@ -541,12 +583,20 @@ public class ManagementController {
     }
 
     @FXML
-    void onMouseClickBack(MouseEvent event) {
+    void onMouseClickBackCar(MouseEvent event) {
         //TODO TO_BACK
+        try {
+            Phone.sendOrGetData(Commands.RESTORE_CAR_DATA_LOCAL_STORAGE, new Car());
+            updateCarTable();
+            car_warning_label.setText(LAST_RESTORE_POINT_MSG);
+            car_warning_label.setVisible(true);
+        } catch (IOException | ClassNotFoundException | GettingDataException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void onMouseClickDelete(MouseEvent event) {
+    void onMouseClickDeleteAccount(MouseEvent event) {
         try {
             Account account = (Account) account_table.getSelectionModel().getSelectedItem();
             if (account != null) {
@@ -565,14 +615,51 @@ public class ManagementController {
     }
 
     @FXML
-    void onMouseClickSave(MouseEvent event) {
-
+    void onMouseClickSaveCar(MouseEvent event) {
+        try {
+            Phone.sendOrGetData(Commands.SAVE_CAR_DATA_LOCAL_STORAGE, new Car());
+            car_warning_label.setText(CREATED_RESTORE_POINT_MSG);
+            car_warning_label.setVisible(true);
+        } catch (IOException | ClassNotFoundException | GettingDataException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void onMouseClickReset(MouseEvent event) {
+    void onMouseClickResetAccount(MouseEvent event) {
         warning_account_label.setVisible(false);
         updateAccountTable();
+    }
+
+    @FXML
+    void onMouseClickAddCar(MouseEvent event) {
+        GeneralFuncWindow.openNewScene(Paths.WindowAddCar);
+        fillCarTableWithFilteredData();
+    }
+
+    @FXML
+    void onMouseClickDeleteCar(MouseEvent event) {
+        try {
+            Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+            if (car == null) {
+                car_warning_label.setText(ERROR_SELECT_FIELD_MSG);
+            } else {
+                Phone.sendOrGetData(Commands.DELETE_CAR_BY_VIN, car);
+                car_warning_label.setText(DELETE_SUCCESS_MSG);
+                fillCarTableWithFilteredData();
+            }
+        } catch (IOException | ClassNotFoundException | GettingDataException e) {
+            car_warning_label.setText(DELETE_FAIL_MSG);
+            log.error(e);
+            e.printStackTrace();
+        }
+        car_warning_label.setVisible(true);
+    }
+
+    @FXML
+    void onMouseClickResetCar(MouseEvent event) {
+        car_warning_label.setVisible(false);
+        updateCarTable();
     }
 
     @FXML
@@ -650,6 +737,84 @@ public class ManagementController {
 
         account.getData().setThirdName(newValue);
         sendEditedData(account);
+    }
+
+    @FXML
+    void onEditVIN(TableColumn.CellEditEvent<Car, String> carForTableStringCellEditEvent) {
+        Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+        String newValue = carForTableStringCellEditEvent.getNewValue();
+
+        car.setVIN(newValue);
+        sendEditedData(car);
+    }
+
+    @FXML
+    void onEditBodyType(TableColumn.CellEditEvent<Car, String> carForTableStringCellEditEvent) {
+        Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+        String newValue = carForTableStringCellEditEvent.getNewValue();
+
+        for (BodyType p : BodyType.values()) {
+            if (newValue.equals(p.getBodyType())) {
+                car.setBodyType(p.getBodyType());
+                sendEditedData(car);
+                break;
+            } else {
+                warning_account_label.setText(EDITING_DATA_FAILURE);
+                warning_account_label.setVisible(true);
+            }
+        }
+    }
+
+    @FXML
+    void onEditFuelType(TableColumn.CellEditEvent<Car, String> carForTableStringCellEditEvent) {
+        Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+        String newValue = carForTableStringCellEditEvent.getNewValue();
+
+        for (FuelType p : FuelType.values()) {
+            if (newValue.equals(p.getRusName())) {
+                car.setFuelType(p.getRusName());
+                sendEditedData(car);
+                break;
+            } else {
+                warning_account_label.setText(EDITING_DATA_FAILURE);
+                warning_account_label.setVisible(true);
+            }
+        }
+    }
+
+    @FXML
+    void onEditPrice(TableColumn.CellEditEvent<Car, BigDecimal> carForTableStringCellEditEvent) {
+        Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+        BigDecimal newValue = carForTableStringCellEditEvent.getNewValue();
+
+        car.setPrice(newValue);
+        sendEditedData(car);
+    }
+    
+    @FXML
+    void onEditGearbox(TableColumn.CellEditEvent<Car, String> carForTableStringCellEditEvent) {
+        Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+        String newValue = carForTableStringCellEditEvent.getNewValue();
+
+        for (GearBox p : GearBox.values()) {
+            if (newValue.equals(p.getRusName())) {
+                car.setGearbox(p.getRusName());
+                sendEditedData(car);
+                break;
+            } else {
+                warning_account_label.setText(EDITING_DATA_FAILURE);
+                warning_account_label.setVisible(true);
+            }
+        }
+    }
+
+    @FXML
+    void onEditRate(TableColumn.CellEditEvent<Car, BigDecimal> carForTableStringCellEditEvent) {
+        Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+        BigDecimal newValue = carForTableStringCellEditEvent.getNewValue();
+
+        car.setRate(newValue);
+        sendEditedData(car);
     }
 }
 

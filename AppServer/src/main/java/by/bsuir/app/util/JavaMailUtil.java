@@ -8,7 +8,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-import static by.bsuir.app.util.Constants.*;
+import static by.bsuir.app.util.constants.Constants.*;
 
 /**
  * Class for interaction with mail: send letters to recipients

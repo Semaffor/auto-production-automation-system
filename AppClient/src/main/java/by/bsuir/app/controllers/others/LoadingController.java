@@ -78,8 +78,8 @@ public class LoadingController {
 
             Platform.runLater(() -> {
                 deny_button.getScene().getWindow().hide();
-//                GeneralFuncWindow.openNewScene(Paths.WindowSignIn);
-                GeneralFuncWindow.openNewScene(Paths.WindowManagement);
+                GeneralFuncWindow.openNewScene(Paths.WindowSignIn);
+//                GeneralFuncWindow.openNewScene(Paths.WindowManagement);
             });
         }
     }

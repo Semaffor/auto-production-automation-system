@@ -44,6 +44,7 @@
                                           <TableColumn fx:id="social" prefWidth="100.0" text="Соц.сети" />
                                           <TableColumn fx:id="start_column" prefWidth="75.0" text="Нанят" />
                                           <TableColumn fx:id="fire_column" prefWidth="75.0" text="Уволен" />
+                                          <TableColumn fx:id="account_ban" prefWidth="75.0" text="Уволен" />
                                       </columns>
                                     </TableView>
                                     <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" visible="false" />
@@ -54,33 +55,9 @@
                                     </Label>
                                     <HBox layoutX="647.0" layoutY="363.0" prefHeight="26.0" prefWidth="169.0" spacing="15.0">
                                        <children>
-                                          <Button fx:id="account_save_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickSave" textAlignment="CENTER">
+                                          <Button fx:id="delete_account_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickResetAccount" prefHeight="0.0" prefWidth="0.0" textAlignment="CENTER">
                                              <graphic>
-                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickSave" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../assets/diskette.png" />
-                                                   </image>
-                                                   <viewport>
-                                                      <Rectangle2D height="16.0" width="16.0" />
-                                                   </viewport>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                          <Button minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickBack" prefHeight="15.0" prefWidth="16.0" textAlignment="CENTER">
-                                             <graphic>
-                                                <ImageView fitHeight="15.0" fitWidth="15.0" onMouseClicked="#onMouseClickBack" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../assets/undo-circular-arrow.png" />
-                                                   </image>
-                                                   <viewport>
-                                                      <Rectangle2D height="16.0" width="16.0" />
-                                                   </viewport>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                          <Button fx:id="delete_account_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickReset" prefHeight="0.0" prefWidth="0.0" textAlignment="CENTER">
-                                             <graphic>
-                                                <ImageView fitHeight="15.0" fitWidth="20.0" onMouseClicked="#onMouseClickReset" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="15.0" fitWidth="20.0" onMouseClicked="#onMouseClickResetAccount" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../assets/reload.png" />
                                                    </image>
@@ -90,9 +67,9 @@
                                                 </ImageView>
                                              </graphic>
                                           </Button>
-                                          <Button fx:id="account_reset_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickDelete" textAlignment="CENTER">
+                                          <Button fx:id="account_reset_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickDeleteAccount" textAlignment="CENTER">
                                              <graphic>
-                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickDelete" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickDeleteAccount" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../assets/bin.png" />
                                                    </image>
@@ -120,31 +97,89 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="826.0">
                                  <children>
-                                    <TableView fx:id="carTable" editable="true" prefHeight="354.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-16.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="car_table" editable="true" prefHeight="354.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
                                       <columns>
-                                        <TableColumn fx:id="VIN" prefWidth="127.19997555017471" resizable="false" text="VIN" />
+                                        <TableColumn fx:id="VIN" onEditCommit="#onEditVIN" prefWidth="127.19997555017471" resizable="false" text="VIN" />
                                           <TableColumn fx:id="model_table_car_field" prefWidth="80.800048828125" text="Модель" />
-                                          <TableColumn fx:id="body_typeTableCar" prefWidth="100.00003051757812" text="Тип кузова" />
-                                          <TableColumn fx:id="fuel_typeCarTable" prefWidth="103.99993896484375" text="Тип топлива" />
-                                          <TableColumn fx:id="price" prefWidth="79.20001220703125" text="Стоимость" />
-                                          <TableColumn fx:id="gearbox" prefWidth="74.4000244140625" text="Коробка" />
-                                          <TableColumn fx:id="rate" minWidth="12.0" prefWidth="71.99993896484375" text="Рейтинг" />
-                                          <TableColumn fx:id="issuer_date" prefWidth="69.5999755859375" text="Выпущена" />
-                                          <TableColumn fx:id="car_quantity_column" prefWidth="119.199951171875" text="Кол-во" />
+                                          <TableColumn fx:id="body_typeTableCar" onEditCommit="#onEditBodyType" prefWidth="100.00003051757812" text="Тип кузова" />
+                                          <TableColumn fx:id="fuel_typeCarTable" onEditCommit="#onEditFuelType" prefWidth="103.99993896484375" text="Тип топлива" />
+                                          <TableColumn fx:id="gearbox" onEditCommit="#onEditGearbox" prefWidth="74.4000244140625" text="Коробка" />
+                                          <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="79.20001220703125" text="Стоимость" />
+                                          <TableColumn fx:id="rate" minWidth="12.0" onEditCommit="#onEditRate" prefWidth="71.99993896484375" text="Рейтинг" />
+                                          <TableColumn fx:id="issuer_date" prefWidth="109.5999755859375" text="Выпущена" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                           </content>
                         </ScrollPane>
-                        <Button fx:id="delete_car_button" layoutX="685.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Удалить" />
                         <Label fx:id="war_label" alignment="CENTER_RIGHT" layoutX="251.0" layoutY="368.0" prefHeight="18.0" prefWidth="269.0" text="Label" visible="false" />
-                        <Button fx:id="add_car_button" layoutX="750.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Добавить" />
-                        <Label fx:id="car_warning_label" layoutX="487.0" layoutY="374.0" prefHeight="18.0" prefWidth="322.0" text="ntrcn" textFill="#bc3636" visible="false">
+                        <Label fx:id="car_warning_label" layoutX="14.0" layoutY="367.0" prefHeight="18.0" prefWidth="322.0" text="Label" textFill="#bc3636" visible="false">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
+                        <HBox layoutX="607.0" layoutY="364.0" prefHeight="26.0" prefWidth="169.0" spacing="15.0">
+                           <children>
+                              <Button fx:id="account_save_button1" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickSaveCar" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickSaveCar" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/diskette.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D height="16.0" width="16.0" />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickBackCar" prefHeight="15.0" prefWidth="16.0" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="15.0" onMouseClicked="#onMouseClickBackCar" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/undo-circular-arrow.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D height="16.0" width="16.0" />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="delete_account_button1" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickResetCar" prefHeight="0.0" prefWidth="0.0" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="15.0" fitWidth="20.0" onMouseClicked="#onMouseClickResetCar" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/reload.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D height="16.0" width="16.0" />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="account_reset_button1" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickDeleteCar" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickDeleteCar" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/bin.png" />
+                                       </image>
+                                       <viewport>
+                                          <Rectangle2D height="16.0" width="16.0" />
+                                       </viewport>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="add_car_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickAddCar" prefHeight="25.0" prefWidth="30.0">
+                                 <graphic>
+                                    <ImageView fitHeight="16.0" fitWidth="16.0" onMouseClicked="#onMouseClickAddCar" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/add.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
                      </children></AnchorPane>
             </content>
           </Tab>

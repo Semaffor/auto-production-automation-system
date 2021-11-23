@@ -4,7 +4,7 @@ import by.bsuir.app.dao.AccountDao;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.HistoryLog;
 import by.bsuir.app.entity.enums.Role;
-import by.bsuir.app.util.Status;
+import by.bsuir.app.util.constants.Status;
 import by.bsuir.app.service.Services;
 import by.bsuir.app.util.HibernateUtil;
 import by.bsuir.app.util.JavaMailUtil;
@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-import static by.bsuir.app.util.ConstantsMSG.PASSWORD_RECOVERY_TOPIC_MSG;
+import static by.bsuir.app.util.constants.ConstantsMSG.PASSWORD_RECOVERY_TOPIC_MSG;
 
 @Log4j2
 public class AccountDaoImpl implements AccountDao {

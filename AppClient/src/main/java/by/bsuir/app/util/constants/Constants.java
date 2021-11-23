@@ -46,5 +46,9 @@ public class Constants {
     public static final String MAIL_IS_NOT_SET_MSG = "Ошибка отправки. Почта не указана.";
     public static final String FAIL_MSG = "Произошла ошибка.";
     public static final String ERROR_SELECT_FIELD_MSG = "Выделите необходимый элемент.";
+    public static final String CREATED_RESTORE_POINT_MSG = "Создана точка восстановления.";
+    public static final String LAST_RESTORE_POINT_MSG = "Возращено к последней точки восстановления. ";
+    public static final String INCORRECT_RATE_MSG = "Рейтинг от 0,1 до 5,0. ";
+    public static final String USE_COMA_INSTEADOF_POINT = "Используйте ',' вместо '.'";
 
 }
