@@ -48,6 +48,12 @@ public class Account extends BaseEntity {
 //            feedbacks = new ArrayList<>();
 //        return feedbacks;
 //    }
+
+//    public void addFeedback(Feedback feedback) {
+//        if (feedbacks == null)
+//            feedbacks = new ArrayList<>();
+//        feedbacks.add(feedback);
+//    }
 }
 
 

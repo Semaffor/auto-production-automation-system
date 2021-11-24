@@ -1,10 +1,17 @@
 package by.bsuir.app;
 
+import by.bsuir.app.dao.CarDao;
+import by.bsuir.app.dao.impl.CarDaoImpl;
+import by.bsuir.app.entity.Car;
 import by.bsuir.app.service.snapshot.Originator;
 import by.bsuir.app.util.constants.ConstantsMSG;
 import by.bsuir.app.util.Server;
 import lombok.extern.log4j.Log4j2;
 
+import javax.mail.Address;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -20,6 +27,11 @@ public class ServerRunner {
 
 
     public static void main(String[] args) {
+
+//        CarDao carDao = new CarDaoImpl();
+//        List<Object[]> models = carDao.findAllGroupedByQuantity();
+//
+
 
         Scanner scanner = new Scanner(System.in);
         int answer;

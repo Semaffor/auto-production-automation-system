@@ -1,5 +1,7 @@
 package by.bsuir.app.controllers.submenu;
 
+import by.bsuir.app.entity.Account;
+import by.bsuir.app.entity.Feedback;
 import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.Commands;
@@ -49,14 +51,21 @@ public class FeedbackController {
 
     private void sendQuestion() {
 
-        String feedback = feedback_area.getText();
+        String question = feedback_area.getText();
 
-        if (feedback.length() < MIN_MESSAGE_LENGTH) {
+        if (question.length() < MIN_MESSAGE_LENGTH) {
             warning_label.setText(MIN_MESSAGE_LENGTH_MSG);
         } else {
-
             try {
-                Phone.sendOrGetData(Commands.ADD_QUESTION_FROM_USER, LocalStorage.getAccount().getLogin());
+
+                Account account = (Account) Phone.sendOrGetData(Commands.GET_USER_BY_LOGIN,
+                        LocalStorage.getAccount().getLogin());
+
+                Feedback feedback = new Feedback();
+                feedback.setQuestion(question);
+                feedback.setSender_id(account.getId());
+
+                Phone.sendOrGetData(Commands.ADD_QUESTION_FROM_USER, feedback);
                 warning_label.setText(MESSAGE_SUCCESS_MSG);
                 feedback_area.setText("");
             } catch (IOException | GettingDataException | ClassNotFoundException e) {

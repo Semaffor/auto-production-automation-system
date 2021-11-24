@@ -9,7 +9,9 @@ import by.bsuir.app.exception.EmptyObjectException;
 import by.bsuir.app.util.HibernateUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
@@ -19,16 +21,10 @@ import java.util.Optional;
 @Log4j2
 public class CarDaoImpl implements CarDao {
     private static Session session;
-    private static final String FIND_ALL_MODELS_GROUPED_BY_QUANTITY = "SELECT (SELECT m.name FROM Model m WHERE m.id " +
-            "=id) as model," +
-            "sum(i.quantity) " +
-            "as " +
-            "quantity " +
-            "FROM" +
-            " Car i GROUP BY model";
+    private static final String FIND_ALL_MODELS_GROUPED_BY_QUANTITY = "SELECT model_name as model, sum(quantity) as " +
+            "quantity FROM model group " +
+            "by model_name";
 
-    //SELECT (SELECT name FROM Model WHERE id" +
-    //            " = i.model.id) as model, sum(i.quantity) as quantity FROM Car i GROUP BY model";
     @Override
     public List<Car> findAll() {
         List<Car> cars = null;
@@ -112,8 +108,11 @@ public class CarDaoImpl implements CarDao {
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery(FIND_ALL_MODELS_GROUPED_BY_QUANTITY);
-        List<Object[]> list = query.getResultList();
+        SQLQuery query = session.createSQLQuery(FIND_ALL_MODELS_GROUPED_BY_QUANTITY);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+        List list = query.list();
+//        Query query = session.createQuery(FIND_ALL_MODELS_GROUPED_BY_QUANTITY);
+//        List<Object[]> list = query.getResultList();
 
         session.close();
         return list;

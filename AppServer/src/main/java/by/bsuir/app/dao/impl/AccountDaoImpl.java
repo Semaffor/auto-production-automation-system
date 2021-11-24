@@ -91,6 +91,9 @@ public class AccountDaoImpl implements AccountDao {
     public Role auth(Account account) {
         Account foundAccount = Optional.of(findByLogin(account.getLogin())).orElse(new Account());
 
+        if (foundAccount.isBlocked())
+            return Role.UNDEFINED;
+
         if (account.getLogin().equals(foundAccount.getLogin()) && account.getPassword().equals(foundAccount.getPassword()))
             for (Role e : Role.values()) {
                 if (e.toString().equals(foundAccount.getRole())) {

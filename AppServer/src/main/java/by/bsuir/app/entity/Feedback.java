@@ -35,4 +35,10 @@ public class Feedback extends BaseEntity{
 
     @Column(name = "answer_date")
     private Date answerDate;
+
+//    @OneToOne
+//    @MapsId
+//    @JoinColumn(name = "id")
+    @Column(name = "sender_id")
+    private Long sender_id;
 }

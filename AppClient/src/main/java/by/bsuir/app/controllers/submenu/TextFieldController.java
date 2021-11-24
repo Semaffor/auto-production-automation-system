@@ -57,8 +57,7 @@ public class TextFieldController {
             if (answer.length() < MIN_MESSAGE_LENGTH)
                 warning_label.setText(MIN_MESSAGE_LENGTH_MSG);
             else {
-                Feedback feedback = new Feedback();
-                feedback.setQuestion(question_field.getText());
+                Feedback feedback = LocalStorage.getFeedback();
                 feedback.setAnswer(answer);
                 Phone.sendOrGetData(Commands.ADD_ANSWER_ON_QUESTION, feedback);
 

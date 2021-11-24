@@ -3,15 +3,18 @@ package by.bsuir.app.util.constants;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.Car;
 import by.bsuir.app.entity.Feedback;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class LocalStorage {
     private static Account account;
     private static List<Car> cars;
     private static List<Feedback> feedbacks;
     private static Long feedback_id;
     private static String question;
+    private static Feedback feedback;
 
     public static Account getAccount() {
         return account;
@@ -64,5 +67,13 @@ public class LocalStorage {
 
     public static void setFeedback_id(Long feedback_id) {
         LocalStorage.feedback_id = feedback_id;
+    }
+
+    public static Feedback getFeedback() {
+        return feedback;
+    }
+
+    public static void setFeedback(Feedback feedback) {
+        LocalStorage.feedback = feedback;
     }
 }

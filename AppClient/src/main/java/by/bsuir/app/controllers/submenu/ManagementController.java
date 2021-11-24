@@ -164,6 +164,7 @@ public class ManagementController {
         account_table.getScene().getWindow().hide();
     }
 
+    private List<Account> accounts;
     @FXML
     void initialize() {
 
@@ -371,7 +372,7 @@ public class ManagementController {
         try {
             ObservableList<Account> ol_accounts = FXCollections.observableArrayList();
 
-            List<Account> accounts = (List<Account>) Phone.sendOrGetData(Commands.GET_ALL_USERS, new Car());
+            accounts = (List<Account>) Phone.sendOrGetData(Commands.GET_ALL_USERS, new Car());
             ol_accounts.addAll(accounts);
 
             // Wrap the ObservableList in a FilteredList (initially display all data).
@@ -581,6 +582,7 @@ public class ManagementController {
         account.setLogin(newValue);
         sendEditedData(account);
     }
+
 
     @FXML
     void onMouseClickBackCar(MouseEvent event) {
@@ -816,6 +818,51 @@ public class ManagementController {
         car.setRate(newValue);
         sendEditedData(car);
     }
+
+    @FXML
+    void onMouseClickBlockAccount(MouseEvent event) {
+        Account account = account_table.getSelectionModel().getSelectedItem();
+
+        account.setBlocked(!account.isBlocked());
+        sendEditedData(account);
+//        int i = 0;
+//        for (Account bean: data) {
+//            if (bean.isBlocked() != accounts.get(i).isBlocked()) {
+//                bean.setBlocked(!bean.isBlocked());
+//                sendEditedData(bean);
+//            }
+//            i++;
+//        }
+    }
+
+    @FXML
+    void onEditStartData(TableColumn.CellEditEvent<Account, Date> employeesForTableStringCellEditEvent) {
+        Account account = (Account) account_table.getSelectionModel().getSelectedItem();
+        Date newValue = Date.valueOf(String.valueOf(employeesForTableStringCellEditEvent.getNewValue()));
+
+//        account.getData().setSocial(newValue);
+        System.out.println(newValue);
+        sendEditedData(account);
+    }
+
+    @FXML
+    void onEditEndData(TableColumn.CellEditEvent<Account, Date> employeesForTableStringCellEditEvent) {
+//        Account account = (Account) account_table.getSelectionModel().getSelectedItem();
+//
+////        account.getData().setSocial(newValue);
+//        System.out.println(newValue);
+//        sendEditedData(account);
+    }
+
+    @FXML
+    void onEditSocial(TableColumn.CellEditEvent<Account, String> employeesForTableStringCellEditEvent){
+        Account account = (Account) account_table.getSelectionModel().getSelectedItem();
+        String newValue = employeesForTableStringCellEditEvent.getNewValue();
+
+        account.getData().setSocial(newValue);
+        sendEditedData(account);
+    }
+
 }
 
 

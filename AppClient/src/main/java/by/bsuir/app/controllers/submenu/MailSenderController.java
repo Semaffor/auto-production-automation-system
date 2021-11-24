@@ -1,18 +1,24 @@
 package by.bsuir.app.controllers.submenu;
 
 import by.bsuir.app.entity.Account;
+import by.bsuir.app.entity.Message;
+import by.bsuir.app.entity.Position;
 import by.bsuir.app.exception.EmptyFieldsException;
 import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.connection.Phone;
 import by.bsuir.app.util.constants.Constants;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,12 +85,42 @@ public class MailSenderController {
 
     private void loadTableData() {
         ID.setCellValueFactory(new PropertyValueFactory<Account, Long>("id"));
-        firstName.setCellValueFactory(new PropertyValueFactory<Account, String>("name"));
-        secondName.setCellValueFactory(new PropertyValueFactory<Account, String>("surname"));
-        thirdName.setCellValueFactory(new PropertyValueFactory<Account, String>("thirdname"));
-        position.setCellValueFactory(new PropertyValueFactory<Account, String>("position"));
         mail.setCellValueFactory(new PropertyValueFactory<Account, String>("email"));
-
+        position.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
+                        ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+                Position position = param.getValue().getData().getPosition();
+                if (position != null)
+                    return new SimpleObjectProperty<>(position.getName());
+                return null;
+            }
+        });
+        position.setCellFactory(TextFieldTableCell.forTableColumn());
+        firstName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+                return new SimpleObjectProperty<>(param.getValue().getData().getName());
+            }
+        });
+        firstName.setCellFactory(TextFieldTableCell.forTableColumn());
+        secondName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+                return new SimpleObjectProperty<>(param.getValue().getData().getSurname());
+            }
+        });
+        secondName.setCellFactory(TextFieldTableCell.forTableColumn());
+        thirdName.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
+                ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
+                return new SimpleObjectProperty<>(param.getValue().getData().getThirdName());
+            }
+        });
+        thirdName.setCellFactory(TextFieldTableCell.forTableColumn());
 
         try {
             tableView.setItems(getObserveValues());
@@ -114,7 +150,10 @@ public class MailSenderController {
                     if (eft[0].getEmail().isEmpty())
                         throw new EmptyFieldsException(MAIL_IS_NOT_SET_MSG);
 
-                    Phone.sendOrGetData(Commands.SEND_MESSAGE_TO_USER, eft[0].getEmail());
+                    Message message = new Message();
+                    message.setMessage(msg);
+                    message.setRecipient(eft[0].getEmail());
+                    Phone.sendOrGetData(Commands.SEND_MESSAGE_TO_USER, message);
                     warning_label.setText(MESSAGE_SUCCESS_MSG);
                 } else {
                     warning_label.setText(MESSAGE_CHOOSE_TO_SEND_MSG);

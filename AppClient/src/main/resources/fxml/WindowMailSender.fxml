@@ -12,7 +12,7 @@
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="550.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.MailSenderController">
    <children>
-      <TextArea fx:id="text_field" layoutX="27.0" layoutY="346.0" prefHeight="54.0" prefWidth="494.0" promptText="Текст для отправки." wrapText="true" />
+      <TextArea fx:id="text_field" layoutX="27.0" layoutY="346.0" prefHeight="54.0" prefWidth="494.0" promptText="Текст для отправки сообщения." wrapText="true" />
       <Button fx:id="send_button" layoutX="446.0" layoutY="410.0" mnemonicParsing="false" style="-fx-background-radius: 20;" stylesheets="@../animation/second.css" text="Отправить" />
       <Label fx:id="warning_label" alignment="CENTER" layoutX="40.0" layoutY="413.0" prefHeight="18.0" prefWidth="393.0" text="Заполните форму для отправки" textFill="#940a0a" visible="false">
          <font>
