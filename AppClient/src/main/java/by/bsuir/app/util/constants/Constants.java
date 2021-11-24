@@ -30,7 +30,8 @@ public class Constants {
     public static final String REPORT_PATTERN_HEAD_MSG = "\n\tID   User ID\tTime\n  ";
     public static final String GETTING_DATA_FAILURE = "Произошла ошибка при получении данных.";
     public static final String EDITING_DATA_FAILURE = "Ошибка. Изменения не применены.";
-    public static final String EDITING_DATA_SUCCESS = "Данные изменены. Обновите страницу.";
+    public static final String EDITING_DATA_SUCCESS = "Данные изменены. ";
+    public static final String EDITING_DATA_SUCCESS_UPDATE = EDITING_DATA_SUCCESS + "Обновите страницу.";
     public static final String INCORRECT_DATA_MSG = "Некорректные данные.";
     public static final String INCORRECT_MAIL_MSG = "Проверьте корректность введенной почты.";
     public static final String ADD_SUCCESS_MSG = "Успешно. Данные добавлены";
@@ -45,5 +46,12 @@ public class Constants {
     public static final String MAIL_IS_NOT_SET_MSG = "Ошибка отправки. Почта не указана.";
     public static final String FAIL_MSG = "Произошла ошибка.";
     public static final String ERROR_SELECT_FIELD_MSG = "Выделите необходимый элемент.";
+    public static final String CREATED_RESTORE_POINT_MSG = "Создана точка восстановления.";
+    public static final String LAST_RESTORE_POINT_MSG = "Возращено к последней точки восстановления. ";
+    public static final String INCORRECT_RATE_MSG = "Рейтинг от 0,1 до 5,0. ";
+    public static final String USE_COMA_INSTEADOF_POINT = "Используйте ',' вместо '.'";
+    public static final String ACCOUNT_IS_BLOCKED_MSG = "Ваш аккаунт заблокирован.";
+    public static final String INCORRECT_LOGIN_OR_PASSWORD_MSG = "Неверный логин или пароль. Повторите попытку";
+    public static final String AGES_PERCENTAGE_MSG = "Общая доля возрастной группы сотрудников ";
 
 }

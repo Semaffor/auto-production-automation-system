@@ -8,16 +8,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-import static by.bsuir.app.util.Constants.*;
+import static by.bsuir.app.util.constants.Constants.*;
 
 /**
  * Class for interaction with mail: send letters to recipients
  */
 public class JavaMailUtil {
 
+    private static final FilePropertyReader p = new FilePropertyReader();
+
     public static void send(String recipient, String msg_topic, String msg) throws MessagingException {
-        String from = MAIL_USER_NAME;
-        String pass = MAIL_PASSWORD;
+        String from = p.getPropertyString("mail.username");
+        String pass = p.getPropertyString("mail.password");
         String RECIPIENT = recipient;
         String[] to = {RECIPIENT};
         String subject = msg_topic;
@@ -31,9 +33,9 @@ public class JavaMailUtil {
         Properties props = System.getProperties();
 
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.ssl.trust", MAIL_HOST);
+        props.put("mail.smtp.ssl.trust", p.getPropertyString("mail.host"));
         props.put("mail.smtp.ssl.protocols", "TLSv1.2");
-        props.put("mail.smtp.port", MAIL_PORT);
+        props.put("mail.smtp.port", p.getPropertyInt("mail.port"));
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.user", from);
         props.put("mail.smtp.password", pass);
@@ -59,7 +61,7 @@ public class JavaMailUtil {
 
         Transport transport = session.getTransport("smtp");
 
-        transport.connect(MAIL_HOST, from, pass);
+        transport.connect(p.getPropertyString("mail.host"), from, pass);
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
 

@@ -4,12 +4,13 @@ import by.bsuir.app.dao.AccountDao;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.HistoryLog;
 import by.bsuir.app.entity.enums.Role;
-import by.bsuir.app.util.Status;
+import by.bsuir.app.util.constants.Status;
 import by.bsuir.app.service.Services;
 import by.bsuir.app.util.HibernateUtil;
 import by.bsuir.app.util.JavaMailUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -18,7 +19,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
-import static by.bsuir.app.util.ConstantsMSG.PASSWORD_RECOVERY_TOPIC_MSG;
+import static by.bsuir.app.util.constants.ConstantsMSG.PASSWORD_RECOVERY_TOPIC_MSG;
 
 @Log4j2
 public class AccountDaoImpl implements AccountDao {
@@ -58,6 +59,7 @@ public class AccountDaoImpl implements AccountDao {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(account);
+            session.getTransaction().commit();
             session.close();
         } catch (Throwable e) {
             e.printStackTrace();
@@ -67,10 +69,9 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public boolean deleteById(Long id) {
-        Account account = new Account();
-        account.setId(id);
+        Optional<Account> account = findById(id);
         try {
-            delete(account);
+            account.ifPresent(this::delete);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -90,6 +91,9 @@ public class AccountDaoImpl implements AccountDao {
     @Override
     public Role auth(Account account) {
         Account foundAccount = Optional.of(findByLogin(account.getLogin())).orElse(new Account());
+
+        if (foundAccount.isBlocked())
+            return Role.UNDEFINED;
 
         if (account.getLogin().equals(foundAccount.getLogin()) && account.getPassword().equals(foundAccount.getPassword()))
             for (Role e : Role.values()) {
@@ -170,5 +174,7 @@ public class AccountDaoImpl implements AccountDao {
         session.getTransaction().commit();
         session.close();
     }
+
+
 
 }

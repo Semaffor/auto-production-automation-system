@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.File;
-import java.util.List;
 
 @Log4j2
 public class CatalogRowController {
@@ -46,21 +45,13 @@ public class CatalogRowController {
     @FXML
     private Label quantity_label;
 
-    private int index = 0;
-    private List<Car> cars = null;
-
-    {
-        cars = LocalStorage.getCars();
-    }
-
-    //TODO iterator
     @FXML
     void initialize() {
         initializeRowsWithData();
     }
 
     private void initializeRowsWithData() {
-        Car car = cars.get(0);
+        Car car = LocalStorage.getFirstCar();
         Model model = car.getModel();
 
         model_label.setText(model.getName());
@@ -68,7 +59,8 @@ public class CatalogRowController {
 
         body_type_label.setText(car.getBodyType());
         fuel_type_label.setText(car.getFuelType());
-        issue_date_label.setText(car.getIssueDate().toString());
+        if (car.getIssueDate() != null)
+            issue_date_label.setText(car.getIssueDate().toString());
         price_label.setText(car.getPrice().toString() + Constants.CURRENCY_MSG);
         gearbox_label.setText(car.getGearbox());
         rate_label.setText(String.valueOf(car.getRate()));
@@ -78,10 +70,5 @@ public class CatalogRowController {
         if (photoURL != null)
             imageView.setImage(new Image(new File(photoURL).toURI().toString()));
 
-        if (index == cars.size() - 1) {
-            index = 0;
-        } else {
-            index++;
-        }
     }
 }

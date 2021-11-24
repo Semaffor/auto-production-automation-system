@@ -16,6 +16,7 @@ public class Account extends BaseEntity {
     String login;
     String password;
     String email;
+    boolean isBlocked;
 
     String role;
 
@@ -48,6 +49,11 @@ public class Account extends BaseEntity {
 //        return feedbacks;
 //    }
 
+//    public void addFeedback(Feedback feedback) {
+//        if (feedbacks == null)
+//            feedbacks = new ArrayList<>();
+//        feedbacks.add(feedback);
+//    }
 }
 
 

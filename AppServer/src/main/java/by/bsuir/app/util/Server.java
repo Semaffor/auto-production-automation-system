@@ -1,60 +1,59 @@
-package by.bsuir.app;
+package by.bsuir.app.util;
 
-import by.bsuir.app.dao.AccountDao;
-import by.bsuir.app.dao.impl.AccountDaoImpl;
-import by.bsuir.app.dao.impl.HistoryLogDaoImpl;
-import by.bsuir.app.entity.Account;
 import by.bsuir.app.util.connection.ClientHandler;
 import lombok.extern.log4j.Log4j2;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Objects;
+import java.util.Properties;
 
-import static by.bsuir.app.util.Constants.PORT;
-import static by.bsuir.app.util.ConstantsMSG.*;
-
+import static by.bsuir.app.ServerRunner.*;
+import static by.bsuir.app.util.constants.Constants.FILE_PROPERTIES_PATH;
+import static by.bsuir.app.util.constants.ConstantsMSG.*;
 
 @Log4j2
-public class Server {
+public class Server implements Runnable {
 
-    private static final AtomicInteger countOfConnected = new AtomicInteger(0);
     private static volatile boolean isActive = true;
     private static final ThreadGroup threadGroup = new ThreadGroup("mainGroup");
+    private static final FilePropertyReader p = new FilePropertyReader();
 
-    public static void main(String[] args) {
-        int local_port = PORT;
+    @Override
+    public void run() {
 
-//        AccountDao accountDao = new AccountDaoImpl();
-//        accountDao.auth()
+
+        int local_port = p.getPropertyInt("server.port");
+
         while (isActive) {
 
             try (ServerSocket ss = new ServerSocket(local_port)) {
                 log.info(SERVER_STARTED_MSG);
-                log.info(CURRENT_PORT_MSG + PORT);
+                log.info(CURRENT_PORT_MSG + local_port);
 
                 Socket socket;
                 while (isActive) {
                     socket = null;
                     socket = ss.accept();
-                    countOfConnected.incrementAndGet();
+                    incrementCountOfConnected();
 
-                    log.info(CLIENT_CONNECTED_MSG + socket + " " + CURRENT_CONNECTION_MSG + countOfConnected);
+                    log.info(CLIENT_CONNECTED_MSG + socket + " " + CURRENT_CONNECTION_MSG + getCountOfConnected());
 
-                    Runnable runnable = new ClientHandler(threadGroup, "Client_" + countOfConnected, socket);
+                    Runnable runnable = new ClientHandler(threadGroup, "Client_" + getCountOfConnected(), socket);
 
                     Thread newThread = new Thread(runnable);
                     newThread.start();
 
                 }
                 do {
-                    log.info(SERVER_OFF_MSG + countOfConnected);
+                    log.info(SERVER_OFF_MSG + getCountOfConnected());
                 } while (threadGroup.activeCount() > 0);
             } catch (BindException e) {
-                log.error(e.getMessage() + " " + CURRENT_PORT_MSG + PORT);
+                log.error(e.getMessage() + " " + CURRENT_PORT_MSG + local_port);
                 ++local_port;
             } catch (SocketException e) {
                 log.error(e.getMessage());
@@ -63,10 +62,15 @@ public class Server {
                 log.error(e.getMessage());
                 decrementCountOfConnected();
             }
+            //threadGroup.interrupt();
         }
     }
 
-    public static void decrementCountOfConnected() {
-        log.info(COUNT_CONNECTED_MSG + countOfConnected.decrementAndGet());
+    public static boolean isIsActive() {
+        return isActive;
+    }
+
+    public static void setIsActive(boolean isActive) {
+        Server.isActive = isActive;
     }
 }

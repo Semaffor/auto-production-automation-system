@@ -1,6 +1,5 @@
 package by.bsuir.app.entity;
 
-import by.bsuir.app.entity.enums.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.LazyCollection;
@@ -33,6 +32,9 @@ public class Account extends BaseEntity {
     @Column(nullable = false, length = 45)
     String email;
 
+    @Column(name = "is_blocked")
+    boolean isBlocked;
+
     String role;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -44,7 +46,8 @@ public class Account extends BaseEntity {
     @JoinColumn(name = "account_id")
     List<HistoryLog> logs;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @Transient
+    @OneToMany(cascade = CascadeType.REFRESH)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "sender_id")
     List<Feedback> feedbacks;

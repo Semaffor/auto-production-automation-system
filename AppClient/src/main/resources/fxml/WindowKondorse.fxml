@@ -1,122 +1,122 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<!--<?import javafx.geometry.Insets?>-->
+<!--<?import javafx.scene.control.Button?>-->
+<!--<?import javafx.scene.control.ComboBox?>-->
+<!--<?import javafx.scene.control.Label?>-->
+<!--<?import javafx.scene.control.Separator?>-->
+<!--<?import javafx.scene.control.TextField?>-->
+<!--<?import javafx.scene.layout.AnchorPane?>-->
+<!--<?import javafx.scene.layout.HBox?>-->
+<!--<?import javafx.scene.layout.Pane?>-->
+<!--<?import javafx.scene.layout.VBox?>-->
+<!--<?import javafx.scene.text.Font?>-->
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="550.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.KondorseController">
-   <children>
-      <Pane layoutY="-1.0" prefHeight="27.0" prefWidth="550.0" style="-fx-background-color: #E6E4EF;" />
-      <Label layoutX="532.0" layoutY="-6.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="-6.0">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <Label layoutX="8.0" layoutY="29.0" prefHeight="68.0" prefWidth="534.0" text="Предприятие приняло решение выделить денежные средства на наиболее окупаемую серию транспорта. Для выделения самой приоритетной серии была создана комиссия из 4-и экспертов и рассмотрены предложенные варианты. Для добавления 5 эксперта необходимо ранжировать приоритетность:" wrapText="true" />
-      <Label alignment="CENTER" layoutX="52.0" layoutY="1.0" prefHeight="27.0" prefWidth="433.0" text="Поиск наилучшей альтернативы на основе принципа Кондорсе" textAlignment="CENTER">
-         <font>
-            <Font name="System Italic" size="14.0" />
-         </font>
-      </Label>
-      <VBox layoutX="436.0" layoutY="89.0" prefHeight="102.0" prefWidth="100.0">
-         <children>
-            <Label prefHeight="18.0" prefWidth="99.0" text="1. 100' series" />
-            <Label prefHeight="18.0" prefWidth="99.0" text="2. 200' series" />
-            <Label prefHeight="18.0" prefWidth="99.0" text="3. 300' series" />
-            <Label prefHeight="18.0" prefWidth="99.0" text="4. 400' series" />
-            <Label prefHeight="18.0" prefWidth="99.0" text="5. 500' series" />
-            <Separator prefHeight="3.0" prefWidth="125.0" />
-         </children>
-      </VBox>
-      <VBox layoutX="50.0" layoutY="123.0" prefHeight="164.0" prefWidth="210.0">
-         <children>
-            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">
-               <children>
-                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />
-                  <TextField fx:id="cell_01" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_02" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_03" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_04" editable="false" prefHeight="26.0" prefWidth="27.0" />
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">
-               <children>
-                  <TextField fx:id="cell_10" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />
-                  <TextField fx:id="cell_12" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_13" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_14" editable="false" prefHeight="26.0" prefWidth="27.0" />
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">
-               <children>
-                  <TextField fx:id="cell_20" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_21" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />
-                  <TextField fx:id="cell_23" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_24" editable="false" prefHeight="26.0" prefWidth="27.0" />
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">
-               <children>
-                  <TextField fx:id="cell_30" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_31" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_32" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />
-                  <TextField fx:id="cell_34" editable="false" prefHeight="26.0" prefWidth="27.0" />
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">
-               <children>
-                  <TextField fx:id="cell_40" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_41" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_42" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField fx:id="cell_43" editable="false" prefHeight="26.0" prefWidth="27.0" />
-                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
-      <Label layoutX="68.0" layoutY="290.0" prefHeight="80.0" prefWidth="171.0" text="Оценки, характеризующие предпочтение альтернатив в парных предпочтениях" textAlignment="CENTER" wrapText="true" />
-      <ComboBox fx:id="variantBox" layoutX="450.0" layoutY="193.0" prefHeight="26.0" prefWidth="57.0" />
-      <Button fx:id="solverButton" layoutX="331.0" layoutY="403.0" mnemonicParsing="false" text="Найти" />
-      <Button fx:id="reportButton" disable="true" layoutX="383.0" layoutY="403.0" mnemonicParsing="false" text="Создать отчет" />
-      <Label fx:id="war_label" alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="399.0" prefHeight="34.0" prefWidth="210.0" text="Label" textAlignment="CENTER" visible="false" wrapText="true" />
-      <ComboBox fx:id="variantBox1" layoutX="450.0" layoutY="229.0" prefHeight="26.0" prefWidth="57.0" />
-      <ComboBox fx:id="variantBox2" layoutX="450.0" layoutY="269.0" prefHeight="26.0" prefWidth="57.0" />
-      <ComboBox fx:id="variantBox3" layoutX="450.0" layoutY="309.0" prefHeight="26.0" prefWidth="57.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="196.0" prefHeight="18.0" prefWidth="27.0" text="1." textAlignment="CENTER" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="232.0" prefHeight="18.0" prefWidth="27.0" text="2." textAlignment="CENTER" />
-      <Label fx:id="war_label111" alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="272.0" prefHeight="18.0" prefWidth="27.0" text="3." textAlignment="CENTER" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="312.0" prefHeight="18.0" prefWidth="27.0" text="4." textAlignment="CENTER" />
-      <ComboBox fx:id="variantBox4" layoutX="450.0" layoutY="345.0" prefHeight="26.0" prefWidth="57.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="348.0" prefHeight="18.0" prefWidth="27.0" text="5." textAlignment="CENTER" />
-      <Button fx:id="openButton" disable="true" layoutX="479.0" layoutY="403.0" mnemonicParsing="false" text="Открыть" />
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
-</AnchorPane>
+<!--<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="550.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.KondorseController">-->
+<!--   <children>-->
+<!--      <Pane layoutY="-1.0" prefHeight="27.0" prefWidth="550.0" style="-fx-background-color: #E6E4EF;" />-->
+<!--      <Label layoutX="532.0" layoutY="-6.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="-6.0">-->
+<!--         <font>-->
+<!--            <Font size="26.0" />-->
+<!--         </font>-->
+<!--      </Label>-->
+<!--      <Label layoutX="8.0" layoutY="29.0" prefHeight="68.0" prefWidth="534.0" text="Предприятие приняло решение выделить денежные средства на наиболее окупаемую серию транспорта. Для выделения самой приоритетной серии была создана комиссия из 4-и экспертов и рассмотрены предложенные варианты. Для добавления 5 эксперта необходимо ранжировать приоритетность:" wrapText="true" />-->
+<!--      <Label alignment="CENTER" layoutX="52.0" layoutY="1.0" prefHeight="27.0" prefWidth="433.0" text="Поиск наилучшей альтернативы на основе принципа Кондорсе" textAlignment="CENTER">-->
+<!--         <font>-->
+<!--            <Font name="System Italic" size="14.0" />-->
+<!--         </font>-->
+<!--      </Label>-->
+<!--      <VBox layoutX="436.0" layoutY="89.0" prefHeight="102.0" prefWidth="100.0">-->
+<!--         <children>-->
+<!--            <Label prefHeight="18.0" prefWidth="99.0" text="1. 100' series" />-->
+<!--            <Label prefHeight="18.0" prefWidth="99.0" text="2. 200' series" />-->
+<!--            <Label prefHeight="18.0" prefWidth="99.0" text="3. 300' series" />-->
+<!--            <Label prefHeight="18.0" prefWidth="99.0" text="4. 400' series" />-->
+<!--            <Label prefHeight="18.0" prefWidth="99.0" text="5. 500' series" />-->
+<!--            <Separator prefHeight="3.0" prefWidth="125.0" />-->
+<!--         </children>-->
+<!--      </VBox>-->
+<!--      <VBox layoutX="50.0" layoutY="123.0" prefHeight="164.0" prefWidth="210.0">-->
+<!--         <children>-->
+<!--            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">-->
+<!--               <children>-->
+<!--                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />-->
+<!--                  <TextField fx:id="cell_01" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_02" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_03" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_04" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--               </children>-->
+<!--               <padding>-->
+<!--                  <Insets left="5.0" right="5.0" />-->
+<!--               </padding>-->
+<!--            </HBox>-->
+<!--            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">-->
+<!--               <children>-->
+<!--                  <TextField fx:id="cell_10" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />-->
+<!--                  <TextField fx:id="cell_12" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_13" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_14" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--               </children>-->
+<!--               <padding>-->
+<!--                  <Insets left="5.0" right="5.0" />-->
+<!--               </padding>-->
+<!--            </HBox>-->
+<!--            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">-->
+<!--               <children>-->
+<!--                  <TextField fx:id="cell_20" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_21" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />-->
+<!--                  <TextField fx:id="cell_23" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_24" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--               </children>-->
+<!--               <padding>-->
+<!--                  <Insets left="5.0" right="5.0" />-->
+<!--               </padding>-->
+<!--            </HBox>-->
+<!--            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">-->
+<!--               <children>-->
+<!--                  <TextField fx:id="cell_30" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_31" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_32" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />-->
+<!--                  <TextField fx:id="cell_34" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--               </children>-->
+<!--               <padding>-->
+<!--                  <Insets left="5.0" right="5.0" />-->
+<!--               </padding>-->
+<!--            </HBox>-->
+<!--            <HBox prefHeight="33.0" prefWidth="159.0" spacing="15.0">-->
+<!--               <children>-->
+<!--                  <TextField fx:id="cell_40" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_41" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_42" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField fx:id="cell_43" editable="false" prefHeight="26.0" prefWidth="27.0" />-->
+<!--                  <TextField editable="false" prefHeight="26.0" prefWidth="27.0" text="-" />-->
+<!--               </children>-->
+<!--               <padding>-->
+<!--                  <Insets left="5.0" right="5.0" />-->
+<!--               </padding>-->
+<!--            </HBox>-->
+<!--         </children>-->
+<!--      </VBox>-->
+<!--      <Label layoutX="68.0" layoutY="290.0" prefHeight="80.0" prefWidth="171.0" text="Оценки, характеризующие предпочтение альтернатив в парных предпочтениях" textAlignment="CENTER" wrapText="true" />-->
+<!--      <ComboBox fx:id="variantBox" layoutX="450.0" layoutY="193.0" prefHeight="26.0" prefWidth="57.0" />-->
+<!--      <Button fx:id="solverButton" layoutX="331.0" layoutY="403.0" mnemonicParsing="false" text="Найти" />-->
+<!--      <Button fx:id="reportButton" disable="true" layoutX="383.0" layoutY="403.0" mnemonicParsing="false" text="Создать отчет" />-->
+<!--      <Label fx:id="war_label" alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="399.0" prefHeight="34.0" prefWidth="210.0" text="Label" textAlignment="CENTER" visible="false" wrapText="true" />-->
+<!--      <ComboBox fx:id="variantBox1" layoutX="450.0" layoutY="229.0" prefHeight="26.0" prefWidth="57.0" />-->
+<!--      <ComboBox fx:id="variantBox2" layoutX="450.0" layoutY="269.0" prefHeight="26.0" prefWidth="57.0" />-->
+<!--      <ComboBox fx:id="variantBox3" layoutX="450.0" layoutY="309.0" prefHeight="26.0" prefWidth="57.0" />-->
+<!--      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="196.0" prefHeight="18.0" prefWidth="27.0" text="1." textAlignment="CENTER" />-->
+<!--      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="232.0" prefHeight="18.0" prefWidth="27.0" text="2." textAlignment="CENTER" />-->
+<!--      <Label fx:id="war_label111" alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="272.0" prefHeight="18.0" prefWidth="27.0" text="3." textAlignment="CENTER" />-->
+<!--      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="312.0" prefHeight="18.0" prefWidth="27.0" text="4." textAlignment="CENTER" />-->
+<!--      <ComboBox fx:id="variantBox4" layoutX="450.0" layoutY="345.0" prefHeight="26.0" prefWidth="57.0" />-->
+<!--      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="421.0" layoutY="348.0" prefHeight="18.0" prefWidth="27.0" text="5." textAlignment="CENTER" />-->
+<!--      <Button fx:id="openButton" disable="true" layoutX="479.0" layoutY="403.0" mnemonicParsing="false" text="Открыть" />-->
+<!--   </children>-->
+<!--   <opaqueInsets>-->
+<!--      <Insets />-->
+<!--   </opaqueInsets>-->
+<!--</AnchorPane>-->

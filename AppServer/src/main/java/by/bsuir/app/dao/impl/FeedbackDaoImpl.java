@@ -11,6 +11,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,7 @@ public class FeedbackDaoImpl implements FeedbackDao {
 
     @Override
     public boolean saveOrUpdate(Feedback feedback) {
+        feedback.setQuestionDate(new Date(System.currentTimeMillis()));
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.saveOrUpdate(feedback);
@@ -85,11 +87,13 @@ public class FeedbackDaoImpl implements FeedbackDao {
 
     @Override
     public boolean saveAnswer(Feedback feedback) {
-        Feedback feedbackWithId = findByQuestion(feedback.getQuestion());
-        feedbackWithId.setAnswer(feedback.getAnswer());
+//        Feedback feedbackWithId = findByQuestion(feedback.getQuestion());
+//        feedbackWithId.setAnswer(feedback.getAnswer());
+        feedback.setAnswerDate(new Date(System.currentTimeMillis()));
         session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.update(feedback);
+        session.getTransaction().commit();
         session.close();
         return true;
     }

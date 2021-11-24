@@ -21,4 +21,5 @@ public class Feedback extends BaseEntity{
     private Date questionDate;
     private Date answerDate;
 
+    private Long sender_id;
 }

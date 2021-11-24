@@ -15,8 +15,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class DiagramController {
@@ -53,10 +56,6 @@ public class DiagramController {
     @FXML
     void initialize() {
 
-        String request = "SELECT series, series AS model, SUM(amount) AS amount " +
-                " FROM Model " +
-                " GROUP BY series ";
-
         try {
             List<Object[]> models = (List<Object[]>)  Phone.sendOrGetData(Commands.GET_ALL_MODELS_GROUPED_BY_QUANTITY,
                     new Car());
@@ -65,17 +64,19 @@ public class DiagramController {
             int size = models.size();
             XYChart.Series[] set = new XYChart.Series[size];
 
-
             int totalQuantity = 0;
-            for (int i = 0; i < size; i++) {
+            int i = 0;
+            for(Object object : models) {
                 set[i] = new XYChart.Series();
 
-                Object[] obj = models.get(i);
-                String modelName = (String) obj[0];
-                int quantity = (int) obj[1];
+                Map row = (Map)object;
+                String modelName = (String) row.get("model");
+                BigDecimal quantityBig = (BigDecimal) row.get("quantity");
+                BigInteger bigInteger = quantityBig.toBigInteger();
+                Integer quantity = bigInteger.intValue();
                 set[i].setName(modelName);
                 set[i].getData().add(new XYChart.Data<>(modelName, quantity));
-
+                i++;
                 totalQuantity += quantity;
             }
 

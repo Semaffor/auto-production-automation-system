@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +26,9 @@ public class Model extends BaseEntity {
     private String description;
     private int quantity;
 
+    public Model(String name, String description, int quantity) {
+        this.name = name;
+        this.description = description;
+        this.quantity = quantity;
+    }
 }

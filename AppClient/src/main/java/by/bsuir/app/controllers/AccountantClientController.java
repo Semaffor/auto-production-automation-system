@@ -27,7 +27,14 @@ public class AccountantClientController {
     private Button report_button;
 
     @FXML
-    private Button KondorseButton;
+    private Button analize_button;
+
+    @FXML
+    private Button analize_button1;
+
+    @FXML
+    private Button analize_button2;
+
 
     @FXML
     private Button mail_button;
@@ -55,10 +62,10 @@ public class AccountantClientController {
             }
         });
 
-        KondorseButton.setOnAction(actionEvent -> {
+        analize_button.setOnAction(actionEvent -> {
             try {
                 pane.getChildren().remove(node[0]);
-                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowKondorse));
+                node[0] = (Node) FXMLLoader.load(getClass().getResource(Paths.WindowAgeAndQuantityAccountsPieChart));
                 pane.getChildren().add(node[0]);
 
             } catch (IOException e) {

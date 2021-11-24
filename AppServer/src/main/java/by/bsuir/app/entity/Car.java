@@ -41,7 +41,7 @@ public class Car extends BaseEntity {
     @Column(name="photo_url")
     private String photoURL;
 
-    @OneToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "model_id")
     private Model model;
 

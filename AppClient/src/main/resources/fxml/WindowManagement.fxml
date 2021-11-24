@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -9,125 +10,234 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" opacity="0.7" prefHeight="450.0" prefWidth="830.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.ManagementController">
-   <children>
-      <TabPane layoutX="4.0" layoutY="26.0" prefHeight="424.0" prefWidth="830.0" stylesheets="@../animation/stylesheet.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
-        <tabs>
-          <Tab text="Сотрудники">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <ScrollPane prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="815.0">
-                                 <children>
-                                    <TableView fx:id="account_table" editable="true" fixedCellSize="0.0" prefHeight="361.0" prefWidth="830.0" stylesheets="@../animation/stylesheet.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
-                                      <columns>
-                                        <TableColumn fx:id="id_column" prefWidth="40.0" text="№" />
-                                        <TableColumn fx:id="login_column" onEditCommit="#onEditLogin" prefWidth="85.0" text="Логин" />
-                                          <TableColumn fx:id="mail_column" onEditCommit="#onEditMail" prefWidth="113.60003662109375" text="Почта" />
-                                          <TableColumn fx:id="name_column" prefWidth="85.0" text="Имя" />
-                                          <TableColumn fx:id="role_column" prefWidth="72.800048828125" text="Роль" />
-                                          <TableColumn fx:id="surname_column" prefWidth="90.0" text="Фамилия" />
-                                          <TableColumn fx:id="thirdName_column" prefWidth="86.39993896484373" text="Отчество" />
-                                          <TableColumn fx:id="age_column" prefWidth="55.0" text="Возраст" />
-                                          <TableColumn fx:id="gender_column" prefWidth="70.0" text="Пол" />
-                                          <TableColumn fx:id="position_column" onEditCommit="#onEditPosition" text="Должность" />
-                                          <TableColumn fx:id="phone" text="Телефон" />
-                                          <TableColumn fx:id="social" prefWidth="100.0" text="Соц.сети" />
-                                          <TableColumn fx:id="start_column" prefWidth="75.0" text="Нанят" />
-                                          <TableColumn fx:id="fire_column" prefWidth="75.0" text="Уволен" />
-                                      </columns>
-                                    </TableView>
-                                    <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" visible="false" />
-                                    <Button fx:id="delete_account_button" layoutX="378.0" layoutY="364.0" mnemonicParsing="false" text="Удалить" />
-                                    <Label fx:id="warning" layoutX="477.0" layoutY="364.0" prefHeight="18.0" prefWidth="322.0" text="ntrcn" textFill="#bc3636" visible="false">
-                                       <font>
-                                          <Font name="System Bold" size="13.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </ScrollPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Транспорт">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="826.0">
-                     <children>
-                        <ScrollPane layoutX="89.0" layoutY="214.0" prefHeight="359.0" prefWidth="830.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="826.0">
-                                 <children>
-                                    <TableView fx:id="carTable" editable="true" prefHeight="354.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-16.0" AnchorPane.topAnchor="0.0">
-                                      <columns>
-                                        <TableColumn fx:id="VIN" prefWidth="127.19997555017471" resizable="false" text="VIN" />
-                                          <TableColumn fx:id="model_table_car_field" prefWidth="80.800048828125" text="Модель" />
-                                          <TableColumn fx:id="body_typeTableCar" prefWidth="100.00003051757812" text="Тип кузова" />
-                                          <TableColumn fx:id="fuel_typeCarTable" prefWidth="103.99993896484375" text="Тип топлива" />
-                                          <TableColumn fx:id="price" prefWidth="79.20001220703125" text="Стоимость" />
-                                          <TableColumn fx:id="gearbox" prefWidth="74.4000244140625" text="Коробка" />
-                                          <TableColumn fx:id="rate" minWidth="12.0" prefWidth="71.99993896484375" text="Рейтинг" />
-                                          <TableColumn fx:id="issuer_date" prefWidth="69.5999755859375" text="Выпущена" />
-                                          <TableColumn fx:id="car_quantity_column" prefWidth="119.199951171875" text="Кол-во" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
-                              </AnchorPane>
-                          </content>
-                        </ScrollPane>
-                        <Button fx:id="delete_car_button" layoutX="685.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="60.0" text="Удалить" />
-                        <Label fx:id="war_label" alignment="CENTER_RIGHT" layoutX="251.0" layoutY="368.0" prefHeight="18.0" prefWidth="269.0" text="Label" visible="false" />
-                        <Button fx:id="add_car_button" layoutX="750.0" layoutY="365.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" text="Добавить" />
-                        <Label fx:id="warningCar" alignment="CENTER_RIGHT" layoutX="162.0" layoutY="370.0" prefHeight="18.0" prefWidth="359.0" text="Label" textAlignment="RIGHT" visible="false" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Модели">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView editable="true" layoutX="8.0" prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                              <TableColumn fx:id="seriesTableModel1" prefWidth="52.79995805025101" text="№" />
-                            <TableColumn fx:id="model_name_field" prefWidth="144.79998397827148" text="Название модели" />
-                            <TableColumn fx:id="description_field" prefWidth="629.6000518798828" text="Описание" />
-                          </columns>
-                        </TableView>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Прочее">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView editable="true" layoutX="100.0" layoutY="29.0" prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn fx:id="fuel_typeTableOthers" prefWidth="106.39999085664749" text="Тип топлива" />
-                            <TableColumn prefWidth="114.39996337890625" />
-                              <TableColumn fx:id="body_typeTableOthers" minWidth="0.0" prefWidth="93.60005187988281" text="Тип кузова" />
-                              <TableColumn fx:id="seats_numberTableOthers" minWidth="0.0" prefWidth="109.60003662109375" text="Количество мест" />
-                          </columns>
-                        </TableView>
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-      <Label layoutX="780.0" layoutY="-3.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="-3.0">
-         <font>
-            <Font size="26.0" />
-         </font>
-      </Label>
-      <TextField fx:id="filterField" layoutX="580.0" layoutY="13.0" promptText="Поиск" />
-   </children>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+    <children>
+        <TabPane layoutX="4.0" layoutY="26.0" prefHeight="424.0" prefWidth="830.0" stylesheets="@../animation/stylesheet.css" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.0">
+            <tabs>
+                <Tab text="Сотрудники">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ScrollPane prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="387.0" prefWidth="815.0">
+                                            <children>
+                                                <TableView fx:id="account_table" editable="true" fixedCellSize="0.0" prefHeight="361.0" prefWidth="830.0" stylesheets="@../animation/stylesheet.css" AnchorPane.bottomAnchor="26.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="id_column" prefWidth="40.0" text="№" />
+                                                        <TableColumn fx:id="login_column" onEditCommit="#onEditLogin" prefWidth="85.0" text="Логин" />
+                                                        <TableColumn fx:id="mail_column" onEditCommit="#onEditMail" prefWidth="113.60003662109375" text="Почта" />
+                                                        <TableColumn fx:id="name_column" onEditCommit="#onEditName" prefWidth="85.0" text="Имя" />
+                                                        <TableColumn fx:id="role_column" onEditCommit="#onEditRole" prefWidth="72.800048828125" text="Роль" />
+                                                        <TableColumn fx:id="surname_column" onEditCommit="#onEditSurname" prefWidth="90.0" text="Фамилия" />
+                                                        <TableColumn fx:id="thirdName_column" onEditCommit="#onEditThirdName" prefWidth="86.39993896484373" text="Отчество" />
+                                                        <TableColumn fx:id="age_column" onEditCommit="#onEditAge" prefWidth="55.0" text="Возраст" />
+                                                        <TableColumn fx:id="gender_column" onEditCommit="#onEditGender" prefWidth="70.0" text="Пол" />
+                                                        <TableColumn fx:id="position_column" onEditCommit="#onEditPosition" text="Должность" />
+                                                        <TableColumn fx:id="phone" onEditCommit="#onEditPhone" text="Телефон" />
+                                                        <TableColumn fx:id="social" onEditCommit="#onEditSocial" prefWidth="100.0" text="Соц.сети" />
+                                                        <TableColumn fx:id="start_column" onEditCommit="#onEditStartData" prefWidth="75.0" text="Нанят" />
+                                                        <TableColumn fx:id="fire_column" onEditCommit="#onEditEndData" prefWidth="75.0" text="Уволен" />
+                                                        <TableColumn fx:id="account_ban" editable="false" prefWidth="75.0" text="Заблокирован" />
+                                                    </columns>
+                                                </TableView>
+                                                <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" visible="false" />
+                                                <Label fx:id="warning_account_label" layoutX="14.0" layoutY="367.0" prefHeight="18.0" prefWidth="322.0" text="Label" textFill="#bc3636" visible="false">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Label>
+                                                <HBox layoutX="647.0" layoutY="363.0" prefHeight="26.0" prefWidth="169.0" spacing="15.0">
+                                                    <children>
+                                                        <Button fx:id="delete_account_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickResetAccount" prefHeight="0.0" prefWidth="0.0" textAlignment="CENTER">
+                                                            <graphic>
+                                                                <ImageView fitHeight="15.0" fitWidth="20.0" onMouseClicked="#onMouseClickResetAccount" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../assets/reload.png" />
+                                                                    </image>
+                                                                    <viewport>
+                                                                        <Rectangle2D height="16.0" width="16.0" />
+                                                                    </viewport>
+                                                                </ImageView>
+                                                            </graphic>
+                                                        </Button>
+                                                        <Button fx:id="account_reset_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickDeleteAccount" textAlignment="CENTER">
+                                                            <graphic>
+                                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickDeleteAccount" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../assets/bin.png" />
+                                                                    </image>
+                                                                    <viewport>
+                                                                        <Rectangle2D height="16.0" width="16.0" />
+                                                                    </viewport>
+                                                                </ImageView>
+                                                            </graphic>
+                                                        </Button>
+                                                        <Button fx:id="account_reset_button2" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickBlockAccount" textAlignment="CENTER">
+                                                            <graphic>
+                                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickBlockAccount" pickOnBounds="true" preserveRatio="true">
+                                                                    <image>
+                                                                        <Image url="@../assets/padlock.png" />
+                                                                    </image>
+                                                                    <viewport>
+                                                                        <Rectangle2D height="16.0" width="16.0" />
+                                                                    </viewport>
+                                                                </ImageView>
+                                                            </graphic>
+                                                        </Button>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Транспорт">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="826.0">
+                            <children>
+                                <ScrollPane layoutX="89.0" layoutY="214.0" prefHeight="359.0" prefWidth="830.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="354.0" prefWidth="826.0">
+                                            <children>
+                                                <TableView fx:id="car_table" editable="true" prefHeight="354.0" prefWidth="830.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="VIN" onEditCommit="#onEditVIN" prefWidth="127.19997555017471" resizable="false" text="VIN" />
+                                                        <TableColumn fx:id="model_table_car_field" prefWidth="80.800048828125" text="Модель" />
+                                                        <TableColumn fx:id="body_typeTableCar" onEditCommit="#onEditBodyType" prefWidth="100.00003051757812" text="Тип кузова" />
+                                                        <TableColumn fx:id="fuel_typeCarTable" onEditCommit="#onEditFuelType" prefWidth="103.99993896484375" text="Тип топлива" />
+                                                        <TableColumn fx:id="gearbox" onEditCommit="#onEditGearbox" prefWidth="74.4000244140625" text="Коробка" />
+                                                        <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="79.20001220703125" text="Стоимость" />
+                                                        <TableColumn fx:id="rate" minWidth="12.0" onEditCommit="#onEditRate" prefWidth="71.99993896484375" text="Рейтинг" />
+                                                        <TableColumn fx:id="issuer_date" prefWidth="109.5999755859375" text="Выпущена" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </ScrollPane>
+                                <Label fx:id="war_label" alignment="CENTER_RIGHT" layoutX="251.0" layoutY="368.0" prefHeight="18.0" prefWidth="269.0" text="Label" visible="false" />
+                                <Label fx:id="car_warning_label" layoutX="14.0" layoutY="367.0" prefHeight="18.0" prefWidth="322.0" text="Label" textFill="#bc3636" visible="false">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                                <HBox layoutX="607.0" layoutY="364.0" prefHeight="26.0" prefWidth="169.0" spacing="15.0">
+                                    <children>
+                                        <Button fx:id="account_save_button1" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickSaveCar" textAlignment="CENTER">
+                                            <graphic>
+                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickSaveCar" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../assets/diskette.png" />
+                                                    </image>
+                                                    <viewport>
+                                                        <Rectangle2D height="16.0" width="16.0" />
+                                                    </viewport>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Button minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickBackCar" prefHeight="15.0" prefWidth="16.0" textAlignment="CENTER">
+                                            <graphic>
+                                                <ImageView fitHeight="15.0" fitWidth="15.0" onMouseClicked="#onMouseClickBackCar" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../assets/undo-circular-arrow.png" />
+                                                    </image>
+                                                    <viewport>
+                                                        <Rectangle2D height="16.0" width="16.0" />
+                                                    </viewport>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="delete_account_button1" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickResetCar" prefHeight="0.0" prefWidth="0.0" textAlignment="CENTER">
+                                            <graphic>
+                                                <ImageView fitHeight="15.0" fitWidth="20.0" onMouseClicked="#onMouseClickResetCar" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../assets/reload.png" />
+                                                    </image>
+                                                    <viewport>
+                                                        <Rectangle2D height="16.0" width="16.0" />
+                                                    </viewport>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="account_reset_button1" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickDeleteCar" textAlignment="CENTER">
+                                            <graphic>
+                                                <ImageView fitHeight="13.0" fitWidth="18.0" onMouseClicked="#onMouseClickDeleteCar" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../assets/bin.png" />
+                                                    </image>
+                                                    <viewport>
+                                                        <Rectangle2D height="16.0" width="16.0" />
+                                                    </viewport>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                        <Button fx:id="add_car_button" minHeight="25.0" minWidth="30.0" mnemonicParsing="false" onMouseClicked="#onMouseClickAddCar" prefHeight="25.0" prefWidth="30.0">
+                                            <graphic>
+                                                <ImageView fitHeight="16.0" fitWidth="16.0" onMouseClicked="#onMouseClickAddCar" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../assets/add.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Модели">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView editable="true" layoutX="8.0" prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <columns>
+                                        <TableColumn fx:id="seriesTableModel1" prefWidth="52.79995805025101" text="№" />
+                                        <TableColumn fx:id="model_name_field" prefWidth="144.79998397827148" text="Название модели" />
+                                        <TableColumn fx:id="description_field" prefWidth="629.6000518798828" text="Описание" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Прочее">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView editable="true" layoutX="100.0" layoutY="29.0" prefHeight="395.2" prefWidth="830.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <columns>
+                                        <TableColumn fx:id="fuel_typeTableOthers" prefWidth="106.39999085664749" text="Тип топлива" />
+                                        <TableColumn prefWidth="114.39996337890625" />
+                                        <TableColumn fx:id="body_typeTableOthers" minWidth="0.0" prefWidth="93.60005187988281" text="Тип кузова" />
+                                        <TableColumn fx:id="seats_numberTableOthers" minWidth="0.0" prefWidth="109.60003662109375" text="Количество мест" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Label layoutX="780.0" layoutY="-3.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="-3.0">
+            <font>
+                <Font size="26.0" />
+            </font>
+        </Label>
+        <TextField fx:id="filterField" layoutX="580.0" layoutY="13.0" promptText="Поиск" />
+        <ImageView fitHeight="38.0" fitWidth="78.0" layoutX="456.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+    </children>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
 </AnchorPane>

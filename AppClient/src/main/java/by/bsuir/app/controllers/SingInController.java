@@ -20,6 +20,8 @@ import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 
 import static by.bsuir.app.services.GeneralFuncWindow.openNewScene;
+import static by.bsuir.app.util.constants.Constants.ACCOUNT_IS_BLOCKED_MSG;
+import static by.bsuir.app.util.constants.Constants.AGES_PERCENTAGE_MSG;
 
 @Log4j2
 public class SingInController {
@@ -62,14 +64,18 @@ public class SingInController {
         });
 
         catalog_button.setOnAction(actionEvent -> {
+            msg_label.setVisible(false);
             openNewScene(Paths.WindowCatalog);
         });
         forgotPasswordButton.setOnAction(actionEvent -> {
+            msg_label.setVisible(false);
             openNewScene(Paths.WindowForgotPassword);
         });
         singUpButton.setOnAction(actionEvent -> {
+            msg_label.setVisible(false);
             openNewScene(Paths.WindowSignUp);
         });
+
     }
 
 
@@ -78,6 +84,7 @@ public class SingInController {
     }
 
     private void loginUser(String loginText, String passText) {
+        msg_label.setVisible(false);
 
         try {
             Account account = new Account(loginText, passText);
@@ -87,15 +94,16 @@ public class SingInController {
             LocalStorage.setAccount(account);
 
             switch (accountRole) {
-                case UNDEFINED -> throw new AuthenticationException();
+                case UNDEFINED -> throw new AuthenticationException(ACCOUNT_IS_BLOCKED_MSG);
                 case ADMIN -> openNewScene(Paths.WindowAdminClient);
                 case USER -> openNewScene(Paths.WindowAccountantClient);
                 case GUEST -> openNewScene(Paths.WindowSimpleClient);
-                default -> throw new RoleRecognitionException();
+                default -> throw new RoleRecognitionException(AGES_PERCENTAGE_MSG);
             }
 
         } catch (IOException | ClassNotFoundException | AuthenticationException | RoleRecognitionException | GettingDataException e) {
             log.error(Constants.AUTH_FAIL + e.getMessage());
+            msg_label.setText(e.getMessage());
             msg_label.setVisible(true);
             Shake loginAnim = new Shake(login_field);
             Shake passwordAnim = new Shake(password_field);

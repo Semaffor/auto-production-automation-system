@@ -34,9 +34,11 @@ public class HistoryRowController {
         if (feedback != null) {
             id_label.setText(feedback.getId().toString());
             question_field.setText(feedback.getQuestion());
-            answer_field.setText(feedback.getAnswer());
+            if (feedback.getAnswer() != null)
+                answer_field.setText(feedback.getAnswer());
             request_date_field.setText(feedback.getQuestionDate().toString());
-            answer_date_field.setText(feedback.getAnswerDate().toString());
+            if (feedback.getAnswerDate() != null)
+                answer_date_field.setText(feedback.getAnswerDate().toString());
         }
     }
 }

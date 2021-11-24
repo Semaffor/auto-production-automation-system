@@ -4,6 +4,7 @@ import by.bsuir.app.entity.Car;
 import by.bsuir.app.exception.DAOException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CarDao extends BaseDao<Long, Car> {
     /**
@@ -13,5 +14,7 @@ public interface CarDao extends BaseDao<Long, Car> {
      */
     List<Car> findAllByField(String field) throws DAOException;
     List<Object[]>  findAllGroupedByQuantity();
-
+    boolean deleteByVIN(String VIN);
+    Optional<Car> findByVIN(String VIN);
+    boolean save(Car car);
 }

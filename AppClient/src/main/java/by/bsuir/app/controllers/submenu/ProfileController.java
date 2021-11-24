@@ -97,9 +97,9 @@ public class ProfileController {
             mail_label.setText(account.getEmail());
 
             String sex = account.getData().getGender();
-            if (sex != null && sex.equals(Gender.MALE.toString()))
+            if (sex != null && sex.equals(Gender.MALE.getGender()))
                 image_box.setImage(new Image(new File(Paths.MAN_AVATAR_PATH).toURI().toString()));
-            else if (sex != null && sex.equals(Gender.FEMALE.toString()))
+            else if (sex != null && sex.equals(Gender.FEMALE.getGender()))
                 image_box.setImage(new Image(new File(Paths.WOMAN_AVATAR_PATH).toURI().toString()));
             else
                 image_box.setImage(new Image(new File(Paths.UNDEFINED_AVATAR_PATH).toURI().toString()));

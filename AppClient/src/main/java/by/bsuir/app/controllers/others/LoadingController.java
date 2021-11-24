@@ -73,13 +73,13 @@ public class LoadingController {
                 }
                 warning_label2.setVisible(true);
                 deny_button.setVisible(true);
-                CURRENT_PORT++;
+                //CURRENT_PORT++;
             }
 
             Platform.runLater(() -> {
                 deny_button.getScene().getWindow().hide();
-//                GeneralFuncWindow.openNewScene(Paths.WindowSignIn);
-                GeneralFuncWindow.openNewScene(Paths.WindowManagement);
+                GeneralFuncWindow.openNewScene(Paths.WindowSignIn);
+//                GeneralFuncWindow.openNewScene(Paths.WindowManagement);
             });
         }
     }

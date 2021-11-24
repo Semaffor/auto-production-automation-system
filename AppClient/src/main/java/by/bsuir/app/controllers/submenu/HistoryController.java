@@ -85,6 +85,8 @@ public class HistoryController {
                         LocalStorage.getAccount().getLogin());
             }
 
+            LocalStorage.setFeedbacks(new ArrayList<>(feedbacks));
+
             int size = feedbacks.size();
             Node[] nodes = new Node[size];
             VBox vBox = new VBox();
@@ -113,7 +115,7 @@ public class HistoryController {
                 if (first.isEmpty())
                     throw new NumberFormatException();
 
-                LocalStorage.setFeedback_id(id);
+                LocalStorage.setFeedback(first.get());
                 GeneralFuncWindow.openNewScene(Paths.WindowTextField);
 
             } catch (NumberFormatException e) {
