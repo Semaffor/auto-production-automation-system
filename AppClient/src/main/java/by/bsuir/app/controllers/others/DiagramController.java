@@ -56,10 +56,6 @@ public class DiagramController {
     @FXML
     void initialize() {
 
-        String request = "SELECT series, series AS model, SUM(amount) AS amount " +
-                " FROM Model " +
-                " GROUP BY series ";
-
         try {
             List<Object[]> models = (List<Object[]>)  Phone.sendOrGetData(Commands.GET_ALL_MODELS_GROUPED_BY_QUANTITY,
                     new Car());

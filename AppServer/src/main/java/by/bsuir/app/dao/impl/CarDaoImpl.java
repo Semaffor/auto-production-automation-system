@@ -111,8 +111,6 @@ public class CarDaoImpl implements CarDao {
         SQLQuery query = session.createSQLQuery(FIND_ALL_MODELS_GROUPED_BY_QUANTITY);
         query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
         List list = query.list();
-//        Query query = session.createQuery(FIND_ALL_MODELS_GROUPED_BY_QUANTITY);
-//        List<Object[]> list = query.getResultList();
 
         session.close();
         return list;

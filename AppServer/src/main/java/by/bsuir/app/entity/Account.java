@@ -1,7 +1,5 @@
 package by.bsuir.app.entity;
 
-import by.bsuir.app.entity.enums.BlockStatus;
-import by.bsuir.app.entity.enums.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.LazyCollection;

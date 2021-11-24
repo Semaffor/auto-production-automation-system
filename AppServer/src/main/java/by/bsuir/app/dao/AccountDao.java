@@ -46,4 +46,5 @@ public interface AccountDao extends BaseDao<Long, Account> {
 
     void addEntranceLog(Account account);
 
+
 }

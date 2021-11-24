@@ -1,17 +1,21 @@
 package by.bsuir.app.dao.impl;
 
 import by.bsuir.app.dao.PersonalDataDao;
-import by.bsuir.app.entity.Account;
-import by.bsuir.app.entity.HistoryLog;
 import by.bsuir.app.entity.PersonalData;
 import by.bsuir.app.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class PersonalDataDaoImpl implements PersonalDataDao {
     private static Session session;
+    private static final String FIND_AGE_PERCENT_PROPORTION = "SELECT age as ageGroup, count(*) as quantity FROM " +
+            "personal_data " +
+            "group by age; ";
 
     @Override
     public List<PersonalData> findAll() {
@@ -45,5 +49,19 @@ public class PersonalDataDaoImpl implements PersonalDataDao {
     @Override
     public boolean saveOrUpdate(PersonalData personalDate) {
         return false;
+    }
+
+    @Override
+    public List<Object[]> findAgePercentProportion() {
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+
+        SQLQuery query = session.createSQLQuery(FIND_AGE_PERCENT_PROPORTION);
+        query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+
+        List list = query.list();
+
+        session.close();
+        return list;
     }
 }

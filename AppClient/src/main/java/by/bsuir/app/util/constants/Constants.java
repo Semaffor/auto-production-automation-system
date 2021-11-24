@@ -52,5 +52,6 @@ public class Constants {
     public static final String USE_COMA_INSTEADOF_POINT = "Используйте ',' вместо '.'";
     public static final String ACCOUNT_IS_BLOCKED_MSG = "Ваш аккаунт заблокирован.";
     public static final String INCORRECT_LOGIN_OR_PASSWORD_MSG = "Неверный логин или пароль. Повторите попытку";
+    public static final String AGES_PERCENTAGE_MSG = "Общая доля возрастной группы сотрудников ";
 
 }

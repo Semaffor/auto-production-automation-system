@@ -2,10 +2,7 @@ package by.bsuir.app.util.connection;
 
 import by.bsuir.app.dao.*;
 import by.bsuir.app.dao.impl.*;
-import by.bsuir.app.entity.Account;
-import by.bsuir.app.entity.Car;
-import by.bsuir.app.entity.Feedback;
-import by.bsuir.app.entity.Message;
+import by.bsuir.app.entity.*;
 import by.bsuir.app.exception.DAOException;
 import by.bsuir.app.service.Services;
 import by.bsuir.app.service.snapshot.Manipulator;
@@ -24,6 +21,7 @@ public class CommandHandler {
     private static final ModelDao modelDao = new ModelDaoImpl();
     private static final FeedbackDao feedbackDao = new FeedbackDaoImpl();
     private static final Manipulator manipulator = new Manipulator();
+    private static final PersonalDataDao personalData = new PersonalDataDaoImpl();
 
 
     public static Object execute(Commands command, Object obj) {
@@ -55,6 +53,7 @@ public class CommandHandler {
                 case SAVE_CAR_DATA_LOCAL_STORAGE -> manipulator.saveObjectInMemory(new Car() );
                 case RESTORE_CAR_DATA_LOCAL_STORAGE -> manipulator.getObjectFromMemory(new Car() );
                 case DELETE_CAR_BY_VIN -> carDao.deleteByVIN((String) obj);
+                case GET_AGE_PERCENT_PROPORTION -> personalData.findAgePercentProportion();
                 default -> defaultBranch(command);
 
             };

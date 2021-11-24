@@ -10,6 +10,7 @@ import by.bsuir.app.util.HibernateUtil;
 import by.bsuir.app.util.JavaMailUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -173,5 +174,7 @@ public class AccountDaoImpl implements AccountDao {
         session.getTransaction().commit();
         session.close();
     }
+
+
 
 }
