@@ -71,7 +71,7 @@ public class AgeAndQuantityAccountsPieChartController {
             for (Object object : ages) {
 
                 Map row = (Map) object;
-                String ageGroup = String.valueOf(((Integer) row.get("ageGroup"))) + "age";
+                String ageGroup = String.valueOf(((Integer) row.get("ageGroup"))) + " age";
                 BigInteger quantityBig = (BigInteger) row.get("quantity");
                 Integer quantity = quantityBig.intValue();
                 pieChartData.add(new PieChart.Data(ageGroup, quantity));

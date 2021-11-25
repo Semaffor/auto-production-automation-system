@@ -30,11 +30,7 @@ public class AccountantClientController {
     private Button analize_button;
 
     @FXML
-    private Button analize_button1;
-
-    @FXML
-    private Button analize_button2;
-
+    private Button analize_team_button;
 
     @FXML
     private Button mail_button;

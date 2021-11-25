@@ -157,7 +157,7 @@ public class AddCarController {
             } catch (EmptyFieldsException e) {
                 war_label.setText(e.getMessage());
             } catch (NumberFormatException e) {
-                war_label.setText(USE_COMA_INSTEADOF_POINT);
+                war_label.setText(USE_COMA_INSTEADOF_POINT_MSG);
             }
             war_label.setVisible(true);
         });

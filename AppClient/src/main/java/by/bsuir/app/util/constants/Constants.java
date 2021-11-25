@@ -8,6 +8,8 @@ public class Constants {
     public static final int MIN_LOGIN_LENGTH = 3;
     public static final int MIN_PASSWORD_LENGTH = 6;
     public static final int MIN_MESSAGE_LENGTH = 10;
+    public static final String OLD_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
+    public static final String NEW_FORMAT = "yyyy-MM-dd";
 
     public static final String IP_ADDRESS = "127.0.0.1";
     public static final String AUTH_FAIL = "Auth has failed. - ";
@@ -49,9 +51,18 @@ public class Constants {
     public static final String CREATED_RESTORE_POINT_MSG = "Создана точка восстановления.";
     public static final String LAST_RESTORE_POINT_MSG = "Возращено к последней точки восстановления. ";
     public static final String INCORRECT_RATE_MSG = "Рейтинг от 0,1 до 5,0. ";
-    public static final String USE_COMA_INSTEADOF_POINT = "Используйте ',' вместо '.'";
+    public static final String USE_COMA_INSTEADOF_POINT_MSG = "Используйте ',' вместо '.'";
     public static final String ACCOUNT_IS_BLOCKED_MSG = "Ваш аккаунт заблокирован.";
     public static final String INCORRECT_LOGIN_OR_PASSWORD_MSG = "Неверный логин или пароль. Повторите попытку";
     public static final String AGES_PERCENTAGE_MSG = "Общая доля возрастной группы сотрудников ";
+    public static final String REPORT_SUCCESS_MSG = "Отчет создан. ";
+    public static final String REPORT_FAILURE_MSG = "Не удалось создать отчет. ";
+    public static final String AUTHOR_MSG = "Автор: ";
+    public static final String REPORT_TITLE_MSG = "Отчет. ";
+    public static final String DATA_MISSED_MSG = " ------- ";
+    public static final String REPORT_ACCOUNT_DATA_MSG = "Report of accounts data";
+    public static final String REPORT_CHOOSE_EXTENSION_MSG = "Выберите расширение файла.";
+    public static final String INCORRECT_DATE_FORMAT_MSG = "Неверный формат даты: dd-MM-yyyy";
+    public static final String INCORRECT_DATE_CHRONOLOGY_MSG = "Увольнение не может быть раньше трудоустройства.";
 
 }
