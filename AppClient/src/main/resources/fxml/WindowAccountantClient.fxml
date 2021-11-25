@@ -46,7 +46,7 @@
                     <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../assets/icons/catalogue.png" />
+                                <Image url="@../assets/teamwork.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -60,11 +60,11 @@
                         <Insets left="55.0" />
                     </padding>
                 </Button>
-                <Button fx:id="analize_button" alignment="BASELINE_LEFT" graphicTextGap="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #E6E4EF;" stylesheets="@../animation/second.css" text="Анализ">
+                <Button fx:id="analize_button" alignment="BASELINE_LEFT" graphicTextGap="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #E6E4EF;" stylesheets="@../animation/second.css" text="Возрастной анализ">
                     <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../assets/icons/shop.png" />
+                                <Image url="@../assets/age-group.png" />
                             </image>
                         </ImageView>
                     </graphic>
@@ -75,36 +75,6 @@
                         <Insets left="55.0" />
                     </padding>
                 </Button>
-            <Button fx:id="analize_button1" alignment="BASELINE_LEFT" graphicTextGap="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #E6E4EF;" stylesheets="@../animation/second.css" text="Анализ">
-               <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/icons/shop.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <padding>
-                  <Insets left="55.0" />
-               </padding>
-            </Button>
-            <Button fx:id="analize_button2" alignment="BASELINE_LEFT" graphicTextGap="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #E6E4EF;" stylesheets="@../animation/second.css" text="Анализ">
-               <graphic>
-                  <ImageView fitHeight="18.0" fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/icons/shop.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font size="13.0" />
-               </font>
-               <padding>
-                  <Insets left="55.0" />
-               </padding>
-            </Button>
                 <Button fx:id="mail_button" alignment="BASELINE_LEFT" graphicTextGap="30.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #E6E4EF;" stylesheets="@../animation/second.css" text="Рассылка сообщений">
                     <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">

@@ -31,4 +31,5 @@ public class Paths {
     public static final String WindowActivityChart= "/fxml/WindowActivityChart.fxml";
     public static final String WindowAddCar= "/fxml/WindowAddCar.fxml";
     public static final String WindowAgeAndQuantityAccountsPieChart= "/fxml/WindowAgeAndQuantityAccountsPieChart.fxml";
+    public static final String WindowTeamAnalyzesChart= "/fxml/WindowTeamAnalyzesChart.fxml";
 }

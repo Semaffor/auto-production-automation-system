@@ -84,11 +84,11 @@ public class ServerRunner {
     }
 
     public synchronized static void decrementCountOfConnected() {
-        log.info(COUNT_CONNECTED_MSG + countOfConnected.decrementAndGet());
+        log.info(CURRENT_CONNECTION_MSG + countOfConnected.decrementAndGet());
     }
 
     public synchronized static void incrementCountOfConnected() {
-        log.info(COUNT_CONNECTED_MSG + countOfConnected.incrementAndGet());
+        log.info(CURRENT_CONNECTION_MSG + countOfConnected.incrementAndGet());
     }
 
     public synchronized static int getCountOfConnected() {

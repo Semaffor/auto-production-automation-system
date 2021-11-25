@@ -7,6 +7,7 @@ module MyApp {
     requires static lombok;
     requires java.sql;
     requires java.desktop;
+    requires itextpdf;
 
     opens by.bsuir.app.controllers.submenu to javafx.fxml;
     opens by.bsuir.app.controllers.others to javafx.fxml;

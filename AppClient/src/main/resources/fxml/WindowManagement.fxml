@@ -47,7 +47,6 @@
                                                         <TableColumn fx:id="account_ban" editable="false" prefWidth="75.0" text="Заблокирован" />
                                                     </columns>
                                                 </TableView>
-                                                <TextField fx:id="delete_employee_field" layoutX="214.0" layoutY="361.0" promptText="ID" visible="false" />
                                                 <Label fx:id="warning_account_label" layoutX="14.0" layoutY="367.0" prefHeight="18.0" prefWidth="322.0" text="Label" textFill="#bc3636" visible="false">
                                                     <font>
                                                         <Font name="System Bold" size="13.0" />
