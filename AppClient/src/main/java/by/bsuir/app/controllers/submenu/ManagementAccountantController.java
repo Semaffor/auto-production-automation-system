@@ -6,6 +6,7 @@ import by.bsuir.app.entity.PersonalData;
 import by.bsuir.app.entity.Position;
 import by.bsuir.app.entity.enums.PositionType;
 import by.bsuir.app.exception.GettingDataException;
+import by.bsuir.app.services.DateHandler;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.services.reportFactory.ReportFactory;
 import by.bsuir.app.services.reportFactory.ReportTypes;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -418,19 +420,41 @@ public class ManagementAccountantController {
         return true;
     }
 
+
+
+
     public void onStartData(TableColumn.CellEditEvent<Account, Date> accountDateCellEditEvent) {
         try {
             Account account = (Account) employee_table.getSelectionModel().getSelectedItem();
-            java.sql.Date newDate = Date.valueOf(String.valueOf(accountDateCellEditEvent.getNewValue()));
+            String oldDate = String.valueOf(accountDateCellEditEvent.getNewValue());
+            Date newDateString = DateHandler.convertDateFormatInSqlDate(oldDate);
 
-            account.getData().setEmplStartDate(newDate);
+            account.getData().setEmplStartDate(newDateString);
             sendEditedData(account);
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | ParseException e) {
             warning_account_label.setText(INCORRECT_DATE_FORMAT_MSG);
             warning_account_label.setVisible(true);
         }
     }
 
     public void onEndData(TableColumn.CellEditEvent<Account, Date> accountDateCellEditEvent) {
+        try {
+            Account account = (Account) employee_table.getSelectionModel().getSelectedItem();
+            String oldDate = String.valueOf(accountDateCellEditEvent.getNewValue());
+            Date newDateString = DateHandler.convertDateFormatInSqlDate(oldDate);
+
+            if (account.getData().getEmplStartDate().after(newDateString))
+                throw new IllegalArgumentException();
+
+            account.getData().setEmplEndDate(newDateString);
+            sendEditedData(account);
+        } catch (ParseException e) {
+            warning_account_label.setText(INCORRECT_DATE_FORMAT_MSG);
+        }catch (IllegalArgumentException e) {
+            warning_account_label.setText(INCORRECT_DATE_CHRONOLOGY_MSG);
+            updateAccountTable();
+        }
+        warning_account_label.setVisible(true);
+
     }
 }

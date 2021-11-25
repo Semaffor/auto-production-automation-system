@@ -117,7 +117,7 @@
                                                         <TableColumn fx:id="gearbox" onEditCommit="#onEditGearbox" prefWidth="74.4000244140625" text="Коробка" />
                                                         <TableColumn fx:id="price" onEditCommit="#onEditPrice" prefWidth="79.20001220703125" text="Стоимость" />
                                                         <TableColumn fx:id="rate" minWidth="12.0" onEditCommit="#onEditRate" prefWidth="71.99993896484375" text="Рейтинг" />
-                                                        <TableColumn fx:id="issuer_date" prefWidth="109.5999755859375" text="Выпущена" />
+                                                        <TableColumn fx:id="issuer_date" onEditCommit="#onEditIssueDate" prefWidth="109.5999755859375" text="Выпущена" />
                                                     </columns>
                                                 </TableView>
                                             </children>

@@ -8,6 +8,8 @@ public class Constants {
     public static final int MIN_LOGIN_LENGTH = 3;
     public static final int MIN_PASSWORD_LENGTH = 6;
     public static final int MIN_MESSAGE_LENGTH = 10;
+    public static final String OLD_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
+    public static final String NEW_FORMAT = "yyyy-MM-dd";
 
     public static final String IP_ADDRESS = "127.0.0.1";
     public static final String AUTH_FAIL = "Auth has failed. - ";
@@ -61,5 +63,6 @@ public class Constants {
     public static final String REPORT_ACCOUNT_DATA_MSG = "Report of accounts data";
     public static final String REPORT_CHOOSE_EXTENSION_MSG = "Выберите расширение файла.";
     public static final String INCORRECT_DATE_FORMAT_MSG = "Неверный формат даты: dd-MM-yyyy";
+    public static final String INCORRECT_DATE_CHRONOLOGY_MSG = "Увольнение не может быть раньше трудоустройства.";
 
 }

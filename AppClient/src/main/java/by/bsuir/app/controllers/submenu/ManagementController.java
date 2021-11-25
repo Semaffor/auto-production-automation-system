@@ -6,6 +6,7 @@ import by.bsuir.app.entity.PersonalData;
 import by.bsuir.app.entity.Position;
 import by.bsuir.app.entity.enums.*;
 import by.bsuir.app.exception.GettingDataException;
+import by.bsuir.app.services.DateHandler;
 import by.bsuir.app.services.GeneralFuncWindow;
 import by.bsuir.app.util.Commands;
 import by.bsuir.app.util.connection.Phone;
@@ -25,13 +26,13 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.converter.BigDecimalStringConverter;
-import javafx.util.converter.FormatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -199,6 +200,9 @@ public class ManagementController {
             }
         });
         age_column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+
         start_column.setCellFactory(column -> {
             TableCell<Account, Date> cell = new TableCell<Account, Date>() {
                 private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
@@ -217,7 +221,6 @@ public class ManagementController {
             return cell;
         });
 
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
         start_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, Date>,
                 ObservableValue<Date>>() {
@@ -229,7 +232,6 @@ public class ManagementController {
                 else return null;
             }
         });
-        start_column.setCellFactory(TextFieldTableCell.forTableColumn(new FormatStringConverter<>(format)));
 
 
         fire_column.setCellFactory(column -> {
@@ -259,7 +261,6 @@ public class ManagementController {
                 else return null;
             }
         });
-        fire_column.setCellFactory(TextFieldTableCell.forTableColumn(new FormatStringConverter<>(format)));
 
         position_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
                 ObservableValue<String>>() {
@@ -271,7 +272,6 @@ public class ManagementController {
                 return null;
             }
         });
-        position_column.setCellFactory(TextFieldTableCell.forTableColumn());
         name_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
                 ObservableValue<String>>() {
             @Override
@@ -357,14 +357,6 @@ public class ManagementController {
         rate.setCellValueFactory(new PropertyValueFactory<>("rate"));
         rate.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
 
-//        car_quantity_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Car, Integer>,
-//                ObservableValue<Integer>>() {
-//            @Override
-//            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<Car, Integer> param) {
-//                return new SimpleObjectProperty<>(param.getValue().getModel().getQuantity());
-//            }
-//        });
-//        car_quantity_column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
     void fillAccountTableWithFilteredData() {
@@ -548,22 +540,6 @@ public class ManagementController {
         car_warning_label.setVisible(true);
         return true;
     }
-    @FXML
-    public void onEditPosition(TableColumn.CellEditEvent<Account, String> employeesForTableStringCellEditEvent) {
-        Account account = (Account) account_table.getSelectionModel().getSelectedItem();
-        String newValue = employeesForTableStringCellEditEvent.getNewValue();
-
-        for (PositionType p : PositionType.values()) {
-            if (newValue.equals(p.getPositionRU())) {
-                account.getData().getPosition().setName(p.getPositionRU());
-                sendEditedData(account);
-                break;
-            } else {
-                warning_account_label.setText(EDITING_DATA_FAILURE);
-                warning_account_label.setVisible(true);
-            }
-        }
-    }
 
     @FXML
     void onEditMail(TableColumn.CellEditEvent<Account, String> employeesForTableStringCellEditEvent) {
@@ -572,6 +548,21 @@ public class ManagementController {
 
         account.setEmail(newValue);
         sendEditedData(account);
+    }
+
+    @FXML
+    void onEditIssueDate(TableColumn.CellEditEvent<Account, String> event) {
+        try {
+            Car car = (Car) car_table.getSelectionModel().getSelectedItem();
+            String oldDate = String.valueOf(event.getNewValue());
+            Date newDateString = DateHandler.convertDateFormatInSqlDate(oldDate);
+
+            car.setIssueDate(newDateString);
+            sendEditedData(car);
+        } catch (IllegalArgumentException | ParseException e) {
+            car_warning_label.setText(INCORRECT_DATE_FORMAT_MSG);
+            car_warning_label.setVisible(true);
+        }
     }
 
     @FXML
@@ -833,25 +824,6 @@ public class ManagementController {
 //            }
 //            i++;
 //        }
-    }
-
-    @FXML
-    void onEditStartData(TableColumn.CellEditEvent<Account, Date> employeesForTableStringCellEditEvent) {
-        Account account = (Account) account_table.getSelectionModel().getSelectedItem();
-        Date newValue = Date.valueOf(String.valueOf(employeesForTableStringCellEditEvent.getNewValue()));
-
-//        account.getData().setSocial(newValue);
-        System.out.println(newValue);
-        sendEditedData(account);
-    }
-
-    @FXML
-    void onEditEndData(TableColumn.CellEditEvent<Account, Date> employeesForTableStringCellEditEvent) {
-//        Account account = (Account) account_table.getSelectionModel().getSelectedItem();
-//
-////        account.getData().setSocial(newValue);
-//        System.out.println(newValue);
-//        sendEditedData(account);
     }
 
     @FXML
