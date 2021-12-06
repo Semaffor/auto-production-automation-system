@@ -3,7 +3,6 @@ package by.bsuir.app.controllers.submenu;
 import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.Car;
 import by.bsuir.app.entity.PersonalData;
-import by.bsuir.app.entity.Position;
 import by.bsuir.app.entity.enums.*;
 import by.bsuir.app.exception.GettingDataException;
 import by.bsuir.app.services.DateHandler;
@@ -26,6 +25,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.converter.BigDecimalStringConverter;
+import javafx.util.converter.FormatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import lombok.extern.log4j.Log4j2;
 
@@ -72,19 +72,10 @@ public class ManagementController {
     private TableColumn<Account, String> gender_column;
 
     @FXML
-    private TableColumn<Account, String> position_column;
-
-    @FXML
     private TableColumn<Account, String> phone;
 
     @FXML
     private TableColumn<Account, String> social;
-
-    @FXML
-    private TableColumn<Account, Date> start_column;
-
-    @FXML
-    private TableColumn<Account, Date> fire_column;
 
     @FXML
     private TableColumn<Account, Boolean> account_ban;
@@ -121,11 +112,6 @@ public class ManagementController {
 
     @FXML
     private TableColumn<Car, Date> issuer_date;
-
-
-
-    @FXML
-    private Button delete_car_button;
 
     @FXML
     private Label war_label;
@@ -201,77 +187,6 @@ public class ManagementController {
         });
         age_column.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-
-        start_column.setCellFactory(column -> {
-            TableCell<Account, Date> cell = new TableCell<Account, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-
-                @Override
-                protected void updateItem(Date item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText(null);
-                    } else {
-                        setText(format.format(item));
-                    }
-                }
-            };
-
-            return cell;
-        });
-
-
-        start_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, Date>,
-                ObservableValue<Date>>() {
-            @Override
-            public ObservableValue<Date> call(TableColumn.CellDataFeatures<Account, Date> param) {
-                PersonalData personalData = param.getValue().getData();
-                if (personalData.getEmplStartDate() != null)
-                    return new SimpleObjectProperty<>(personalData.getEmplStartDate());
-                else return null;
-            }
-        });
-
-
-        fire_column.setCellFactory(column -> {
-            TableCell<Account, Date> cell = new TableCell<Account, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-
-                @Override
-                protected void updateItem(Date item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText(null);
-                    } else {
-                        setText(format.format(item));
-                    }
-                }
-            };
-
-            return cell;
-        });
-        fire_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, Date>,
-                ObservableValue<Date>>() {
-            @Override
-            public ObservableValue<Date> call(TableColumn.CellDataFeatures<Account, Date> param) {
-                PersonalData personalData = param.getValue().getData();
-                if (personalData.getEmplEndDate() != null)
-                    return new SimpleObjectProperty<>(personalData.getEmplEndDate());
-                else return null;
-            }
-        });
-
-        position_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
-                ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Account, String> param) {
-                Position position = param.getValue().getData().getPosition();
-                if (position != null)
-                    return new SimpleObjectProperty<>(position.getName());
-                return null;
-            }
-        });
         name_column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Account, String>,
                 ObservableValue<String>>() {
             @Override
@@ -327,13 +242,17 @@ public class ManagementController {
                 return new SimpleObjectProperty<>(param.getValue().getModel().getName());
             }
         });
+
         model_table_car_field.setCellFactory(TextFieldTableCell.forTableColumn());
         body_typeTableCar.setCellValueFactory(new PropertyValueFactory<>("bodyType"));
         body_typeTableCar.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+
         issuer_date.setCellValueFactory(new PropertyValueFactory<>("issueDate"));
         issuer_date.setCellFactory(column -> {
             TableCell<Car, Date> cell = new TableCell<Car, Date>() {
-                private SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
 
                 @Override
                 protected void updateItem(Date item, boolean empty) {
@@ -348,6 +267,8 @@ public class ManagementController {
 
             return cell;
         });
+        issuer_date.setCellFactory(TextFieldTableCell.forTableColumn(new FormatStringConverter<>(format)));
+
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
         price.setCellFactory(TextFieldTableCell.forTableColumn(new BigDecimalStringConverter()));
         fuel_typeCarTable.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
@@ -577,7 +498,6 @@ public class ManagementController {
 
     @FXML
     void onMouseClickBackCar(MouseEvent event) {
-        //TODO TO_BACK
         try {
             Phone.sendOrGetData(Commands.RESTORE_CAR_DATA_LOCAL_STORAGE, new Car());
             updateCarTable();

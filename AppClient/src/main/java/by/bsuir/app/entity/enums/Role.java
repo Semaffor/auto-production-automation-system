@@ -4,7 +4,8 @@ public enum Role {
     UNDEFINED(0),
     ADMIN(1),
     USER(2),
-    GUEST(3);
+    GUEST(3),
+    UNREGISTERED(4);
 
     private final int id;
 

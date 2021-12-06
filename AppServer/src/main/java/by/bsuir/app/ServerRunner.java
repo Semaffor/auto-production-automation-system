@@ -28,11 +28,6 @@ public class ServerRunner {
 
     public static void main(String[] args) {
 
-//        CarDao carDao = new CarDaoImpl();
-//        List<Object[]> models = carDao.findAllGroupedByQuantity();
-//
-
-
         Scanner scanner = new Scanner(System.in);
         int answer;
         String answerString = null;
@@ -41,8 +36,7 @@ public class ServerRunner {
         while (isOn) {
 
             try {
-//                answerString = scanner.nextLine();
-                answerString = "1";
+                answerString = scanner.nextLine();
                 answer = Integer.parseInt(answerString);
 
                 switch (answer) {

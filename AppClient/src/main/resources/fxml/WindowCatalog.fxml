@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" style="-fx-background-color: F4F4F4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.CatalogController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="578.0" style="-fx-background-color: F4F4F4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.CatalogController">
    <children>
-      <ScrollPane fx:id="scrollPane" layoutY="31.0" prefHeight="420.0" prefWidth="600.0" style="-fx-background-radius: 15;" />
-      <Label layoutX="582.0" layoutY="-6.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true">
+      <ScrollPane fx:id="scrollPane" layoutY="31.0" prefHeight="420.0" prefWidth="575.0" style="-fx-background-radius: 15;" />
+      <Label layoutX="535.0" layoutY="-6.0" onMouseClicked="#handleClose" text="X" textFill="#f77368" wrapText="true">
          <font>
-            <Font size="26.0" />
+            <Font size="22.0" />
          </font>
       </Label>
       <ToolBar layoutX="-1.0" layoutY="-2.0" prefHeight="30.0" prefWidth="278.0" style="-fx-background-color: F4F4F4;">

@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 @Log4j2
@@ -73,6 +74,7 @@ public class ProfileController {
     @FXML
     private Label social_label;
 
+    private static final String DATE_PATTERN = "dd-MM-yyyy";
 
     @FXML
     void handleClose(MouseEvent event) {
@@ -139,12 +141,16 @@ public class ProfileController {
                 age_label.setText(String.valueOf(age));
 
             Date date = account.getData().getEmplStartDate();
-            if (date != null)
-                start_date.setText(date.toString());
+            if (date != null) {
+                String normalDate = new SimpleDateFormat(DATE_PATTERN).format(date);
+                start_date.setText(normalDate);
+            }
 
             Date endDate = account.getData().getEmplEndDate();
-            if (endDate != null)
-                end_date.setText(endDate.toString());
+            if (endDate != null) {
+                String normalDate = new SimpleDateFormat(DATE_PATTERN).format(date);
+                end_date.setText(normalDate);
+            }
 
         } catch (IOException e) {
             log.error(e.getMessage());

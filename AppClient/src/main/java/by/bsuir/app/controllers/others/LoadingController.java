@@ -67,8 +67,8 @@ public class LoadingController {
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
                         }
-                        log.error(e.getMessage() + " ");
-                        e.printStackTrace();
+                        log.error(e.getMessage() + " " + e);
+                        //e.printStackTrace();
                     }
                 }
                 warning_label2.setVisible(true);

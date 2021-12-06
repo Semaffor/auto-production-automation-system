@@ -52,6 +52,12 @@ public class Account extends BaseEntity {
     @JoinColumn(name = "sender_id")
     List<Feedback> feedbacks;
 
+    public Account(Long id, String login, String password) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+    }
+
     public void addLog(HistoryLog log) {
         if (logs == null)
             logs = new ArrayList<>();

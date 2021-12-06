@@ -18,9 +18,6 @@ public class ConstantsMSG {
     public static final String INCORRECT_VALUE_RU_MSG = "Некорректное значение: ";
     public static final String SERVER_SWITCHED_OFF_MSG = "Сервер завершил работу. Все соединения разорваны. ";
     public static final String SERVER_SWITCHED_OFF_ERROR_MSG = "Не удалось разорвать все соединения. ";
-
-
-
 }
 
 

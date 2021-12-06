@@ -5,6 +5,8 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -31,6 +33,15 @@
                 <HBox alignment="CENTER" prefHeight="27.0" prefWidth="282.0" spacing="10.0">
                     <children>
                         <ComboBox fx:id="gear_box" prefHeight="26.0" prefWidth="155.0" promptText="Коробка передач" />
+                  <Button mnemonicParsing="false" onMouseClicked="#onMouseClickedAddPhoto">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" onMouseClicked="#onMouseClickedAddPhoto" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/gallery.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="27.0" prefWidth="282.0" spacing="10.0">
