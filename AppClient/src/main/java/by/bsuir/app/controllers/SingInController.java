@@ -20,8 +20,7 @@ import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 
 import static by.bsuir.app.services.GeneralFuncWindow.openNewScene;
-import static by.bsuir.app.util.constants.Constants.ACCOUNT_IS_BLOCKED_MSG;
-import static by.bsuir.app.util.constants.Constants.AGES_PERCENTAGE_MSG;
+import static by.bsuir.app.util.constants.Constants.*;
 
 @Log4j2
 public class SingInController {
@@ -98,6 +97,7 @@ public class SingInController {
                 case ADMIN -> openNewScene(Paths.WindowAdminClient);
                 case USER -> openNewScene(Paths.WindowAccountantClient);
                 case GUEST -> openNewScene(Paths.WindowSimpleClient);
+                case UNREGISTERED -> throw new AuthenticationException(INCORRECT_LOGIN_OR_PASSWORD_MSG);
                 default -> throw new RoleRecognitionException(AGES_PERCENTAGE_MSG);
             }
 

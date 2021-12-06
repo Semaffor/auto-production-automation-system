@@ -14,8 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import lombok.extern.log4j.Log4j2;
 
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -69,6 +72,8 @@ public class AddCarController {
         addButton.getScene().getWindow().hide();
     }
 
+    private Car car  = new Car();
+
     @FXML
     void initialize() {
         try {
@@ -110,7 +115,7 @@ public class AddCarController {
         addButton.setOnAction(actionEvent -> {
 
             try {
-                Car car = new Car();
+
                 String VIN = VIN_field.getText().toUpperCase(Locale.ROOT);
                 String model = model_box.getValue();
                 String bodyType = bodyType_box.getValue();
@@ -161,5 +166,25 @@ public class AddCarController {
             }
             war_label.setVisible(true);
         });
+    }
+
+    @FXML
+    private void onMouseClickedAddPhoto(MouseEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+
+        fileChooser.setTitle("Select Pictures");
+
+        // Set Initial Directory
+        fileChooser.setInitialDirectory(
+                new File("E:\\Documents_BSUIR\\5_term\\KURSACH2\\AppClient\\src\\main\\resources\\assets"));
+
+        // Add Extension Filters
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("PNG", "*.png"));
+        new FileChooser.ExtensionFilter("JPG", "*.jpg");
+
+        File file = fileChooser.showOpenDialog(new Stage());
+
+        car.setPhotoURL(file.getAbsolutePath());
     }
 }

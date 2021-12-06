@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="577.0" style="-fx-border-radius: 20;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.CatalogRowController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="543.0" style="-fx-border-radius: 20;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="by.bsuir.app.controllers.submenu.CatalogRowController">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <children>
-      <HBox layoutY="14.0" prefHeight="127.0" prefWidth="577.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutY="14.0" maxWidth="600.0" minWidth="549.0" prefHeight="127.0" prefWidth="549.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -78,32 +78,32 @@
             </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="112.0">
                <children>
-                  <Label fx:id="model_label" text="Label">
+                  <Label fx:id="model_label" text="---">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="body_type_label" text="Label">
+                  <Label fx:id="body_type_label" text="---">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="fuel_type_label" text="Label">
+                  <Label fx:id="fuel_type_label" text="---">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="quantity_label" text="Label">
+                  <Label fx:id="quantity_label" text="---">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="issue_date_label" text="Label">
+                  <Label fx:id="issue_date_label" text="---">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="price_label" text="Label" />
+                  <Label fx:id="price_label" text="---" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -137,19 +137,19 @@
                   <Insets top="5.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="154.0">
+            <VBox alignment="TOP_CENTER" prefHeight="127.0" prefWidth="134.0">
                <children>
-                  <Label fx:id="gearbox_label" text="Label">
+                  <Label fx:id="gearbox_label" text="---">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="rate_label" text="Label">
+                  <Label fx:id="rate_label" text="---">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Label fx:id="description_label" alignment="TOP_CENTER" prefHeight="74.0" prefWidth="166.0" text="Label" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="description_label" alignment="TOP_CENTER" prefHeight="74.0" prefWidth="166.0" text="---" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -164,7 +164,7 @@
             </VBox>
          </children>
       </HBox>
-      <Separator layoutX="4.0" layoutY="123.0" opacity="0.5" prefHeight="2.0" prefWidth="518.0">
+      <Separator layoutX="4.0" layoutY="124.0" opacity="0.5" prefHeight="2.0" prefWidth="536.0">
          <effect>
             <Lighting diffuseConstant="1.75" specularConstant="1.42" specularExponent="38.13" surfaceScale="7.76">
                <bumpInput>

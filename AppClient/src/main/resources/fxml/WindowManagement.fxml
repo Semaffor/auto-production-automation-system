@@ -39,12 +39,9 @@
                                                         <TableColumn fx:id="thirdName_column" onEditCommit="#onEditThirdName" prefWidth="86.39993896484373" text="Отчество" />
                                                         <TableColumn fx:id="age_column" onEditCommit="#onEditAge" prefWidth="55.0" text="Возраст" />
                                                         <TableColumn fx:id="gender_column" onEditCommit="#onEditGender" prefWidth="70.0" text="Пол" />
-                                                        <TableColumn fx:id="position_column" onEditCommit="#onEditPosition" text="Должность" />
                                                         <TableColumn fx:id="phone" onEditCommit="#onEditPhone" text="Телефон" />
                                                         <TableColumn fx:id="social" onEditCommit="#onEditSocial" prefWidth="100.0" text="Соц.сети" />
-                                                        <TableColumn fx:id="start_column" onEditCommit="#onEditStartData" prefWidth="75.0" text="Нанят" />
-                                                        <TableColumn fx:id="fire_column" onEditCommit="#onEditEndData" prefWidth="75.0" text="Уволен" />
-                                                        <TableColumn fx:id="account_ban" editable="false" prefWidth="75.0" text="Заблокирован" />
+                                                        <TableColumn fx:id="account_ban" editable="false" minWidth="85.0" prefWidth="85.0" text="Заблокирован" />
                                                     </columns>
                                                 </TableView>
                                                 <Label fx:id="warning_account_label" layoutX="14.0" layoutY="367.0" prefHeight="18.0" prefWidth="322.0" text="Label" textFill="#bc3636" visible="false">

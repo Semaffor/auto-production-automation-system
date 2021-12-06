@@ -4,14 +4,13 @@ import by.bsuir.app.dao.*;
 import by.bsuir.app.dao.impl.*;
 import by.bsuir.app.entity.*;
 import by.bsuir.app.exception.DAOException;
-import by.bsuir.app.service.Services;
+import by.bsuir.app.util.Services;
 import by.bsuir.app.service.snapshot.Manipulator;
 import by.bsuir.app.util.constants.Status;
 import lombok.extern.log4j.Log4j2;
 
 import javax.mail.MessagingException;
 
-import static by.bsuir.app.util.connection.Commands.CREATE_PDF_REPORT;
 import static by.bsuir.app.util.constants.ConstantsMSG.INCORRECT_VALUE_MSG;
 
 @Log4j2

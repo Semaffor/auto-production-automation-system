@@ -1,4 +1,4 @@
-package by.bsuir.app.service;
+package by.bsuir.app.util;
 
 import by.bsuir.app.dao.AccountDao;
 import by.bsuir.app.dao.impl.AccountDaoImpl;

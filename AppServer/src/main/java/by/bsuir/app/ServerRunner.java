@@ -27,7 +27,7 @@ public class ServerRunner {
 
 
     public static void main(String[] args) {
-        
+
         Scanner scanner = new Scanner(System.in);
         int answer;
         String answerString = null;

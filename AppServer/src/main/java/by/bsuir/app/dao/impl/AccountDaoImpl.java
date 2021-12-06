@@ -5,12 +5,11 @@ import by.bsuir.app.entity.Account;
 import by.bsuir.app.entity.HistoryLog;
 import by.bsuir.app.entity.enums.Role;
 import by.bsuir.app.util.constants.Status;
-import by.bsuir.app.service.Services;
+import by.bsuir.app.util.Services;
 import by.bsuir.app.util.HibernateUtil;
 import by.bsuir.app.util.JavaMailUtil;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.Criteria;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -102,7 +101,7 @@ public class AccountDaoImpl implements AccountDao {
                     return e;
                 }
             }
-        return Role.UNDEFINED;
+        return Role.UNREGISTERED;
     }
 
     @Override
